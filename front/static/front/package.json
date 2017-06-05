@@ -1,0 +1,34 @@
+{
+  "name": "webpack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack"
+  },
+  "keywords": [
+    "webpack"
+  ],
+  "author": "念牧",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-react": "^6.23.0",
+    "extract-text-webpack-plugin": "^2.0.0-beta.4",
+    "jquery": "^2.2.4",
+    "json-loader": "^0.5.4",
+    "webpack": "^2.2.0",
+    "webpack-dev-server": "^2.4.2"
+  },
+  "dependencies": {
+    "jquery": "^2.2.1",
+    "react": "^15.4.2",
+    "react-bootstrap": "^0.30.8",
+    "react-dom": "^15.4.2",
+    "react-redux": "^5.0.4",
+    "redux": "^3.6.0"
+  }
+}
