@@ -3,7 +3,7 @@ import $ from "jquery"
 import {Navbar} from "react-bootstrap";
 import {Button} from 'react-bootstrap';
 import {ButtonToolbar} from 'react-bootstrap';
-import {Row, Col, Modal, Grid, Panel, Well} from 'react-bootstrap';
+import {Row, Col, Modal, Grid, Panel, Well, FormGroup, InputGroup, FormControl, ListGroup, ListGroupItem} from 'react-bootstrap';
 class Parents extends Component {
     constructor(props) {
         super(props);
@@ -48,10 +48,10 @@ class Parents extends Component {
             curPlatform: newCurPlatform,
             curArticleClassify: newCurArticleClassify,
             curAllmedia: newCurAllmedia,
-            curPlatformId:newCurPlatformId,
-            curArticleClassifyId:newCurArticleClassifyId,
-            curAllmediaId:newCurAllmediaId,
-            Time:beforeSendTime
+            curPlatformId: newCurPlatformId,
+            curArticleClassifyId: newCurArticleClassifyId,
+            curAllmediaId: newCurAllmediaId,
+            Time: beforeSendTime
         })
 
         console.log("curAllmediaId=" + this.state.curAllmediaId)
@@ -67,7 +67,7 @@ class Parents extends Component {
                 <TestWrapper curItem={this.state.curItem} curPlatformId={this.state.curPlatformId}
                              curArticleClassifyId={this.state.curArticleClassifyId}
                              curAllmediaId={this.state.curAllmediaId}
-                             time =  {this.state.Time}
+                             time={this.state.Time}
                 />
             </div>
         )
@@ -119,7 +119,7 @@ class ArticleClassify extends Component {
     render() {
         return (
             <div>
-                <Panel header="网站分类">
+                <Panel header= { <Search /> }>
                     {
                         (function () {
                             return this.state.articleClassify.map(
@@ -127,7 +127,7 @@ class ArticleClassify extends Component {
                                     <Button bsStyle="primary" key={name.id}
                                             onClick={this.handClick.bind(this, [name.id, name.crawl_media_sort_name], 'ArticleClassify')}> {name.crawl_media_sort_name} </Button> :
                                     <Button bsStyle="warning" key={name.id}
-                                            onClick={this.handClick.bind(this, [name.id , name.crawl_media_sort_name], 'ArticleClassify')}> {name.crawl_media_sort_name} </Button>
+                                            onClick={this.handClick.bind(this, [name.id, name.crawl_media_sort_name], 'ArticleClassify')}> {name.crawl_media_sort_name} </Button>
                             )
                         }.bind(this))()
                     }
@@ -192,9 +192,9 @@ class Platform extends Component {
                             return this.state.Platform.map(
                                 (name, index) => this.props.heightLinghtT.slice().indexOf(name.crawl_dir_sort_name) == -1 ?
                                     <Button bsStyle="primary" key={name.id}
-                                            onClick={this.handClick.bind(this, [name.id , name.crawl_dir_sort_name], 'Platform')}> {name.crawl_dir_sort_name} </Button> :
+                                            onClick={this.handClick.bind(this, [name.id, name.crawl_dir_sort_name], 'Platform')}> {name.crawl_dir_sort_name} </Button> :
                                     <Button bsStyle="warning" key={name.id}
-                                            onClick={this.handClick.bind(this, [name.id , name.crawl_dir_sort_name], 'Platform')}> {name.crawl_dir_sort_name} </Button>
+                                            onClick={this.handClick.bind(this, [name.id, name.crawl_dir_sort_name], 'Platform')}> {name.crawl_dir_sort_name} </Button>
                             )
                         }.bind(this))()
 
@@ -260,9 +260,9 @@ class Allmedia extends Component {
                             return this.state.Platform.map(
                                 (name, index) => this.props.heightLinghtT.slice().indexOf(name.crawl_media_name) == -1 ?
                                     <Button bsStyle="primary" key={name.id}
-                                            onClick={this.handClick.bind(this, [name.id , name.crawl_media_name], 'Allmedia')}> {name.crawl_media_name} </Button> :
+                                            onClick={this.handClick.bind(this, [name.id, name.crawl_media_name], 'Allmedia')}> {name.crawl_media_name} </Button> :
                                     <Button bsStyle="warning" key={name.id}
-                                            onClick={this.handClick.bind(this, [name.id , name.crawl_media_name], 'Allmedia')}> {name.crawl_media_name} </Button>
+                                            onClick={this.handClick.bind(this, [name.id, name.crawl_media_name], 'Allmedia')}> {name.crawl_media_name} </Button>
                             )
                         }.bind(this))()
 
@@ -277,7 +277,7 @@ class Allmedia extends Component {
 class TestWrapper extends Component {
     constructor(props) {
         super(props);
-        this.state = {articleList: [], clear: false,Data:{}};
+        this.state = {articleList: [], clear: false, Data: {}};
         // this.testChange = this.testChange.bind(this);
         // this.getArticleList = this.getArticleList.bind(this);
     }
@@ -291,7 +291,7 @@ class TestWrapper extends Component {
         }).then(msg => {
             var post = msg;
             // var newPost = this.state.articleList.slice().concat(post);
-            this.setState({articleList: post, Data:nextProps})
+            this.setState({articleList: post, Data: nextProps})
         })
     }
 
@@ -309,6 +309,7 @@ class TestWrapper extends Component {
             clearInterval(repeat);
         }
     }
+
     componentWillUnmount() {
         this.serverRequest.abort();
     }
@@ -331,6 +332,7 @@ class List extends Component {
     constructor(props) {
         super(props);
     }
+
     render() {
         return (
             <ButtonToolbar>
@@ -362,31 +364,57 @@ class Modle extends Component {
                     <div dangerouslySetInnerHTML={{__html: this.props.article.article_content}}></div>
                     <p> {this.props.article.article_origin}</p>
                 </Panel>
-                <Button bsStyle="info" onClick={ ()=> this.setState({ open: !this.state.open })}> 显示文章主体 </Button>
-                <Button href={this.props.article.article_true_link} target="_blank" style =  {{marginLeft:15}}>查看原网页</Button>
-                <i><b> 更新时间：{this.props.article.article_published_at}  来源： {this.props.article.media_name} </b></i>
+                <Button bsStyle="info" onClick={ () => this.setState({open: !this.state.open})}> 显示文章主体 </Button>
+                <Button href={this.props.article.article_true_link} target="_blank"
+                        style={{marginLeft: 15}}>查看原网页</Button>
+                <i><b> 更新时间：{this.props.article.article_published_at} 来源： {this.props.article.media_name} </b></i>
                 {/*<Modal*/}
-                    {/*{...this.props}*/}
-                    {/*show={this.state.show}*/}
-                    {/*onHide={this.hideModal}*/}
-                    {/*dialogClassName="custom-modal"*/}
+                {/*{...this.props}*/}
+                {/*show={this.state.show}*/}
+                {/*onHide={this.hideModal}*/}
+                {/*dialogClassName="custom-modal"*/}
                 {/*>*/}
-                    {/*<Modal.Header closeButton>*/}
-                        {/*<Modal.Title*/}
-                            {/*id="contained-modal-title-lg">{this.props.article.fields.article_title}</Modal.Title>*/}
-                    {/*</Modal.Header>*/}
-                    {/*<Modal.Body>*/}
-                        {/*<h4>{this.props.article.fields.article_title}</h4>*/}
-                        {/*<p>{this.props.article.fields.article_desc}</p>*/}
-                        {/*<div dangerouslySetInnerHTML = {{__html: this.props.article.fields.article_content}} ></div>*/}
-                        {/*<p> {this.props.article.fields.article_origin}</p>*/}
-                    {/*</Modal.Body>*/}
-                    {/*<Modal.Footer>*/}
-                        {/*<Button href={this.props.article.fields.article_true_link} target="_blank">查看原网页</Button>*/}
-                        {/*<Button onClick={this.hideModal}>Close</Button>*/}
-                    {/*</Modal.Footer>*/}
+                {/*<Modal.Header closeButton>*/}
+                {/*<Modal.Title*/}
+                {/*id="contained-modal-title-lg">{this.props.article.fields.article_title}</Modal.Title>*/}
+                {/*</Modal.Header>*/}
+                {/*<Modal.Body>*/}
+                {/*<h4>{this.props.article.fields.article_title}</h4>*/}
+                {/*<p>{this.props.article.fields.article_desc}</p>*/}
+                {/*<div dangerouslySetInnerHTML = {{__html: this.props.article.fields.article_content}} ></div>*/}
+                {/*<p> {this.props.article.fields.article_origin}</p>*/}
+                {/*</Modal.Body>*/}
+                {/*<Modal.Footer>*/}
+                {/*<Button href={this.props.article.fields.article_true_link} target="_blank">查看原网页</Button>*/}
+                {/*<Button onClick={this.hideModal}>Close</Button>*/}
+                {/*</Modal.Footer>*/}
                 {/*</Modal>*/}
             </Well>
+        )
+    }
+}
+//search
+class Search extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <Col xs={5} md={3} className = "pull-right">
+                <FormGroup style={{marginBottom:0,position:"relative"}}>
+                    <InputGroup>
+                        <FormControl type="text"/>
+                        <InputGroup.Button>
+                            <Button>search</Button>
+                        </InputGroup.Button>
+                        <ListGroup className="seachList">
+                            <ListGroupItem href="#link1">Link 1</ListGroupItem>
+                            <ListGroupItem href="#link2">Link 2</ListGroupItem>
+                        </ListGroup>
+                    </InputGroup>
+                </FormGroup>
+            </Col>
         )
     }
 }

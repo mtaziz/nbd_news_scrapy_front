@@ -7322,7 +7322,7 @@ var ArticleClassify = function (_Component3) {
                 null,
                 _react2.default.createElement(
                     _reactBootstrap.Panel,
-                    { header: "\u7F51\u7AD9\u5206\u7C7B" },
+                    { header: _react2.default.createElement(Search, null) },
                     function () {
                         var _this5 = this;
 
@@ -7731,7 +7731,8 @@ var Modle = function (_Component10) {
                 ),
                 _react2.default.createElement(
                     _reactBootstrap.Button,
-                    { href: this.props.article.article_true_link, target: "_blank", style: { marginLeft: 15 } },
+                    { href: this.props.article.article_true_link, target: "_blank",
+                        style: { marginLeft: 15 } },
                     "\u67E5\u770B\u539F\u7F51\u9875"
                 ),
                 _react2.default.createElement(
@@ -7742,7 +7743,7 @@ var Modle = function (_Component10) {
                         null,
                         " \u66F4\u65B0\u65F6\u95F4\uFF1A",
                         this.props.article.article_published_at,
-                        "  \u6765\u6E90\uFF1A ",
+                        " \u6765\u6E90\uFF1A ",
                         this.props.article.media_name,
                         " "
                     )
@@ -7752,6 +7753,62 @@ var Modle = function (_Component10) {
     }]);
 
     return Modle;
+}(_react.Component);
+//search
+
+
+var Search = function (_Component11) {
+    _inherits(Search, _Component11);
+
+    function Search(props) {
+        _classCallCheck(this, Search);
+
+        return _possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).call(this, props));
+    }
+
+    _createClass(Search, [{
+        key: "render",
+        value: function render() {
+            return _react2.default.createElement(
+                _reactBootstrap.Col,
+                { xs: 5, md: 3, className: "pull-right" },
+                _react2.default.createElement(
+                    _reactBootstrap.FormGroup,
+                    { style: { marginBottom: 0, position: "relative" } },
+                    _react2.default.createElement(
+                        _reactBootstrap.InputGroup,
+                        null,
+                        _react2.default.createElement(_reactBootstrap.FormControl, { type: "text" }),
+                        _react2.default.createElement(
+                            _reactBootstrap.InputGroup.Button,
+                            null,
+                            _react2.default.createElement(
+                                _reactBootstrap.Button,
+                                null,
+                                "search"
+                            )
+                        ),
+                        _react2.default.createElement(
+                            _reactBootstrap.ListGroup,
+                            { className: "seachList" },
+                            _react2.default.createElement(
+                                _reactBootstrap.ListGroupItem,
+                                { href: "#link1" },
+                                "Link 1"
+                            ),
+                            _react2.default.createElement(
+                                _reactBootstrap.ListGroupItem,
+                                { href: "#link2" },
+                                "Link 2"
+                            )
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return Search;
 }(_react.Component);
 
 exports.default = Parents;
