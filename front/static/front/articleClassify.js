@@ -119,7 +119,7 @@ class ArticleClassify extends Component {
     render() {
         return (
             <div>
-                <Panel header= { <Search /> }>
+                <Panel header= { "网站分类" }>
                     {
                         (function () {
                             return this.state.articleClassify.map(
@@ -397,24 +397,36 @@ class Modle extends Component {
 class Search extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            searchList:[],
+            open:false,
+            value:"",
+        }
+        this.searcheKeyword = this.searcheKeyword.bind(this);
+    }
+    searcheKeyword(e) {
+        const word = e.target.value;
+        this.setState({value:word},()=>{console.log(this.state.value)})
+        console.log(this.props.tags)
     }
 
     render() {
         return (
-            <Col xs={5} md={3} className = "pull-right">
-                <FormGroup style={{marginBottom:0,position:"relative"}}>
-                    <InputGroup>
-                        <FormControl type="text"/>
-                        <InputGroup.Button>
-                            <Button>search</Button>
-                        </InputGroup.Button>
-                        <ListGroup className="seachList">
-                            <ListGroupItem href="#link1">Link 1</ListGroupItem>
-                            <ListGroupItem href="#link2">Link 2</ListGroupItem>
-                        </ListGroup>
-                    </InputGroup>
-                </FormGroup>
-            </Col>
+            <Row>
+                <Col xs={5} md={3} className = "pull-right">
+                    <FormGroup style={{marginBottom:0,position:"relative"}}>
+                        <InputGroup>
+                            <FormControl type="text" value={this.state.value}  onChange = {this.searcheKeyword} />
+                            <InputGroup.Button>
+                                <Button>search</Button>
+                            </InputGroup.Button>
+                            <ListGroup className="seachList">
+                                <ListGroupItem>共有个{this.state.searchList.length}关键词</ListGroupItem>
+                            </ListGroup>
+                        </InputGroup>
+                    </FormGroup>
+                </Col>
+            </Row>
         )
     }
 }

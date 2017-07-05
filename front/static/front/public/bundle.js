@@ -7322,7 +7322,7 @@ var ArticleClassify = function (_Component3) {
                 null,
                 _react2.default.createElement(
                     _reactBootstrap.Panel,
-                    { header: _react2.default.createElement(Search, null) },
+                    { header: "网站分类" },
                     function () {
                         var _this5 = this;
 
@@ -7763,43 +7763,63 @@ var Search = function (_Component11) {
     function Search(props) {
         _classCallCheck(this, Search);
 
-        return _possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).call(this, props));
+        var _this19 = _possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).call(this, props));
+
+        _this19.state = {
+            searchList: [],
+            open: false,
+            value: ""
+        };
+        _this19.searcheKeyword = _this19.searcheKeyword.bind(_this19);
+        return _this19;
     }
 
     _createClass(Search, [{
+        key: "searcheKeyword",
+        value: function searcheKeyword(e) {
+            var _this20 = this;
+
+            var word = e.target.value;
+            this.setState({ value: word }, function () {
+                console.log(_this20.state.value);
+            });
+            console.log(this.props.tags);
+        }
+    }, {
         key: "render",
         value: function render() {
             return _react2.default.createElement(
-                _reactBootstrap.Col,
-                { xs: 5, md: 3, className: "pull-right" },
+                _reactBootstrap.Row,
+                null,
                 _react2.default.createElement(
-                    _reactBootstrap.FormGroup,
-                    { style: { marginBottom: 0, position: "relative" } },
+                    _reactBootstrap.Col,
+                    { xs: 5, md: 3, className: "pull-right" },
                     _react2.default.createElement(
-                        _reactBootstrap.InputGroup,
-                        null,
-                        _react2.default.createElement(_reactBootstrap.FormControl, { type: "text" }),
+                        _reactBootstrap.FormGroup,
+                        { style: { marginBottom: 0, position: "relative" } },
                         _react2.default.createElement(
-                            _reactBootstrap.InputGroup.Button,
+                            _reactBootstrap.InputGroup,
                             null,
+                            _react2.default.createElement(_reactBootstrap.FormControl, { type: "text", value: this.state.value, onChange: this.searcheKeyword }),
                             _react2.default.createElement(
-                                _reactBootstrap.Button,
+                                _reactBootstrap.InputGroup.Button,
                                 null,
-                                "search"
-                            )
-                        ),
-                        _react2.default.createElement(
-                            _reactBootstrap.ListGroup,
-                            { className: "seachList" },
-                            _react2.default.createElement(
-                                _reactBootstrap.ListGroupItem,
-                                { href: "#link1" },
-                                "Link 1"
+                                _react2.default.createElement(
+                                    _reactBootstrap.Button,
+                                    null,
+                                    "search"
+                                )
                             ),
                             _react2.default.createElement(
-                                _reactBootstrap.ListGroupItem,
-                                { href: "#link2" },
-                                "Link 2"
+                                _reactBootstrap.ListGroup,
+                                { className: "seachList" },
+                                _react2.default.createElement(
+                                    _reactBootstrap.ListGroupItem,
+                                    null,
+                                    "\u5171\u6709\u4E2A",
+                                    this.state.searchList.length,
+                                    "\u5173\u952E\u8BCD"
+                                )
                             )
                         )
                     )
