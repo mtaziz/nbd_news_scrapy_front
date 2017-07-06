@@ -114,10 +114,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
-CELERY_BROKER_URL = 'redis://172.19.23.208:6379/0'
-CELERY_RESULT_BACKEND = 'redis://172.19.23.208:6379/0'
+CELERY_BROKER_URL = 'redis://nbd-news-scrapy-redis:6379/0'
+CELERY_RESULT_BACKEND = 'redis://nbd-news-scrapy-redis:6379/0'
 
-SCRAPYD_SETTING_HOST = "http://172.19.23.208:6800/"  # must be a backslash end
+SCRAPYD_SETTING_HOST = "http://nbd-news-scrapy:6800/"  # must be a backslash end
 
 
 WECHAT_SEND_MESSAGE_API =  "https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token="
