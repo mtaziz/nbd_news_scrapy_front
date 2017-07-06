@@ -106,7 +106,7 @@ class ArticleClassify extends Component {
     }
 
     componentDidMount() {
-        $.get("http://172.19.23.208/get_media_sorts").then(msg => {
+        $.get("http://news.nbd.com.cn/get_media_sorts").then(msg => {
             const posts = msg;
             this.setState({articleClassify: posts.message})
         })
@@ -172,7 +172,7 @@ class Platform extends Component {
     }
 
     componentDidMount() {
-        $.get("http://172.19.23.208/get_dir_sorts").then(msg => {
+        $.get("http://news.nbd.com.cn/get_dir_sorts").then(msg => {
             const posts1 = msg;
             this.setState({Platform: posts1.message})
         })
@@ -240,7 +240,7 @@ class Allmedia extends Component {
     }
 
     componentDidMount() {
-        $.get("http://172.19.23.208/get_medias").then(msg => {
+        $.get("http://news.nbd.com.cn/get_medias").then(msg => {
             const posts1 = msg;
             this.setState({Platform: posts1.message})
         })
@@ -283,7 +283,7 @@ class TestWrapper extends Component {
     }
 
     getArticleList(nextProps) {
-        $.getJSON("http://172.19.23.208/get_article", {
+        $.getJSON("http://news.nbd.com.cn/get_article", {
             "newCurArticleClassifyl": nextProps.curArticleClassifyId.join(","),
             "Platforml": nextProps.curPlatformId.join(","),
             "SendTime": this.props.time,
