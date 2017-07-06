@@ -1,6 +1,0 @@
-FROM scrapy_base
-ADD . /data/
-WORKDIR /data/
-RUN pip install -r requirements.txt
-# 不要使用& 后台执行
-ENTRYPOINT nohup celery -A nbd_news_scrapy_front worker -l info 2>&1 >/dev/null &;celery -A nbd_news_scrapy_front beat -l info -S django 2>&1
