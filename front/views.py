@@ -1,9 +1,10 @@
 # coding: utf8
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from models import ArticleForm, Articles, ArticleTag
 from scrapy_config.models import CrawlMedia, CrawlMediaSort, CrawlDirSort
 import json
 import logging
+from django.contrib.auth.decorators import login_required
 from django.core import serializers
 from scrapy_config.models import CustomerCrawlConfig
 from itertools import chain
@@ -11,7 +12,19 @@ from django.db.models import Q
 import time
 
 
+def check_user_is_login(func):
+    def wrapper(request, *args, **kwargs):
+        cookies = request.COOKIES
+        if cookies.get('user_name') and cookies.get('customer_id'):
+            return func(request, *args, **kwargs)
+        else:
+            return HttpResponseRedirect('/login')
+
+    return wrapper
+
+
 # Create your views here.
+@login_required(login_url="/admin/login/")
 def index(request):
     return render(request, 'front/index.html', locals())
 
@@ -50,6 +63,7 @@ def receive_article_result(request):
         return HttpResponse(json.dumps({'status': 500, 'message': 'failed'}), content_type="application/json")
 
 
+@login_required(login_url="/admin/login/")
 def get_article(request):
     current_time = request.GET.get("SendTime", '')
     # newCurArticleClassify 文章标签
@@ -91,7 +105,7 @@ def get_article(request):
 
     for j in chain(article_info_list_for_media_sort, article_info_list_for_dir_sort, article_info_list_for_media):
         single_info = {}
-        single_info['pk'] =  j.id
+        single_info['pk'] = j.id
         single_info['media_name'] = j.article_for_crawl_media.crawl_media_name
         single_info['article_published_at'] = str(j.article_published_at)
         single_info['article_true_link'] = j.article_true_link
@@ -102,6 +116,7 @@ def get_article(request):
     return HttpResponse(json.dumps(all_articles_info_list), content_type="application/json")
 
 
+@login_required(login_url="/admin/login/")
 def get_medias(request):
     media_info = CrawlMedia.objects.all().values('id', 'crawl_media_name')
     media_list = []
@@ -113,6 +128,7 @@ def get_medias(request):
     return HttpResponse(json.dumps({'status': 200, 'message': media_list}), content_type="application/json")
 
 
+@login_required(login_url="/admin/login/")
 def get_media_sorts(request):
     media_sort_info = CrawlMediaSort.objects.all().values('id', 'crawl_media_sort_name')
     media_list = []
@@ -124,6 +140,7 @@ def get_media_sorts(request):
     return HttpResponse(json.dumps({'status': 200, 'message': media_list}), content_type="application/json")
 
 
+@login_required(login_url="/admin/login/")
 def get_dir_sorts(request):
     media_sort_info = CrawlDirSort.objects.all().values('id', 'crawl_dir_sort_name')
     media_list = []
@@ -135,6 +152,7 @@ def get_dir_sorts(request):
     return HttpResponse(json.dumps({'status': 200, 'message': media_list}), content_type="application/json")
 
 
+@login_required(login_url="/admin/login/")
 def get_tags(request):
     article_info = ArticleTag.objects.all().values('tag_name').distinct()
     tag_list = []
