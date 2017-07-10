@@ -1,7 +1,6 @@
 from django.conf.urls import url
 import views
 
-
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^guojun', views.guojun, name='guojun'),
@@ -14,3 +13,10 @@ urlpatterns = [
     # url(r'^logout$', views.logout, name='logout'),
     # url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
 ]
+
+from django.conf import settings
+
+if settings.DEBUG is False:
+    urlpatterns += [
+        url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT,
+    ]
