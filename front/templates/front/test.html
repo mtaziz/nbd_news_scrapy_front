@@ -1,52 +1,19 @@
-{% load staticfiles %}
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="{% static 'front/public/bootstrap.min.css' %}">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <!--<link rel="stylesheet" href="{% static 'front/public/bootstrap-theme.min.css' %}">-->
-</head>
-
-<body >
-    <style>
-    .show-grid {
-        margin-bottom: 15px;
-    }
-    .custom-modal {
-        width: 90%;
-        margin:0 auto;
-    }
-    .articleList {
-        overflow: hidden;
-        margin-bottom: 10px;
-    }
-    /*.articleList:hover {*/
-        /*cursor: pointer;*/
-        /*box-shadow: 0px 1px 12px #888888;*/
-    /*}*/
-    .panel-body button {
-        margin-right: 10px;
-        margin-bottom: 10px;
-    }
-
-    .seachList {
-        position: absolute;
-        top: 34px;
-        width: 100%;
-        left: 0;
-        height: 120px;
-        background: #FFF;
-        overflow-y: auto;
-        display: none;
-    }
-    </style>
-    <div class="container" id="example">
-
-    </div>
-<script type="text/javascript" src="{% static 'front/public/vendor.js' %}"></script>
-<script type="text/javascript" src="{% static 'front/public/bundle.js' %}"></script>
-</body>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello React!</title>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+      ReactDOM.render(
+        <h1>Hello, world!</h1>,
+        document.getElementById('example')
+      );
+    </script>
+  </body>
 </html>

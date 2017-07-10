@@ -4,7 +4,7 @@ from django.views.static import serve as staticserve
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^guojun', views.guojun, name='guojun'),
+    url(r'^test', views.test, name='test'),
     url(r'^receive_article_result', views.receive_article_result, name='receive_article_result'),
     url(r'^get_media_sorts', views.get_media_sorts, name='get_media_sorts'),
     url(r'^get_dir_sorts', views.get_dir_sorts, name='get_dir_sorts'),

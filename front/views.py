@@ -29,8 +29,8 @@ def index(request):
     return render(request, 'front/index.html', locals())
 
 
-def guojun(request):
-    return render(request, 'front/index.html', locals())
+def test(request):
+    return render(request, 'front/test.html', locals())
 
 
 def receive_article_result(request):

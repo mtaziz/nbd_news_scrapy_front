@@ -5,10 +5,10 @@ module.exports = {
   entry:{
     "index" : __dirname + "/main.js",
     "vendor":["react","react-dom","jquery"]
-  }, 
+  },
   output: {
     path: __dirname + "/public",
-    filename: "bundle.js" 
+    filename: "bundle.js"
   },
   plugins:[
      new webpack.optimize.CommonsChunkPlugin({
