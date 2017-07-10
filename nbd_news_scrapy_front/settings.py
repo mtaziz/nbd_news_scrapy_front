@@ -25,7 +25,7 @@ SECRET_KEY = 'qpb75ckpd=swk0=+*v!c^nalw9!9kj(r58$q5@l)3rgr*-68z5'
 # DEBUG = True
 DEBUG = False
 
-ALLOWED_HOSTS = ['news.nbd.com.cn']
+ALLOWED_HOSTS = ['news.nbd.com.cn', 'nbd-news-scrapy-front']
 
 # Application definition
 
