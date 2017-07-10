@@ -84,7 +84,7 @@ class WechatQiyeConfig(models.Model):
     wechat_qiye_name = models.CharField(u"微信企业号名称，备注使用", max_length=20, default='')
     wechat_corp_id = models.CharField(u"微信corp_id", max_length=20, default='')
     wechat_corp_secret = models.CharField(u"微信corp_secret", max_length=66, default='')
-    wechat_corp_access_token = models.CharField(u"access_token", max_length=66, default='', blank=True, null=True)
+    wechat_corp_access_token = models.TextField(u"access_token", max_length=66, default='', blank=True, null=True)
     wechat_corp_access_token_expires_time = models.DateTimeField(u"access_token过期时间", auto_now=True)
     wechat_corp_access_token_updated_at = models.DateTimeField(u"access_token更新时间", auto_now=True)
 

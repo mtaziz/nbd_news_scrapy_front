@@ -1,19 +1,32 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
+<head>
+    <meta charset="UTF-8"/>
     <title>Hello React!</title>
-    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
-    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
-    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
-  </head>
-  <body>
-    <div id="example"></div>
-    <script type="text/babel">
-      ReactDOM.render(
-        <h1>Hello, world!</h1>,
-        document.getElementById('example')
-      );
-    </script>
-  </body>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/select2/4.0.3/css/select2.css" rel="stylesheet"/>
+    <script src="https://cdn.bootcss.com/select2/4.0.3/js/select2.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="coo-md-9" role="main">
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(".js-example-tagas").select2({
+                    tags: true
+                });
+            });
+        </script>
+
+        <select class="js-example-tagas" multiple="multiple">
+            <option value="AL">Alabama</option>
+            <option value="WY">Wyoming</option>
+        </select>
+
+    </div>
+</div>
+
+</body>
 </html>
