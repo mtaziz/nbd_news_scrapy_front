@@ -25,7 +25,7 @@ SECRET_KEY = 'qpb75ckpd=swk0=+*v!c^nalw9!9kj(r58$q5@l)3rgr*-68z5'
 # DEBUG = True
 DEBUG = False
 
-ALLOWED_HOSTS = ['news.nbd.com.cn', 'nbd-news-scrapy-front']
+ALLOWED_HOSTS = ['news.nbd.com.cn', 'nbd-news-scrapy-front', '172.19.23.208']
 
 # Application definition
 
@@ -80,8 +80,8 @@ WSGI_APPLICATION = 'nbd_news_scrapy_front.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        # 'HOST': '172.19.23.208',
-        'HOST': 'nbd-news-scrapy-mysql',
+        'HOST': '172.19.23.208',
+        # 'HOST': 'nbd-news-scrapy-mysql',
         'USER': 'scrapy_user',
         'PASSWORD': 'Abcd1234',
         'NAME': 'nbd_scrapy',
