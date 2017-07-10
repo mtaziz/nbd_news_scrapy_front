@@ -99,6 +99,7 @@ class WechatQiyeConfig(models.Model):
 @receiver(post_save, sender=WechatQiyeConfig)
 def update_access_token(sender, instance, *args, **kwargs):
     gettoken_url = 'https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=' + instance.wechat_corp_id + '&corpsecret=' + instance.wechat_corp_secret
+    logging.log(logging.DEBUG, gettoken_url)
     resp = requests.get(gettoken_url)
     if resp.status_code == 200:
         instance.wechat_corp_access_token = resp.json()['access_token']
