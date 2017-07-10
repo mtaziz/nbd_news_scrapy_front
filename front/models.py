@@ -171,7 +171,6 @@ def add_wechat_user_to_qiye(sender, instance, *args, **kwargs):
         logging.log(logging.WARN, send_values)
         data = json.dumps(send_values, ensure_ascii=False).encode('utf8')
         resp = requests.post(send_url, data=data)
-        print resp.content
         if resp.json()['errmsg']== "userid existed":
             send_url = settings.WECHAT_UPDATE_USER_API + wechat_info.wechat_corp_access_token
             resp = requests.post(send_url, data=data)
