@@ -1,5 +1,6 @@
 from django.conf.urls import url
 import views
+from django.views.static import serve as staticserve
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
@@ -18,6 +19,6 @@ from django.conf import settings
 
 if settings.DEBUG is False:
     urlpatterns += [
-        url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT,
-                                                                    }),
+        url(r'^media/(?P<path>.*)$', staticserve, {'document_root': settings.MEDIA_ROOT, }),
+         url(r'^static/(?P<path>.*)$', staticserve, {'document_root': settings.STATIC_ROOT}),
     ]
