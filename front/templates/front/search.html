@@ -11,7 +11,8 @@
                 <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                         <form class="input-group" ethod="get">
-                            <input type="text" class="form-control" id="id_q" name="q" type="search" value="{{ query|default_if_none:"" }}" placeholder="Search for...">
+                            <input type="text" class="form-control" id="id_q" name="q" type="search"
+                                   value="{{ query|default_if_none:"" }}" placeholder="Search for...">
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="submit">Go!</button>
                             </span>
@@ -56,7 +57,7 @@
                                 </div>
 
                                 <!-- Table -->
-                                <table class="table">
+                                <table class="table table-bordered">
                                     <thead>
                                     <tr>
                                         <th>文章标题</th>
@@ -67,10 +68,11 @@
                                     <tbody>
                                     {% for result in page_obj.object_list %}
                                         <tr>
-                                        <td>
+                                            <td>
                                                 <p>{{ result.object.article_title }}</p>
                                             </td>
-                                            <td><a href="{{ result.object }}"  target="_blank">{{ result.object }}</a></td>
+                                            <td><a href="{{ result.object }}" target="_blank">{{ result.object }}</a>
+                                            </td>
 
                                             <td>
                                                 {{ result.object.article_for_crawl_media.crawl_media_name }}
