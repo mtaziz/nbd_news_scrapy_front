@@ -12,18 +12,66 @@
 <body>
 <div class="container">
     <div class="coo-md-9" role="main">
+        <select class="js-example-data-ajax form-control">
+            <option value="3620194" selected="selected">select2/select2</option>
+        </select>
         <script type="text/javascript">
             $(document).ready(function () {
-                $(".js-example-tagas").select2({
-                    tags: true
+                function formatRepo(repo) {
+                    if (repo.loading) return repo.text;
+
+                    var markup = "<div class='select2-result-repository clearfix'>" + repo.full_name + "</div>";
+
+                    if (repo.description) {
+                        markup += "<div class='select2-result-repository__description'>" + repo.description + "</div>";
+                    }
+                    return markup;
+                }
+
+                function formatRepoSelection(repo) {
+                    return repo.full_name || repo.text;
+                }
+
+
+                var $ajax = $(".js-example-data-ajax");
+                $ajax.select2({
+                    // tags: true,
+                    ajax: {
+                        url: "https://api.github.com/search/repositories",
+                        dataType: 'json',
+                        delay: 250,
+                        data: function (params) {
+                            return {
+                                q: params.term, // search term
+                                page: params.page
+                            };
+                        },
+                        processResults: function (data, params) {
+                            // parse the results into the format expected by Select2
+                            // since we are using custom formatting functions we do not need to
+                            // alter the remote JSON data, except to indicate that infinite
+                            // scrolling can be used
+                            params.page = params.page || 1;
+
+                            return {
+                                results: data.items,
+                                pagination: {
+                                    more: (params.page * 30) < data.total_count
+                                }
+                            };
+                        },
+                        cache: true
+                    },
+                    escapeMarkup: function (markup) {
+                        return markup;
+                    },
+                    minimumInputLength: 1,
+                    templateResult: formatRepo,
+                    templateSelection: formatRepoSelection
                 });
             });
         </script>
 
-        <select class="js-example-tagas" multiple="multiple">
-            <option value="AL">Alabama</option>
-            <option value="WY">Wyoming</option>
-        </select>
 
     </div>
 </div>

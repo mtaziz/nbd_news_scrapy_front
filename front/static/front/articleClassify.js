@@ -369,27 +369,6 @@ class Modle extends Component {
                 <Button href={this.props.article.article_true_link} target="_blank"
                         style={{marginLeft: 15}}>查看原网页</Button>
                 <i><b> 更新时间：{this.props.article.article_published_at} 来源： {this.props.article.media_name} </b></i>
-                {/*<Modal*/}
-                {/*{...this.props}*/}
-                {/*show={this.state.show}*/}
-                {/*onHide={this.hideModal}*/}
-                {/*dialogClassName="custom-modal"*/}
-                {/*>*/}
-                {/*<Modal.Header closeButton>*/}
-                {/*<Modal.Title*/}
-                {/*id="contained-modal-title-lg">{this.props.article.fields.article_title}</Modal.Title>*/}
-                {/*</Modal.Header>*/}
-                {/*<Modal.Body>*/}
-                {/*<h4>{this.props.article.fields.article_title}</h4>*/}
-                {/*<p>{this.props.article.fields.article_desc}</p>*/}
-                {/*<div dangerouslySetInnerHTML = {{__html: this.props.article.fields.article_content}} ></div>*/}
-                {/*<p> {this.props.article.fields.article_origin}</p>*/}
-                {/*</Modal.Body>*/}
-                {/*<Modal.Footer>*/}
-                {/*<Button href={this.props.article.fields.article_true_link} target="_blank">查看原网页</Button>*/}
-                {/*<Button onClick={this.hideModal}>Close</Button>*/}
-                {/*</Modal.Footer>*/}
-                {/*</Modal>*/}
             </Well>
         )
     }
