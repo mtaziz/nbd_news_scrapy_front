@@ -68,15 +68,15 @@
                                     <tbody>
                                     {% for result in page_obj.object_list %}
                                         <tr>
-                                            <td><a href="?q={{ result.object }}">{{ result.object }}</a></td>
+                                            <td><a href="{{ result.object }}">{{ result.object }}</a></td>
                                             {#                            <td>#}
                                             {#                                <a href="?q={{ result.object.keyword_to_company }}">{{ result.object.keyword_to_company }}</a>#}
                                             {#                            </td>#}
                                             <td>
-                                                <p>{{ result.object.get_keyword_type_display }}</p>
+                                                <p>{{ result.object.article_title }}</p>
                                             </td>
                                             <td>
-                                                <a href="http://www.baidu.com/s?wd={{ result.object }}">{{ result.object.keyword_ranking }}</a>
+                                                {{ result.object.article_for_crawl_media }}
                                             </td>
                                         </tr>
                                     {% empty %}
