@@ -168,7 +168,6 @@ class KeyWordSearchView(SearchView):
 
     # load_all = False
     def get_queryset(self):
-        cookies = self.request.COOKIES
         queryset = super(KeyWordSearchView, self).get_queryset()
         query_word = self.request.GET.get('q', '')
         return queryset.filter(content=query_word).order_by('id')
