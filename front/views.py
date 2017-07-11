@@ -10,6 +10,8 @@ from scrapy_config.models import CustomerCrawlConfig
 from itertools import chain
 from django.db.models import Q
 import time
+from haystack.generic_views import SearchView
+from haystack.query import SearchQuerySet
 
 
 def check_user_is_login(func):
@@ -159,3 +161,27 @@ def get_tags(request):
     for i in article_info:
         tag_list.append(i['tag_name'])
     return HttpResponse(json.dumps({'status': 200, 'message': tag_list}), content_type="application/json")
+
+
+@login_required(login_url="/admin/login/")
+class KeyWordSearchView(SearchView):
+    template_name = "front/search.html"
+
+    # load_all = False
+
+    def get_queryset(self):
+        cookies = self.request.COOKIES
+        queryset = super(KeyWordSearchView, self).get_queryset()
+        query_word = self.request.GET.get('q', '')
+        return queryset.filter(content=query_word).order_by('id')
+
+    def get_context_data(self, **kwargs):
+        context = super(KeyWordSearchView, self).get_context_data(**kwargs)
+        context['customer_id'] = "pass"
+        context['user_name'] = "pass"
+        return context
+
+    def paginate_queryset(self, queryset, page_size):
+        return super(KeyWordSearchView, self).paginate_queryset(queryset[:200], page_size)
+
+

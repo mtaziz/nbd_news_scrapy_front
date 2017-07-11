@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'haystack',
     'front',
     'scrapy_config',
     'django_celery_results',
@@ -124,4 +125,15 @@ SCRAPYD_SETTING_HOST = "http://nbd-news-scrapy:6800/"  # must be a backslash end
 WECHAT_SEND_MESSAGE_API =  "https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token="
 WECHAT_CREATE_USER_API = "https://qyapi.weixin.qq.com/cgi-bin/user/create?access_token="
 WECHAT_UPDATE_USER_API = "https://qyapi.weixin.qq.com/cgi-bin/user/update?access_token="
+
+ADMIN_SITE_HEADER = u"新闻实时更新平台"
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://172.19.23.208:9200/',
+        'INDEX_NAME': 'haystack',
+    },
+}
+HAYSTACK_SIGNAL_PROCESSOR = "haystack.signals.RealtimeSignalProcessor"
 
