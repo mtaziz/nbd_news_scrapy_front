@@ -1,3 +1,4 @@
+# coding: utf8
 """
 Django settings for nbd_news_scrapy_front project.
 
