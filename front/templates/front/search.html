@@ -59,24 +59,21 @@
                                 <table class="table">
                                     <thead>
                                     <tr>
-                                        <th>关键词</th>
-                                        {#                        <th>公司</th>#}
-                                        <th>排名类型</th>
-                                        <th>排名</th>
+                                        <th>文章标题</th>
+                                        <th>原文链接</th>
+                                        <th>来源网站</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     {% for result in page_obj.object_list %}
                                         <tr>
-                                            <td><a href="{{ result.object }}">{{ result.object }}</a></td>
-                                            {#                            <td>#}
-                                            {#                                <a href="?q={{ result.object.keyword_to_company }}">{{ result.object.keyword_to_company }}</a>#}
-                                            {#                            </td>#}
-                                            <td>
+                                        <td>
                                                 <p>{{ result.object.article_title }}</p>
                                             </td>
+                                            <td><a href="{{ result.object }}"  target="_blank">{{ result.object }}</a></td>
+
                                             <td>
-                                                {{ result.object.article_for_crawl_media }}
+                                                {{ result.object.article_for_crawl_media.crawl_media_name }}
                                             </td>
                                         </tr>
                                     {% empty %}
@@ -118,9 +115,9 @@
                                 <table class="table">
                                     <thead>
                                     <tr>
-                                        <th>关键词</th>
-                                        <th>公司</th>
-                                        <th>排名</th>
+                                        <th>文章标题</th>
+                                        <th>原文链接</th>
+                                        <th>来源网站</th>
                                     </tr>
                                     </thead>
                                     <tbody>
