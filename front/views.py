@@ -11,7 +11,6 @@ from itertools import chain
 from django.db.models import Q
 import time
 from haystack.generic_views import SearchView
-from haystack.query import SearchQuerySet
 
 
 def check_user_is_login(func):
@@ -163,12 +162,11 @@ def get_tags(request):
     return HttpResponse(json.dumps({'status': 200, 'message': tag_list}), content_type="application/json")
 
 
-@login_required(login_url="/admin/login/")
+# @login_required(login_url="/admin/login/")
 class KeyWordSearchView(SearchView):
     template_name = "front/search.html"
 
     # load_all = False
-
     def get_queryset(self):
         cookies = self.request.COOKIES
         queryset = super(KeyWordSearchView, self).get_queryset()
