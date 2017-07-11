@@ -162,6 +162,10 @@ def get_tags(request):
     return HttpResponse(json.dumps({'status': 200, 'message': tag_list}), content_type="application/json")
 
 
+def login(request):
+    return render(request, 'front/login.html', locals())
+
+
 # @login_required(login_url="/admin/login/")
 class KeyWordSearchView(SearchView):
     template_name = "front/search.html"
