@@ -28,61 +28,64 @@
                             <strong>请注意!</strong> 搜索结果最多展示200条记录。
                         </div>
                         {% if query %}
-                            <div class="panel panel-default">
+                            <div class="panel">
                                 <div class="panel-heading">结果：</div>
                                 <div class="panel-body">
-                                    {% if page_obj.has_previous or page_obj.has_next %}
-                                        <div>
-                                            <nav>
-                                                <ul class="pager">
-                                                    <li>总页数：{{ page_obj.paginator.num_pages }}</li>
-                                                    <li>共计{{ page_obj.paginator.count }}条</li>
-                                                    {% if page_obj.has_previous %}
-                                                        <li>
-                                                        <a href="?q={{ query }}&amp;page={{ page_obj.previous_page_number }}">
-                                                    {% endif %}&laquo;
-                                                    Prev
-                                                    {% if page_obj.has_previous %}</a></li>{% endif %}
-                                                    <li>{{ page_obj.number }}</li>
-                                                    {% if page_obj.has_next %}
-                                                        <li>
-                                                        <a href="?q={{ query }}&amp;page={{ page_obj.next_page_number }}">
-                                                    {% endif %}
-                                                    Next &raquo;
-                                                    {% if page_obj.has_next %}</a></li>{% endif %}
-                                                </ul>
-                                            </nav>
-                                        </div>
-                                    {% endif %}
-                                </div>
+                                    <div class="panel-collapse collapse in">
+                                        {% if page_obj.has_previous or page_obj.has_next %}
+                                            <div>
+                                                <nav>
+                                                    <ul class="pager">
+                                                        <li>总页数：{{ page_obj.paginator.num_pages }}</li>
+                                                        <li>共计{{ page_obj.paginator.count }}条</li>
+                                                        {% if page_obj.has_previous %}
+                                                            <li>
+                                                            <a href="?q={{ query }}&amp;page={{ page_obj.previous_page_number }}">
+                                                        {% endif %}&laquo;
+                                                        Prev
+                                                        {% if page_obj.has_previous %}</a></li>{% endif %}
+                                                        <li>{{ page_obj.number }}</li>
+                                                        {% if page_obj.has_next %}
+                                                            <li>
+                                                            <a href="?q={{ query }}&amp;page={{ page_obj.next_page_number }}">
+                                                        {% endif %}
+                                                        Next &raquo;
+                                                        {% if page_obj.has_next %}</a></li>{% endif %}
+                                                    </ul>
+                                                </nav>
+                                            </div>
+                                        {% endif %}
+                                    </div>
 
-                                <!-- Table -->
-                                <table class="table table-bordered">
-                                    <thead>
-                                    <tr>
-                                        <th>文章标题</th>
-                                        <th>原文链接</th>
-                                        <th>来源网站</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {% for result in page_obj.object_list %}
+                                    <!-- Table -->
+                                    <table class="table table-bordered">
+                                        <thead>
                                         <tr>
-                                            <td>
-                                                <p>{{ result.object.article_title }}</p>
-                                            </td>
-                                            <td><a href="{{ result.object }}" target="_blank">{{ result.object }}</a>
-                                            </td>
-
-                                            <td>
-                                                {{ result.object.article_for_crawl_media.crawl_media_name }}
-                                            </td>
+                                            <th>文章标题</th>
+                                            <th>原文链接</th>
+                                            <th>来源网站</th>
                                         </tr>
-                                    {% empty %}
-                                        <script>window.location.href = '{% url 'haystack_search' %}';</script>
-                                    {% endfor %}
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                        {% for result in page_obj.object_list %}
+                                            <tr>
+                                                <td>
+                                                    <p>{{ result.object.article_title }}</p>
+                                                </td>
+                                                <td><a href="{{ result.object }}"
+                                                       target="_blank">{{ result.object }}</a>
+                                                </td>
+
+                                                <td>
+                                                    {{ result.object.article_for_crawl_media.crawl_media_name }}
+                                                </td>
+                                            </tr>
+                                        {% empty %}
+                                            <script>window.location.href = '{% url 'haystack_search' %}';</script>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
 
                             {% if page_obj.has_previous or page_obj.has_next %}
