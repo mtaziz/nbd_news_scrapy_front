@@ -70,7 +70,7 @@
                                         {% for result in page_obj.object_list %}
                                             <tr>
                                                 <td>
-                                                    <p>{{ result.object.article_title }}</p>
+                                                    {{ result.object.article_title }}
                                                 </td>
                                                 <td><a href="{{ result.object }}"
                                                        target="_blank">{{ result.object }}</a>
