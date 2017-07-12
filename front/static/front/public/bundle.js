@@ -7501,6 +7501,7 @@ var Box = function (_Component2) {
                 _react2.default.createElement(
                     _reactBootstrap.Col,
                     { xs: 12, md: 12 },
+                    _react2.default.createElement(ArticleClassify, { changePlatformL: this.changePlatformA, heightLinghtT: this.props.curItem }),
                     _react2.default.createElement(ArticleClassify, { changePlatformL: this.changePlatformA, heightLinghtT: this.props.curItem })
                 )
             );
@@ -7534,7 +7535,7 @@ var ArticleClassify = function (_Component3) {
         value: function componentDidMount() {
             var _this4 = this;
 
-            _jquery2.default.get("http://news.nbd.com.cn/get_media_sorts").then(function (msg) {
+            _jquery2.default.get("/get_media_sorts").then(function (msg) {
                 var posts = msg;
                 _this4.setState({ articleClassify: posts.message });
             });
@@ -7644,7 +7645,7 @@ var Platform = function (_Component5) {
         value: function componentDidMount() {
             var _this8 = this;
 
-            _jquery2.default.get("http://news.nbd.com.cn/get_dir_sorts").then(function (msg) {
+            _jquery2.default.get("/get_dir_sorts").then(function (msg) {
                 var posts1 = msg;
                 _this8.setState({ Platform: posts1.message });
             });
@@ -7755,7 +7756,7 @@ var Allmedia = function (_Component7) {
         value: function componentDidMount() {
             var _this12 = this;
 
-            _jquery2.default.get("http://news.nbd.com.cn/get_medias").then(function (msg) {
+            _jquery2.default.get("/get_medias").then(function (msg) {
                 var posts1 = msg;
                 _this12.setState({ Platform: posts1.message });
             });
@@ -7823,7 +7824,7 @@ var TestWrapper = function (_Component8) {
         value: function getArticleList(nextProps) {
             var _this15 = this;
 
-            _jquery2.default.getJSON("http://news.nbd.com.cn/get_article", {
+            _jquery2.default.getJSON("/get_article", {
                 "newCurArticleClassifyl": nextProps.curArticleClassifyId.join(","),
                 "Platforml": nextProps.curPlatformId.join(","),
                 "SendTime": this.props.time,
