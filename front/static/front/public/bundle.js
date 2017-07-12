@@ -7501,7 +7501,6 @@ var Box = function (_Component2) {
                 _react2.default.createElement(
                     _reactBootstrap.Col,
                     { xs: 12, md: 12 },
-                    _react2.default.createElement(ArticleClassify, { changePlatformL: this.changePlatformA, heightLinghtT: this.props.curItem }),
                     _react2.default.createElement(ArticleClassify, { changePlatformL: this.changePlatformA, heightLinghtT: this.props.curItem })
                 )
             );
