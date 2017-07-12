@@ -131,7 +131,7 @@ ADMIN_SITE_HEADER = u"新闻实时更新平台"
 
 HAYSTACK_CONNECTIONS = {
     'default': {
-        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'ENGINE': 'haystack.backends.elasticsearch2_backend.Elasticsearch2SearchEngine',
         'URL': 'http://172.19.23.208:9200/',
         'INDEX_NAME': 'haystack',
     },
