@@ -5,7 +5,7 @@ from django.views.static import serve as staticserve
 from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
-    url(r'^search/', login_required(KeyWordSearchView.as_view()), name='haystack_search'),
+    url(r'^search/', login_required(KeyWordSearchView.as_view(), login_url="/admin/login/"), name='haystack_search'),
     url(r'^$', views.index, name='index'),
     url(r'^test', views.test, name='test'),
     url(r'^receive_article_result', views.receive_article_result, name='receive_article_result'),
