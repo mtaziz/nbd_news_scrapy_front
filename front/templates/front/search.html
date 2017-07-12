@@ -2,139 +2,139 @@
 
 {% block content %}
     <div class="right_col" role="main">
-        <div class="">
-            <div class="page-title">
-                <div class="title_left">
-                    <h3>搜索页</h3>
-                </div>
-
-                <div class="title_right">
-                    <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                        <form class="input-group" ethod="get">
-                            <input type="text" class="form-control" id="id_q" name="q" type="search"
-                                   value="{{ query|default_if_none:"" }}" placeholder="Search for...">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="submit">Go!</button>
-                            </span>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-            <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="x_panel">
-                        <div class="alert alert-success" role="alert">
-                            <strong>请注意!</strong> 搜索结果最多展示200条记录。
-                        </div>
-                        {% if query %}
-                            <div class="panel">
-                                <div class="panel-heading">结果：</div>
-                                <div class="panel-body">
-                                    <div class="panel-collapse collapse in">
-                                        {% if page_obj.has_previous or page_obj.has_next %}
-                                            <div>
-                                                <nav>
-                                                    <ul class="pager">
-                                                        <li>总页数：{{ page_obj.paginator.num_pages }}</li>
-                                                        <li>共计{{ page_obj.paginator.count }}条</li>
-                                                        {% if page_obj.has_previous %}
-                                                            <li>
-                                                            <a href="?q={{ query }}&amp;page={{ page_obj.previous_page_number }}">
-                                                        {% endif %}&laquo;
-                                                        Prev
-                                                        {% if page_obj.has_previous %}</a></li>{% endif %}
-                                                        <li>{{ page_obj.number }}</li>
-                                                        {% if page_obj.has_next %}
-                                                            <li>
-                                                            <a href="?q={{ query }}&amp;page={{ page_obj.next_page_number }}">
-                                                        {% endif %}
-                                                        Next &raquo;
-                                                        {% if page_obj.has_next %}</a></li>{% endif %}
-                                                    </ul>
-                                                </nav>
-                                            </div>
-                                        {% endif %}
-                                    </div>
-
-                                    <!-- Table -->
-                                    <table class="table table-striped">
-                                        <thead>
-                                        <tr>
-                                            <th>文章标题</th>
-                                            <th>原文链接</th>
-                                            <th>来源网站</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for result in page_obj.object_list %}
-                                            <tr>
-                                                <td class="col-md-4 col-sm-4 col-xs-4">
-                                                    {{ result.object.article_title }}
-                                                </td>
-                                                <td class="col-md-4 col-sm-4 col-xs-4">
-                                                    <a href="{{ result.object }}"
-                                                       target="_blank">{{ result.object }}</a>
-                                                </td>
-
-                                                <td class="col-md-4 col-sm-4 col-xs-4">
-                                                    {{ result.object.article_for_crawl_media.crawl_media_name }}
-                                                </td>
-                                            </tr>
-                                        {% empty %}
-                                            <script>window.location.href = '{% url 'haystack_search' %}';</script>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-
-                            {% if page_obj.has_previous or page_obj.has_next %}
-                                <div>
-
-                                    <nav>
-                                        <ul class="pager">
-                                            <li>总页数：{{ page_obj.paginator.num_pages }}</li>
-                                            <li>共计：{{ page_obj.paginator.count }}条</li>
-                                            {% if page_obj.has_previous %}
-                                                <li>
-                                                <a href="?q={{ query }}&amp;page={{ page_obj.previous_page_number }}">
-                                            {% endif %}&laquo;
-                                            Prev
-                                            {% if page_obj.has_previous %}</a></li>{% endif %}
-                                            <li>{{ page_obj.number }}</li>
-                                            {% if page_obj.has_next %}
-                                                <li><a href="?q={{ query }}&amp;page={{ page_obj.next_page_number }}">
-                                            {% endif %}
-                                            Next &raquo;
-                                            {% if page_obj.has_next %}</a></li>{% endif %}
-                                        </ul>
-                                    </nav>
-                                </div>
-                            {% endif %}
-                        {% else %}
-                            <div class="panel panel-default">
-                                <!-- Default panel contents -->
-                                <div class="panel-heading">结果：</div>
-                                <div class="panel-body">
-                                </div>
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th>文章标题</th>
-                                        <th>原文链接</th>
-                                        <th>来源网站</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                            </div>
+{#        <div class="">#}
+{#            <div class="page-title">#}
+{#                <div class="title_left">#}
+{#                    <h3>搜索页</h3>#}
+{#                </div>#}
+{##}
+{#                <div class="title_right">#}
+{#                    <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">#}
+{#                        <form class="input-group" ethod="get">#}
+{#                            <input type="text" class="form-control" id="id_q" name="q" type="search"#}
+{#                                   value="{{ query|default_if_none:"" }}" placeholder="Search for...">#}
+{#                            <span class="input-group-btn">#}
+{#                                <button class="btn btn-default" type="submit">Go!</button>#}
+{#                            </span>#}
+{#                        </form>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="clearfix"></div>#}
+{#            <div class="row">#}
+{#                <div class="col-md-12 col-sm-12 col-xs-12">#}
+{#                    <div class="x_panel">#}
+{#                        <div class="alert alert-success" role="alert">#}
+{#                            <strong>请注意!</strong> 搜索结果最多展示200条记录。#}
+{#                        </div>#}
+{#                        {% if query %}#}
+{#                            <div class="panel">#}
+{#                                <div class="panel-heading">结果：</div>#}
+{#                                <div class="panel-body">#}
+{#                                    <div class="panel-collapse collapse in">#}
+{#                                        {% if page_obj.has_previous or page_obj.has_next %}#}
+{#                                            <div>#}
+{#                                                <nav>#}
+{#                                                    <ul class="pager">#}
+{#                                                        <li>总页数：{{ page_obj.paginator.num_pages }}</li>#}
+{#                                                        <li>共计{{ page_obj.paginator.count }}条</li>#}
+{#                                                        {% if page_obj.has_previous %}#}
+{#                                                            <li>#}
+{#                                                            <a href="?q={{ query }}&amp;page={{ page_obj.previous_page_number }}">#}
+{#                                                        {% endif %}&laquo;#}
+{#                                                        Prev#}
+{#                                                        {% if page_obj.has_previous %}</a></li>{% endif %}#}
+{#                                                        <li>{{ page_obj.number }}</li>#}
+{#                                                        {% if page_obj.has_next %}#}
+{#                                                            <li>#}
+{#                                                            <a href="?q={{ query }}&amp;page={{ page_obj.next_page_number }}">#}
+{#                                                        {% endif %}#}
+{#                                                        Next &raquo;#}
+{#                                                        {% if page_obj.has_next %}</a></li>{% endif %}#}
+{#                                                    </ul>#}
+{#                                                </nav>#}
+{#                                            </div>#}
+{#                                        {% endif %}#}
+{#                                    </div>#}
+{##}
+{#                                    <!-- Table -->#}
+{#                                    <table class="table table-striped">#}
+{#                                        <thead>#}
+{#                                        <tr>#}
+{#                                            <th>文章标题</th>#}
+{#                                            <th>原文链接</th>#}
+{#                                            <th>来源网站</th>#}
+{#                                        </tr>#}
+{#                                        </thead>#}
+{#                                        <tbody>#}
+{#                                        {% for result in page_obj.object_list %}#}
+{#                                            <tr>#}
+{#                                                <td class="col-md-4 col-sm-4 col-xs-4">#}
+{#                                                    {{ result.object.article_title }}#}
+{#                                                </td>#}
+{#                                                <td class="col-md-4 col-sm-4 col-xs-4">#}
+{#                                                    <a href="{{ result.object }}"#}
+{#                                                       target="_blank">{{ result.object }}</a>#}
+{#                                                </td>#}
+{##}
+{#                                                <td class="col-md-4 col-sm-4 col-xs-4">#}
+{#                                                    {{ result.object.article_for_crawl_media.crawl_media_name }}#}
+{#                                                </td>#}
+{#                                            </tr>#}
+{#                                        {% empty %}#}
+{#                                            <script>window.location.href = '{% url 'haystack_search' %}';</script>#}
+{#                                        {% endfor %}#}
+{#                                        </tbody>#}
+{#                                    </table>#}
+{#                                </div>#}
+{#                            </div>#}
+{##}
+{#                            {% if page_obj.has_previous or page_obj.has_next %}#}
+{#                                <div>#}
+{##}
+{#                                    <nav>#}
+{#                                        <ul class="pager">#}
+{#                                            <li>总页数：{{ page_obj.paginator.num_pages }}</li>#}
+{#                                            <li>共计：{{ page_obj.paginator.count }}条</li>#}
+{#                                            {% if page_obj.has_previous %}#}
+{#                                                <li>#}
+{#                                                <a href="?q={{ query }}&amp;page={{ page_obj.previous_page_number }}">#}
+{#                                            {% endif %}&laquo;#}
+{#                                            Prev#}
+{#                                            {% if page_obj.has_previous %}</a></li>{% endif %}#}
+{#                                            <li>{{ page_obj.number }}</li>#}
+{#                                            {% if page_obj.has_next %}#}
+{#                                                <li><a href="?q={{ query }}&amp;page={{ page_obj.next_page_number }}">#}
+{#                                            {% endif %}#}
+{#                                            Next &raquo;#}
+{#                                            {% if page_obj.has_next %}</a></li>{% endif %}#}
+{#                                        </ul>#}
+{#                                    </nav>#}
+{#                                </div>#}
+{#                            {% endif %}#}
+{#                        {% else %}#}
+{#                            <div class="panel panel-default">#}
+{#                                <!-- Default panel contents -->#}
+{#                                <div class="panel-heading">结果：</div>#}
+{#                                <div class="panel-body">#}
+{#                                </div>#}
+{#                                <table class="table">#}
+{#                                    <thead>#}
+{#                                    <tr>#}
+{#                                        <th>文章标题</th>#}
+{#                                        <th>原文链接</th>#}
+{#                                        <th>来源网站</th>#}
+{#                                    </tr>#}
+{#                                    </thead>#}
+{#                                    <tbody>#}
+{#                                    </tbody>#}
+{#                                </table>#}
+{#                            </div>#}
                             {# Show some example queries to run, maybe query syntax, something else? #}
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-        </div>
+{#                        {% endif %}#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
     </div>
 {% endblock content %}
