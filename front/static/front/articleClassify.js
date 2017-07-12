@@ -90,6 +90,7 @@ class Box extends Component {
             <Row className="show-grid">
                 <Col xs={12} md={12}>
                     <ArticleClassify changePlatformL={this.changePlatformA} heightLinghtT={this.props.curItem}/>
+                    <ArticleClassify changePlatformL={this.changePlatformA} heightLinghtT={this.props.curItem}/>
                 </Col>
             </Row>
         )
@@ -107,7 +108,7 @@ class ArticleClassify extends Component {
     }
 
     componentDidMount() {
-        $.get("http://news.nbd.com.cn/get_media_sorts").then(msg => {
+        $.get("/get_media_sorts").then(msg => {
             const posts = msg;
             this.setState({articleClassify: posts.message})
         })
@@ -173,7 +174,7 @@ class Platform extends Component {
     }
 
     componentDidMount() {
-        $.get("http://news.nbd.com.cn/get_dir_sorts").then(msg => {
+        $.get("/get_dir_sorts").then(msg => {
             const posts1 = msg;
             this.setState({Platform: posts1.message})
         })
@@ -241,7 +242,7 @@ class Allmedia extends Component {
     }
 
     componentDidMount() {
-        $.get("http://news.nbd.com.cn/get_medias").then(msg => {
+        $.get("/get_medias").then(msg => {
             const posts1 = msg;
             this.setState({Platform: posts1.message})
         })
@@ -284,7 +285,7 @@ class TestWrapper extends Component {
     }
 
     getArticleList(nextProps) {
-        $.getJSON("http://news.nbd.com.cn/get_article", {
+        $.getJSON("/get_article", {
             "newCurArticleClassifyl": nextProps.curArticleClassifyId.join(","),
             "Platforml": nextProps.curPlatformId.join(","),
             "SendTime": this.props.time,
