@@ -165,6 +165,8 @@ def get_tags(request):
 def login(request):
     return render(request, 'front/login.html', locals())
 
+def get_favicon(request):
+    return HttpResponse('')
 
 # @login_required(login_url="/admin/login/")
 class KeyWordSearchView(SearchView):
