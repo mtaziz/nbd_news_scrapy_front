@@ -90,7 +90,6 @@ class Box extends Component {
             <Row className="show-grid">
                 <Col xs={12} md={12}>
                     <ArticleClassify changePlatformL={this.changePlatformA} heightLinghtT={this.props.curItem}/>
-                    <ArticleClassify changePlatformL={this.changePlatformA} heightLinghtT={this.props.curItem}/>
                 </Col>
             </Row>
         )
