@@ -69,15 +69,15 @@
                                         <tbody>
                                         {% for result in page_obj.object_list %}
                                             <tr>
-                                                <td style="width: 300px;word-wrap: break-word;display: inline-block;">
+                                                <td class="col-md-4 col-sm-4 col-xs-4">
                                                     {{ result.object.article_title }}
                                                 </td>
-                                                <td style="width: 120px;word-wrap: break-word;display: inline-block;">
+                                                <td class="col-md-4 col-sm-4 col-xs-4">
                                                     <a href="{{ result.object }}"
                                                        target="_blank">{{ result.object }}</a>
                                                 </td>
 
-                                                <td>
+                                                <td class="col-md-4 col-sm-4 col-xs-4">
                                                     {{ result.object.article_for_crawl_media.crawl_media_name }}
                                                 </td>
                                             </tr>
