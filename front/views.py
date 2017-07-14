@@ -41,11 +41,11 @@ def receive_article_result(request):
         for key, value in request.POST.items():
             updated_values[key] = value
 
+        updated_values['article_for_crawl_media'] = CrawlMedia.objects.get(id=updated_values['article_for_crawl_media'])
         updated_values['article_for_crawl_media_sort'] = CrawlMediaSort.objects.get(
             id=updated_values['article_for_crawl_media_sort'])
         updated_values['article_for_crawl_dir_sort'] = CrawlDirSort.objects.get(
             id=updated_values['article_for_crawl_dir_sort'])
-        updated_values['article_for_crawl_media'] = CrawlMedia.objects.get(id=updated_values['article_for_crawl_media'])
         print updated_values
         if article_info.is_valid():
             article_info.save()
