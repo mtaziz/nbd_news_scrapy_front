@@ -31,7 +31,7 @@ class Articles(models.Model):
     article_for_crawl_media_sort = models.ForeignKey(CrawlMediaSort, verbose_name=u"网站分类(通常为类别，如股票，财经)", db_index=True)
     article_for_crawl_dir_sort = models.ForeignKey(CrawlDirSort, verbose_name=u'栏目分类(通常为单个的start url的栏目名)',
                                                    db_index=True)
-    article_title = models.CharField(u'来源标题', max_length=150)
+    article_title = models.CharField(u'来源标题', max_length=300)
     article_desc = models.TextField(u'来源摘要', blank=True, default='')
     article_content = models.TextField(u'来源内容', blank=True, default='')
     article_origin = models.CharField(u'上级来源', max_length=20, default='', blank=True, null=True)
