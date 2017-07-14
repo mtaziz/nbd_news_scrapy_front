@@ -36,7 +36,7 @@ class Articles(models.Model):
     article_content = models.TextField(u'来源内容', blank=True, default='')
     article_origin = models.CharField(u'上级来源', max_length=20, default='', blank=True, null=True)
     article_published_at = models.DateTimeField(u'来源发布时间')
-    article_tags = models.CharField(u'相关标签', max_length=20, default='')
+    article_tags = models.CharField(u'相关标签', max_length=100, default='')
     article_updated_at = models.DateTimeField(u'抓取时间', auto_now=True)
 
     def __unicode__(self):
