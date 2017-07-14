@@ -45,12 +45,12 @@ def receive_article_result(request):
             id=updated_values['article_for_crawl_media_sort'])
         updated_values['article_for_crawl_dir_sort'] = CrawlDirSort.objects.get(
             id=updated_values['article_for_crawl_dir_sort'])
+        updated_values['article_for_crawl_media'] = CrawlMedia.objects.get(id=updated_values['article_for_crawl_media'])
         print updated_values
         if article_info.is_valid():
             article_info.save()
             return HttpResponse(json.dumps({'status': 200, 'message': 'success'}), content_type="application/json")
         else:
-            print updated_values
             print article_info.errors
     else:
         return HttpResponse(json.dumps({'status': 500, 'message': 'failed'}), content_type="application/json")
