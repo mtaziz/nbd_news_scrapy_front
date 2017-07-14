@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'qpb75ckpd=swk0=+*v!c^nalw9!9kj(r58$q5@l)3rgr*-68z5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 # DEBUG = False
 
 ALLOWED_HOSTS = ['news.nbd.com.cn', 'nbd-news-scrapy-front']
