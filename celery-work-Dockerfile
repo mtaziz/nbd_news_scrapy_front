@@ -1,6 +1,7 @@
 FROM scrapy_base
+ADD ./requirements.txt /data/requirements.txt
+RUN pip install -r /data/requirements.txt
 ADD . /data/
 WORKDIR /data/
-RUN pip install -r requirements.txt
 # 不要使用& 后台执行
 ENTRYPOINT celery -A nbd_news_scrapy_front worker -l info 2>&1
