@@ -37,29 +37,17 @@ def test(request):
 def receive_article_result(request):
     if request.method == 'POST':
         article_info = ArticleForm(request.POST)
-        # if article_info.is_valid():
-        updated_values = {}
-        for key, value in request.POST.items():
-            updated_values[key] = value
-        updated_values['article_for_crawl_media'] = CrawlMedia.objects.get(id=updated_values['article_for_crawl_media'])
-        updated_values['article_for_crawl_media_sort'] = CrawlMediaSort.objects.get(
-            id=updated_values['article_for_crawl_media_sort'])
-        updated_values['article_for_crawl_dir_sort'] = CrawlDirSort.objects.get(
-            id=updated_values['article_for_crawl_dir_sort'])
-        # # create article_tag object
-        # tag_obj_list = []
-        # if updated_values['article_tags'].strip(",").split(',') == [u'']:
-        #     updated_values['article_tags'] = u"日常新闻,新闻"
-        # for i in updated_values['article_tags'].strip(",").split(','):
-        #     tag, created = ArticleTag.objects.update_or_create(tag_name=i, defaults={'tag_name': i})
-        #     tag.save()
-        #     tag_obj_list.append(tag)
-        # logging.log(logging.WARNING, updated_values)
-        # del updated_values["article_tags"]
-        # article_info = Articles.objects.create(**updated_values)
-        # article_info.article_tags = tag_obj_list
-        article_info.save()
-        return HttpResponse(json.dumps({'status': 200, 'message': 'success'}), content_type="application/json")
+        if article_info.is_valid():
+            updated_values = {}
+            for key, value in request.POST.items():
+                updated_values[key] = value
+            updated_values['article_for_crawl_media'] = CrawlMedia.objects.get(id=updated_values['article_for_crawl_media'])
+            updated_values['article_for_crawl_media_sort'] = CrawlMediaSort.objects.get(
+                id=updated_values['article_for_crawl_media_sort'])
+            updated_values['article_for_crawl_dir_sort'] = CrawlDirSort.objects.get(
+                id=updated_values['article_for_crawl_dir_sort'])
+            article_info.save()
+            return HttpResponse(json.dumps({'status': 200, 'message': 'success'}), content_type="application/json")
     else:
         return HttpResponse(json.dumps({'status': 500, 'message': 'failed'}), content_type="application/json")
 
