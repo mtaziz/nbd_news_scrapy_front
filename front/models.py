@@ -108,47 +108,47 @@ def update_access_token(sender, instance, *args, **kwargs):
                                                      wechat_corp_access_token_expires_time=instance.wechat_corp_access_token_expires_time)
 
 
-@receiver(m2m_changed, sender=Articles.article_tags.through)
-def push_article_to_wechat(sender, instance, action, *args, **kwargs):
-    if action == "post_add":
-        if instance.article_for_crawl_dir_sort.crawl_push_status == 1:
-            wechat_info = WechatQiyeConfig.objects.first()
-            if wechat_info and (wechat_info.wechat_corp_access_token_expires_time > datetime.now()):
-                send_url = "https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=" + wechat_info.wechat_corp_access_token
-                user_list = []
-                for user in ArticlePushConfig.objects.filter(push_status=1).values('wechat_user'):
-                    user_list.append(user['wechat_user'])
-                logging.log(logging.DEBUG, user_list)
-                send_values = {
-                    "touser": "|".join(user_list),
-                    "msgtype": "text",
-                    "agentid": "0",
-                    "text": {
-                        "content": instance.article_content + "\n" + instance.article_for_crawl_media.crawl_media_name
-                    },
-                    "safe": "0"
-                }
-                data = json.dumps(send_values, ensure_ascii=False).encode('utf8')
-                resp = requests.post(send_url, data=data)
-                print resp.content
-            elif wechat_info and (wechat_info.wechat_corp_access_token_expires_time < datetime.now()):
-                wechat_info.save()
-                send_url = "https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=" + wechat_info.wechat_corp_access_token
-                user_list = []
-                for user in ArticlePushConfig.objects.filter(push_status=1).values('wechat_user'):
-                    user_list.append(user['wechat_user'])
-                send_values = {
-                    "touser": "|".join(user_list),
-                    "msgtype": "text",
-                    "agentid": "0",
-                    "text": {
-                        "content": instance.article_content + "\n" + instance.article_for_crawl_media.crawl_media_name
-                    },
-                    "safe": "0"
-                }
-                data = json.dumps(send_values, ensure_ascii=False).encode('utf8')
-                resp = requests.post(send_url, data=data)
-                print resp.content
+@receiver(post_save, sender=Articles)
+def push_article_to_wechat(sender, instance, *args, **kwargs):
+    # if action == "post_add":
+    if instance.article_for_crawl_dir_sort.crawl_push_status == 1:
+        wechat_info = WechatQiyeConfig.objects.first()
+        if wechat_info and (wechat_info.wechat_corp_access_token_expires_time > datetime.now()):
+            send_url = "https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=" + wechat_info.wechat_corp_access_token
+            user_list = []
+            for user in ArticlePushConfig.objects.filter(push_status=1).values('wechat_user'):
+                user_list.append(user['wechat_user'])
+            logging.log(logging.DEBUG, user_list)
+            send_values = {
+                "touser": "|".join(user_list),
+                "msgtype": "text",
+                "agentid": "0",
+                "text": {
+                    "content": instance.article_content + "\n" + instance.article_for_crawl_media.crawl_media_name
+                },
+                "safe": "0"
+            }
+            data = json.dumps(send_values, ensure_ascii=False).encode('utf8')
+            resp = requests.post(send_url, data=data)
+            print resp.content
+        elif wechat_info and (wechat_info.wechat_corp_access_token_expires_time < datetime.now()):
+            wechat_info.save()
+            send_url = "https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=" + wechat_info.wechat_corp_access_token
+            user_list = []
+            for user in ArticlePushConfig.objects.filter(push_status=1).values('wechat_user'):
+                user_list.append(user['wechat_user'])
+            send_values = {
+                "touser": "|".join(user_list),
+                "msgtype": "text",
+                "agentid": "0",
+                "text": {
+                    "content": instance.article_content + "\n" + instance.article_for_crawl_media.crawl_media_name
+                },
+                "safe": "0"
+            }
+            data = json.dumps(send_values, ensure_ascii=False).encode('utf8')
+            resp = requests.post(send_url, data=data)
+            print resp.content
 
 
 @receiver(post_save, sender=ArticlePushConfig)
