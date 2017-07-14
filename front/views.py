@@ -37,17 +37,17 @@ def test(request):
 def receive_article_result(request):
     if request.method == 'POST':
         article_info = ArticleForm(request.POST)
-        if article_info.is_valid():
-            updated_values = {}
-            for key, value in request.POST.items():
-                updated_values[key] = value
-            updated_values['article_for_crawl_media'] = CrawlMedia.objects.get(id=updated_values['article_for_crawl_media'])
-            updated_values['article_for_crawl_media_sort'] = CrawlMediaSort.objects.get(
-                id=updated_values['article_for_crawl_media_sort'])
-            updated_values['article_for_crawl_dir_sort'] = CrawlDirSort.objects.get(
-                id=updated_values['article_for_crawl_dir_sort'])
-            article_info.save()
-            return HttpResponse(json.dumps({'status': 200, 'message': 'success'}), content_type="application/json")
+        # if article_info.is_valid():
+        updated_values = {}
+        for key, value in request.POST.items():
+            updated_values[key] = value
+        updated_values['article_for_crawl_media'] = CrawlMedia.objects.get(id=updated_values['article_for_crawl_media'])
+        updated_values['article_for_crawl_media_sort'] = CrawlMediaSort.objects.get(
+            id=updated_values['article_for_crawl_media_sort'])
+        updated_values['article_for_crawl_dir_sort'] = CrawlDirSort.objects.get(
+            id=updated_values['article_for_crawl_dir_sort'])
+        article_info.save()
+        return HttpResponse(json.dumps({'status': 200, 'message': 'success'}), content_type="application/json")
     else:
         return HttpResponse(json.dumps({'status': 500, 'message': 'failed'}), content_type="application/json")
 
