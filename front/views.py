@@ -50,7 +50,7 @@ def receive_article_result(request):
             article_info.save()
             return HttpResponse(json.dumps({'status': 200, 'message': 'success'}), content_type="application/json")
         else:
-            return HttpResponse(article_info)
+            return HttpResponse(article_info.errors)
             # print article_info.errors
     else:
         return HttpResponse(json.dumps({'status': 500, 'message': 'failed'}), content_type="application/json")
