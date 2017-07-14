@@ -48,6 +48,7 @@ def receive_article_result(request):
             id=updated_values['article_for_crawl_dir_sort'])
         print updated_values
         if article_info.is_valid():
+            article_info = Articles.objects.create(**updated_values)
             article_info.save()
             return HttpResponse(json.dumps({'status': 200, 'message': 'success'}), content_type="application/json")
         else:
