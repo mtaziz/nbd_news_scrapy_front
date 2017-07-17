@@ -5,7 +5,7 @@ import json
 import logging
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
-from scrapy_config.models import CustomerCrawlConfig
+from scrapy_config.models import NextPageCrawlConfig
 from itertools import chain
 from django.db.models import Q
 import time
@@ -153,22 +153,14 @@ def get_dir_sorts(request):
     return HttpResponse(json.dumps({'status': 200, 'message': media_list}), content_type="application/json")
 
 
-@login_required(login_url="/admin/login/")
-def get_tags(request):
-    article_info = ArticleTag.objects.all().values('tag_name').distinct()
-    tag_list = []
-    for i in article_info:
-        tag_list.append(i['tag_name'])
-    return HttpResponse(json.dumps({'status': 200, 'message': tag_list}), content_type="application/json")
-
-
 def login(request):
     return render(request, 'front/login.html', locals())
+
 
 def get_favicon(request):
     return HttpResponse('')
 
-# @login_required(login_url="/admin/login/")
+
 class KeyWordSearchView(SearchView):
     template_name = "front/search.html"
 
@@ -186,5 +178,3 @@ class KeyWordSearchView(SearchView):
 
     def paginate_queryset(self, queryset, page_size):
         return super(KeyWordSearchView, self).paginate_queryset(queryset[:200], page_size)
-
-
