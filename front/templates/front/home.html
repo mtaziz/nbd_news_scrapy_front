@@ -1,9 +1,52 @@
 {% extends "front/base_site.html" %}
+{% load staticfiles %}
+{% block header_js %}
+    <link rel="stylesheet" href="{% static 'front/public/bootstrap.min.css' %}">
+{% endblock %}
 
 {% block content %}
-    <div class="right_col" role="main">
-        <div class="">
-            <iframe src="/index.html" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ></iframe>
-        </div>
+    <style>
+        .show-grid {
+            margin-bottom: 15px;
+        }
+
+        .custom-modal {
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        .articleList {
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        /*.articleList:hover {*/
+        /*cursor: pointer;*/
+        /*box-shadow: 0px 1px 12px #888888;*/
+        /*}*/
+        .panel-body button {
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .seachList {
+            position: absolute;
+            top: 34px;
+            width: 100%;
+            left: 0;
+            height: 120px;
+            background: #FFF;
+            overflow-y: auto;
+            display: none;
+        }
+    </style>
+    <div class="container" id="app">
+
     </div>
 {% endblock content %}
+
+
+{% block footer_js %}
+    <script type="text/javascript" src="{% static 'front/public/vendor.js' %}"></script>
+    <script type="text/javascript" src="{% static 'front/public/bundle.js' %}"></script>
+{% endblock %}
