@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^get_dir_sorts', views.get_dir_sorts, name='get_dir_sorts'),
     url(r'^get_medias', views.get_medias, name='get_medias'),
     url(r'^get_article', views.get_article, name='get_article'),
+    url(r'^detail/(?P<detail_id>\d+?)\.html', views.get_article_detail, name='get_article_detail'),
     url(r'^login.html$', views.login, name='login'),
     url(r'^favicon.ico$', views.get_favicon, name='get_favicon'),
 
