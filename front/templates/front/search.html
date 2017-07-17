@@ -70,7 +70,9 @@
                                         {% for result in page_obj.object_list %}
                                             <tr>
                                                 <td class="col-md-4 col-sm-4 col-xs-4">
-                                                    {{ result.object.article_title }}
+                                                    <a href="{{ result.object.id }}"
+                                                       target="_blank">{{ result.object.article_title }}</a>
+
                                                 </td>
                                                 <td class="col-md-4 col-sm-4 col-xs-4" style="word-break: break-word;">
                                                     <a href="{{ result.object }}"
