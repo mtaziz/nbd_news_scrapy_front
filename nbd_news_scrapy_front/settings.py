@@ -1,4 +1,4 @@
-is_development = False
+is_development = True
 
 
 if is_development:
