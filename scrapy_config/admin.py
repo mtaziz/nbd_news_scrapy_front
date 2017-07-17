@@ -1,6 +1,6 @@
 # coding: utf-8
 from django.contrib import admin
-from models import SystemCrawlConfig, XpathRuleSet, CustomerCrawlConfig, CrawlDirSort, CrawlMedia, CrawlMediaSort, \
+from models import AllSiteCrawlConfig, XpathRuleSet, NextPageCrawlConfig, CrawlDirSort, CrawlMedia, CrawlMediaSort, \
     OnePageCrawlConfig, JsonCrawlConfig
 # from models import CrawlMedia
 from django.contrib import messages
@@ -105,8 +105,8 @@ class XpathRuleSetAdmin(admin.ModelAdmin):
     list_display = ('xpath_for_set_name', 'xpath_for_article_title', 'xpath_for_article_true_link')
 
 
-admin.site.register(SystemCrawlConfig, SystemCrawlConfigAdmin)
-admin.site.register(CustomerCrawlConfig, CustomerCrawlConfigAdmin)
+admin.site.register(AllSiteCrawlConfig, SystemCrawlConfigAdmin)
+admin.site.register(NextPageCrawlConfig, CustomerCrawlConfigAdmin)
 # admin.site.register(CrawlMedia, CrawlMediaAdmin)
 admin.site.register(XpathRuleSet, XpathRuleSetAdmin)
 admin.site.register(CrawlMedia, CrawlMediaAdmin)
