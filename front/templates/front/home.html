@@ -1,9 +1,5 @@
 {% extends "front/base_site.html" %}
 {% load staticfiles %}
-{% block header_js %}
-    <link rel="stylesheet" href="{% static 'front/public/bootstrap.min.css' %}">
-{% endblock %}
-
 {% block content %}
     <style>
         .show-grid {
@@ -41,13 +37,15 @@
         }
     </style>
     <div class="right_col" role="main">
-        <div id="app">
+        <div class="row">
+            <div id="app">
 
+            </div>
         </div>
+
     </div>
 
 {% endblock content %}
-
 
 {% block footer_js %}
     <script type="text/javascript" src="{% static 'front/public/vendor.js' %}"></script>
