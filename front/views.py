@@ -31,6 +31,11 @@ def index(request):
 
 
 @login_required(login_url="/admin/login/")
+def home(request):
+    return render(request, 'front/home.html')
+
+
+@login_required(login_url="/admin/login/")
 def get_article_detail(request, detail_id):
     detail_info = get_object_or_404(Articles, id=detail_id)
     return render(request, 'front/detail.html', locals())
