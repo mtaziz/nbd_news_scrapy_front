@@ -8,6 +8,18 @@ from django.utils.safestring import mark_safe
 
 
 # Register your models here.
+def batch_open(self, obj):
+    obj.update(crawl_status=1)
+
+
+def batch_close(self, obj):
+    obj.update(crawl_status=0)
+
+
+batch_close.short_description = u'批量关闭抓取'
+batch_open.short_description = u'批量开启抓取'
+
+
 class CrawlDirSortAdmin(admin.ModelAdmin):
     list_display = ('crawl_dir_sort_name', 'crawl_push_status_plus')
     list_per_page = 20
@@ -16,6 +28,7 @@ class CrawlDirSortAdmin(admin.ModelAdmin):
     def update_status_to_on(self, request, obj=None):
         # need choose one at least
         obj.update(crawl_push_status=1)
+
     update_status_to_on.short_description = u'批量开启分类栏目推送'
 
     def update_status_to_off(self, request, obj=None):
@@ -45,17 +58,19 @@ class CrawlMediaSortAdmin(admin.ModelAdmin):
     list_per_page = 20
 
 
-class SystemCrawlConfigAdmin(admin.ModelAdmin):
+class AllSiteCrawlConfigAdmin(admin.ModelAdmin):
     list_display = (
         'crawl_media', 'crawl_start_url', 'crawl_link_extractor_allow', 'crawl_link_extractor_deny',
         'crawl_xpath_rule_set', 'crawl_note', 'crawl_frequency', 'crawl_scrapyd_jobid', 'updated_at')
     list_per_page = 50
+    actions = [batch_open, batch_close]
 
 
 class OnePageCrawlConfigAdmin(admin.ModelAdmin):
     list_display = (
         'crawl_start_url', 'crawl_media_sort', 'crawl_frequency', 'crawl_status_fri', 'updated_at')
     list_per_page = 50
+    actions = [batch_open, batch_close]
 
     def crawl_status_fri(self, obj):
         if obj.crawl_status == 1:
@@ -72,6 +87,7 @@ class JsonCrawlConfigAdmin(admin.ModelAdmin):
     list_display = (
         'crawl_start_url', 'crawl_media_sort', 'crawl_next_url', 'crawl_frequency', 'crawl_status_fri')
     list_per_page = 50
+    actions = [batch_open, batch_close]
 
     def crawl_status_fri(self, obj):
         if obj.crawl_status == 1:
@@ -84,11 +100,12 @@ class JsonCrawlConfigAdmin(admin.ModelAdmin):
     crawl_status_fri.short_description = u"是否开启抓取"
 
 
-class CustomerCrawlConfigAdmin(admin.ModelAdmin):
+class NextPageCrawlConfigAdmin(admin.ModelAdmin):
     list_display = (
         'crawl_start_url', 'crawl_media', 'crawl_media_sort', 'crawl_dir_sort', 'crawl_xpath_rule_set',
         'crawl_note', 'crawl_frequency', 'crawl_scrapyd_jobid', 'crawl_status_fri', 'updated_at')
     list_per_page = 50
+    actions = [batch_open, batch_close]
 
     def crawl_status_fri(self, obj):
         if obj.crawl_status == 1:
@@ -105,9 +122,8 @@ class XpathRuleSetAdmin(admin.ModelAdmin):
     list_display = ('xpath_for_set_name', 'xpath_for_article_title', 'xpath_for_article_true_link')
 
 
-admin.site.register(AllSiteCrawlConfig, SystemCrawlConfigAdmin)
-admin.site.register(NextPageCrawlConfig, CustomerCrawlConfigAdmin)
-# admin.site.register(CrawlMedia, CrawlMediaAdmin)
+admin.site.register(AllSiteCrawlConfig, AllSiteCrawlConfigAdmin)
+admin.site.register(NextPageCrawlConfig, NextPageCrawlConfigAdmin)
 admin.site.register(XpathRuleSet, XpathRuleSetAdmin)
 admin.site.register(CrawlMedia, CrawlMediaAdmin)
 admin.site.register(CrawlMediaSort, CrawlMediaSortAdmin)
