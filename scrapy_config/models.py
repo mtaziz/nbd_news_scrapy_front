@@ -11,18 +11,6 @@ from celery import shared_task
 import logging
 
 
-# Create your models here.
-# class CrawlMedia(models.Model):
-#     crawl_media = models.CharField(u'媒体域名(如:www.nbd.com.cn) 做关联用', unique=True, max_length=30)
-#
-#     class Meta:
-#         verbose_name = u'抓取媒体'
-#         verbose_name_plural = u'抓取媒体'
-#
-#     def __unicode__(self):
-#         return self.crawl_media
-
-
 class XpathRuleSet(models.Model):
     # 对应着item对象
     # xpath_for_article_true_link = models.URLField(max_length=100)
@@ -45,7 +33,7 @@ class XpathRuleSet(models.Model):
         return self.xpath_for_set_name
 
 
-class SystemCrawlConfig(models.Model):
+class AllSiteCrawlConfig(models.Model):
     # crawl_type_choice = ((1, u'整站'), (2, u'特定链接'))
     # crawl_type = models.SmallIntegerField(u'爬虫类型', default=1, choices=crawl_type_choice)
     SCORE_CHOICES = [(0, u'一次更新'), ]
@@ -61,8 +49,8 @@ class SystemCrawlConfig(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name = u'全站抓取配置'
-        verbose_name_plural = u'全站抓取配置'
+        verbose_name = u'AllSite数据源'
+        verbose_name_plural = u'AllSite数据源管理'
 
     def __unicode__(self):
         return self.crawl_media
@@ -121,8 +109,8 @@ class OnePageCrawlConfig(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name = u'本页面抓取'
-        verbose_name_plural = u'本页面抓取配置'
+        verbose_name = u'CurrentPage数据源'
+        verbose_name_plural = u'CurrentPage数据源管理'
 
     def __unicode__(self):
         return self.crawl_media.crawl_domain
@@ -145,16 +133,14 @@ class JsonCrawlConfig(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name = u'Json数据源抓取'
-        verbose_name_plural = u'Json数据源抓取'
+        verbose_name = u'Json数据源'
+        verbose_name_plural = u'Json数据源管理'
 
     def __unicode__(self):
         return self.crawl_media.crawl_domain
 
 
-class CustomerCrawlConfig(models.Model):
-    # crawl_type_choice = ((1, u'整站'), (2, u'特定链接'))
-    # crawl_type = models.SmallIntegerField(u'爬虫类型', default=1, choices=crawl_type_choice)
+class NextPageCrawlConfig(models.Model):
     status_type_choice = ((1, u'开启'), (2, u'关闭'))
     SCORE_CHOICES = [(0, u'一次更新'), ]
     SCORE_CHOICES = SCORE_CHOICES + zip(range(1, 30, 1), range(1, 30, 1))
@@ -172,34 +158,11 @@ class CustomerCrawlConfig(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name = u'用户自定义抓取配置'
-        verbose_name_plural = u'用户自定义抓取配置'
+        verbose_name = u'NextPage数据源'
+        verbose_name_plural = u'NextPage数据源管理'
 
     def __unicode__(self):
         return self.crawl_media.crawl_domain
-
-
-# class WeiboCrawlConfig(models.Model):
-#     status_type_choice = ((1, u'开启'), (2, u'关闭'))
-#     SCORE_CHOICES = [(0, u'一次更新'), ]
-#     SCORE_CHOICES = SCORE_CHOICES + zip(range(1, 10, 1), range(1, 10, 1))
-#     crawl_media = models.ForeignKey(CrawlMedia, verbose_name=u'网站域名(如:www.nbd.com.cn) 做关联用', db_index=True)
-#     crawl_media_sort = models.ForeignKey(CrawlMediaSort, verbose_name=u"网站分类(通常为类别，如股票，财经)", db_index=True)
-#     crawl_dir_sort = models.ForeignKey(CrawlDirSort, verbose_name=u'栏目分类(通常为单个的start url的栏目名)', db_index=True)
-#     crawl_start_url = models.URLField(u'单个的start url(通常做快速更新的列表页)', unique=True, db_index=True)
-#     crawl_xpath_rule_set = models.ForeignKey(XpathRuleSet, verbose_name=u'item规则集,该模型在当前页面获取')
-#     crawl_xpath_list = models.CharField(u'xpath规则，生成可循环的对象', max_length=100)
-#     crawl_frequency = models.IntegerField(u'更新频率(单位：分钟)', choices=SCORE_CHOICES)
-#     crawl_status = models.SmallIntegerField(u'是否开启抓取', choices=status_type_choice, default=1)
-#     crawl_note = models.CharField(u'start url备注', max_length=50, blank=True)
-#     updated_at = models.DateTimeField(auto_now=True)
-#
-#     class Meta:
-#         verbose_name = u'本页面抓取'
-#         verbose_name_plural = u'本页面抓取配置'
-#
-#     def __unicode__(self):
-#         return self.crawl_media.crawl_domain
 
 
 @shared_task
@@ -211,7 +174,7 @@ def update_scrapy_crawl(**kwargs):
         return r['jobid']
 
 
-@receiver(pre_save, sender=CustomerCrawlConfig)
+@receiver(pre_save, sender=NextPageCrawlConfig)
 def update_crawl(sender, instance, *args, **kwargs):
     schedule, created = IntervalSchedule.objects.get_or_create(
         every=instance.crawl_frequency,
@@ -234,9 +197,9 @@ def update_crawl(sender, instance, *args, **kwargs):
             logging.log(logging.DEBUG, instance.crawl_start_url)
             resp = requests.get(settings.SCRAPYD_SETTING_HOST + 'listprojects.json')
             project = resp.json()['projects'][0]
-            data = {'project': project, 'spider': 'customer_crawl', 'current_crawl': instance.crawl_start_url}
+            data = {'project': project, 'spider': 'next_page_crawl', 'current_crawl': instance.crawl_start_url}
             task_status = True if instance.crawl_status == 1 else False
-            expires_time = datetime.now + timedelta(
+            expires_time = datetime.now() + timedelta(
                 seconds=75) if instance.crawl_frequency == 0 else datetime.now() + timedelta(days=1000)
             PeriodicTask.objects.update_or_create(
                 name=instance.crawl_start_url,
@@ -252,9 +215,9 @@ def update_crawl(sender, instance, *args, **kwargs):
         logging.log(logging.DEBUG, 'no instance id')
         resp = requests.get(settings.SCRAPYD_SETTING_HOST + 'listprojects.json')
         project = resp.json()['projects'][0]
-        data = {'project': project, 'spider': 'customer_crawl', 'crawl_start_url': instance.crawl_start_url}
+        data = {'project': project, 'spider': 'next_page_crawl', 'crawl_start_url': instance.crawl_start_url}
         task_status = True if instance.crawl_status == 1 else False
-        expires_time = datetime.now + timedelta(
+        expires_time = datetime.now() + timedelta(
             seconds=75) if instance.crawl_frequency == 0 else datetime.now() + timedelta(days=1000)
         PeriodicTask.objects.update_or_create(
             name=instance.crawl_start_url,
@@ -289,9 +252,9 @@ def update_crawl(sender, instance, *args, **kwargs):
             logging.log(logging.DEBUG, instance.crawl_start_url)
             resp = requests.get(settings.SCRAPYD_SETTING_HOST + 'listprojects.json')
             project = resp.json()['projects'][0]
-            data = {'project': project, 'spider': 'current_crawl', 'crawl_start_url': instance.crawl_start_url}
+            data = {'project': project, 'spider': 'one_page_crawl', 'crawl_start_url': instance.crawl_start_url}
             task_status = True if instance.crawl_status == 1 else False
-            expires_time = datetime.now + timedelta(
+            expires_time = datetime.now() + timedelta(
                 seconds=75) if instance.crawl_frequency == 0 else datetime.now() + timedelta(days=1000)
             PeriodicTask.objects.update_or_create(
                 name=instance.crawl_start_url,
@@ -307,9 +270,9 @@ def update_crawl(sender, instance, *args, **kwargs):
         logging.log(logging.DEBUG, 'no instance id')
         resp = requests.get(settings.SCRAPYD_SETTING_HOST + 'listprojects.json')
         project = resp.json()['projects'][0]
-        data = {'project': project, 'spider': 'current_crawl', 'crawl_start_url': instance.crawl_start_url}
+        data = {'project': project, 'spider': 'one_page_crawl', 'crawl_start_url': instance.crawl_start_url}
         task_status = True if instance.crawl_status == 1 else False
-        expires_time = datetime.now + timedelta(
+        expires_time = datetime.now() + timedelta(
             seconds=75) if instance.crawl_frequency == 0 else datetime.now() + timedelta(days=1000)
         PeriodicTask.objects.update_or_create(
             name=instance.crawl_start_url,
@@ -347,7 +310,7 @@ def update_crawl(sender, instance, *args, **kwargs):
             project = resp.json()['projects'][0]
             data = {'project': project, 'spider': 'json_crawl', 'crawl_start_url': instance.crawl_start_url}
             task_status = True if instance.crawl_status == 1 else False
-            expires_time = datetime.now + timedelta(
+            expires_time = datetime.now() + timedelta(
                 seconds=75) if instance.crawl_frequency == 0 else datetime.now() + timedelta(days=1000)
             PeriodicTask.objects.update_or_create(
                 name=instance.crawl_start_url,
@@ -365,7 +328,7 @@ def update_crawl(sender, instance, *args, **kwargs):
         project = resp.json()['projects'][0]
         data = {'project': project, 'spider': 'json_crawl', 'crawl_start_url': instance.crawl_start_url}
         task_status = True if instance.crawl_status == 1 else False
-        expires_time = datetime.now + timedelta(
+        expires_time = datetime.now() + timedelta(
             seconds=75) if instance.crawl_frequency == 0 else datetime.now() + timedelta(days=1000)
         PeriodicTask.objects.update_or_create(
             name=instance.crawl_start_url,

@@ -4,4 +4,4 @@ from django.apps import AppConfig
 
 class ContentConfig(AppConfig):
     name = 'scrapy_config'
-    verbose_name = u'抓取平台及规则控制'
+    verbose_name = u'数据源分类及规则配置'
