@@ -8,11 +8,11 @@ from django.utils.safestring import mark_safe
 
 
 # Register your models here.
-def batch_open(self, obj):
+def batch_open(modeladmin, request, obj):
     obj.update(crawl_status=1)
 
 
-def batch_close(self, obj):
+def batch_close(modeladmin, request, obj):
     obj.update(crawl_status=0)
 
 
