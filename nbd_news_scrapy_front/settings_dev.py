@@ -45,7 +45,6 @@ INSTALLED_APPS = (
     'django_celery_results',
     'django_celery_beat',
 )
-AUTH_USER_MODEL = 'user_profile.CustomUser'
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
