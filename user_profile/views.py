@@ -7,7 +7,7 @@ import json
 # Create your views here.
 @login_required
 def favorite(request):
-    current_user_profile = User.objects.get(request.user)
+    current_user_profile = User.objects.get(user=request.user)
     user_favorite_info = {}
     user_favorite_info['user_favorite_crawl_media_sort'] = current_user_profile
     # user_favorite_info['user_favorite_crawl_media'] = current_user_profile.user_favorite_crawl_media
