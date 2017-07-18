@@ -25,17 +25,17 @@ def check_user_is_login(func):
 
 
 # Create your views here.
-@login_required(login_url="/admin/login/")
+@login_required(login_url="/user/login/")
 def index(request):
     return render(request, 'front/index.html', locals())
 
 
-@login_required(login_url="/admin/login/")
+@login_required(login_url="/user/login/")
 def home(request):
     return render(request, 'front/home.html')
 
 
-@login_required(login_url="/admin/login/")
+@login_required(login_url="/user/login/")
 def get_article_detail(request, detail_id):
     detail_info = get_object_or_404(Articles, id=detail_id)
     return render(request, 'front/detail.html', locals())
@@ -64,7 +64,7 @@ def receive_article_result(request):
         return HttpResponse(json.dumps({'status': 500, 'message': 'failed'}), content_type="application/json")
 
 
-@login_required(login_url="/admin/login/")
+@login_required(login_url="/user/login/")
 def get_article(request):
     current_time = request.GET.get("SendTime", '')
     # newCurArticleClassify 文章标签
@@ -117,7 +117,7 @@ def get_article(request):
     return HttpResponse(json.dumps(all_articles_info_list), content_type="application/json")
 
 
-@login_required(login_url="/admin/login/")
+@login_required(login_url="/user/login/")
 def get_medias(request):
     media_info = CrawlMedia.objects.all().values('id', 'crawl_media_name')
     media_list = []
@@ -129,7 +129,7 @@ def get_medias(request):
     return HttpResponse(json.dumps({'status': 200, 'message': media_list}), content_type="application/json")
 
 
-@login_required(login_url="/admin/login/")
+@login_required(login_url="/user/login/")
 def get_media_sorts(request):
     media_sort_info = CrawlMediaSort.objects.all().values('id', 'crawl_media_sort_name')
     media_list = []
@@ -141,7 +141,7 @@ def get_media_sorts(request):
     return HttpResponse(json.dumps({'status': 200, 'message': media_list}), content_type="application/json")
 
 
-@login_required(login_url="/admin/login/")
+@login_required(login_url="/user/login/")
 def get_dir_sorts(request):
     media_sort_info = CrawlDirSort.objects.all().values('id', 'crawl_dir_sort_name')
     media_list = []
@@ -154,7 +154,7 @@ def get_dir_sorts(request):
 
 
 def login(request):
-    return render(request, 'front/login.html', locals())
+    return render(request, 'front/logain.html', locals())
 
 
 def get_favicon(request):

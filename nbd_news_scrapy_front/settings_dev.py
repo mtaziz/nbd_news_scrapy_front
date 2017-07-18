@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'nbd_news_scrapy_front.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'localhost',
+        'HOST': '172.19.23.208',
         # 'HOST': 'nbd-news-scrapy-mysql',
         'USER': 'scrapy_user',
         'PASSWORD': 'Abcd1234',
@@ -128,7 +128,7 @@ WECHAT_SEND_MESSAGE_API =  "https://qyapi.weixin.qq.com/cgi-bin/message/send?acc
 WECHAT_CREATE_USER_API = "https://qyapi.weixin.qq.com/cgi-bin/user/create?access_token="
 WECHAT_UPDATE_USER_API = "https://qyapi.weixin.qq.com/cgi-bin/user/update?access_token="
 
-ADMIN_SITE_HEADER = u"新闻实时更新平台"
+ADMIN_NAME = u"新闻实时更新平台"
 
 HAYSTACK_CONNECTIONS = {
     'default': {
