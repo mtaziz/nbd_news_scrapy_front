@@ -1,4 +1,4 @@
-is_development = True
+is_development = False
 
 if is_development:
     from settings_dev import *
