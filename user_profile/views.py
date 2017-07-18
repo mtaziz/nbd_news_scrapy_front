@@ -1,11 +1,14 @@
 from django.shortcuts import render, HttpResponse
-from models import UserProfile, User
 from django.contrib.auth.decorators import login_required
+import json
 
 
 # Create your views here.
 @login_required
 def favorite(request):
-    current_user = request.user
-    # desc = User.objects.all()[0].get_profile().description
-    return HttpResponse(current_user.first_name)
+    current_user_profile = request.user.userprofile
+    user_favorite_info = {}
+    user_favorite_info['user_favorite_crawl_media_sort'] = current_user_profile.user_favorite_crawl_media_sort
+    user_favorite_info['user_favorite_crawl_media'] = current_user_profile.user_favorite_crawl_media
+    user_favorite_info['user_favorite_crawl_dir_sort'] = current_user_profile.user_favorite_crawl_media
+    return HttpResponse(json.dumps(user_favorite_info), content_type="application/json")
