@@ -9,7 +9,7 @@ import json
 def favorite(request):
     current_user_profile = User.objects.get(request.user)
     user_favorite_info = {}
-    user_favorite_info['user_favorite_crawl_media_sort'] = current_user_profile.userprofile.user_favorite_crawl_media_sort
+    user_favorite_info['user_favorite_crawl_media_sort'] = current_user_profile
     # user_favorite_info['user_favorite_crawl_media'] = current_user_profile.user_favorite_crawl_media
     # user_favorite_info['user_favorite_crawl_dir_sort'] = current_user_profile.user_favorite_crawl_media
     return HttpResponse(json.dumps(user_favorite_info), content_type="application/json")
