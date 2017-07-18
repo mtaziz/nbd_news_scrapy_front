@@ -8,4 +8,4 @@ from django.contrib.auth.decorators import login_required
 def favorite(request):
     current_user = request.user
     # desc = User.objects.all()[0].get_profile().description
-    return HttpResponse(current_user)
+    return HttpResponse(current_user.first_name)
