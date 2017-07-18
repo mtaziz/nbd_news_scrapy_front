@@ -17,5 +17,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^user/', include('user_profile.urls')),
     url(r'^', include('front.urls')),
 ]

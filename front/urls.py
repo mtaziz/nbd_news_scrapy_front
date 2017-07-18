@@ -17,7 +17,6 @@ urlpatterns = [
     url(r'^detail/(?P<detail_id>\d+?)\.html', views.get_article_detail, name='get_article_detail'),
     url(r'^login.html$', views.login, name='login'),
     url(r'^favicon.ico$', views.get_favicon, name='get_favicon'),
-
     # url(r'^logout$', views.logout, name='logout'),
     # url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
 ]

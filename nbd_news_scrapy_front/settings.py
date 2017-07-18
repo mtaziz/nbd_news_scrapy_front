@@ -1,3 +1,4 @@
+# coding: utf8
 is_development = True
 
 if is_development:

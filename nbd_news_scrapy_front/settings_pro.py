@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'haystack',
     'front',
     'scrapy_config',
+    'user_profile',
     'django_celery_results',
     'django_celery_beat',
 )
