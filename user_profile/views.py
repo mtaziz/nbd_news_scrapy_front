@@ -11,9 +11,9 @@ from django.contrib import messages
 # Create your views here.
 @login_required(login_url="/user/login/")
 def favorite(request):
-    current_user_profile = list(UserProfile.objects.filter(user=request.user))
+    current_user_profile = UserProfile.objects.filter(user=request.user)
     user_favorite_info = {}
-    if not current_user_profile:
+    if not list(current_user_profile):
         user_favorite_info['user_favorite_crawl_media_sort'] = current_user_profile.user_favorite_crawl_media_sort
         user_favorite_info['user_favorite_crawl_media'] = current_user_profile.user_favorite_crawl_media
         user_favorite_info['user_favorite_crawl_dir_sort'] = current_user_profile.user_favorite_crawl_media
