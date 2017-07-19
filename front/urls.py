@@ -8,7 +8,7 @@ urlpatterns = [
     url(r'^search/', login_required(KeyWordSearchView.as_view(), login_url="/admin/login/"), name='haystack_search'),
 
     url(r'^$', views.home, name='home'),
-    url(r'^index.html$', views.index, name='index'),
+    # url(r'^index.html$', views.index, name='index'),
     url(r'^receive_article_result', views.receive_article_result, name='receive_article_result'),
     url(r'^get_media_sorts', views.get_media_sorts, name='get_media_sorts'),
     url(r'^get_dir_sorts', views.get_dir_sorts, name='get_dir_sorts'),
