@@ -9,10 +9,10 @@ from django.dispatch import receiver
 
 # Create your models here.
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    user_favorite_crawl_media_sort = models.CharField(max_length=1000, default='')
-    user_favorite_crawl_media = models.CharField(max_length=1000, default='')
-    user_favorite_crawl_dir_sort = models.CharField(max_length=1000, default='')
+    user = models.OneToOneField(User, verbose_name=u"关联用户", on_delete=models.CASCADE)
+    user_favorite_crawl_media_sort = models.CharField(u"收藏的网站分类", max_length=1000, default='', blank=True, null=True)
+    user_favorite_crawl_media = models.CharField(u"收藏的网站", max_length=1000, default='', blank=True, null=True)
+    user_favorite_crawl_dir_sort = models.CharField(u"收藏的网站目录", max_length=1000, default='', blank=True, null=True)
 
     def __unicode__(self):
         return self.user.first_name

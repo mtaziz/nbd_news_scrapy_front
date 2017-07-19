@@ -17,6 +17,15 @@
 
         <div class="login_wrapper">
             <div class="animate form login_form">
+                {% if messages %}
+                    <div class="alert alert-success" role="alert">
+
+                        {% for message in messages %}
+                            <p{% if message.tags %} class="{{ message.tags }}" {% endif %}
+                                                    style="padding: 10px">{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
                 <section class="login_content">
                     <form method="post">
                         {% csrf_token %}
@@ -26,7 +35,7 @@
                         </div>
                         <div>
                             <input type="password" class="form-control" placeholder="密码" name="password" required=""/>
-                            <input name="next" value="/" type="hidden">
+                            <input name="next" value="{{ next|default:"/" }}" type="hidden">
                         </div>
                         <div>
                             <button class="btn btn-default submit" href="{% url 'user_profile_login' %}">Log in</button>

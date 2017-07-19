@@ -1,0 +1,41 @@
+{% extends "front/base_site.html" %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>搜索页</h3>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="alert alert-success" role="alert">
+                <strong>请注意!</strong> 标示有"收藏的",不能更改，直接在看新闻中操作。
+            </div>
+
+
+            {% if messages %}
+                <div class="alert alert-success" role="alert">
+
+                    {% for message in messages %}
+                        <p{% if message.tags %} class="{{ message.tags }}" {% endif %}
+                                                style="padding: 10px">{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <form method="post">
+                        {% csrf_token %}
+                        <ul>
+                            {{ user_form.as_ul }}
+                            {{ profile_form.as_ul }}
+                        </ul>
+                        <button type="submit">保存提交</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
