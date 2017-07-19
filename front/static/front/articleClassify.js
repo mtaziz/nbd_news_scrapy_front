@@ -63,7 +63,6 @@ class Parents extends Component {
         return (
             <div>
                 <Box changePlatform={this.changeItem} curItem={this.state.curItem}/>
-                /*<Box1 changePlatform={this.changeItem} curItem={this.state.curItem}/>*/
                 <Box2 changePlatform={this.changeItem} curItem={this.state.curItem}/>
                 <TestWrapper curItem={this.state.curItem} curPlatformId={this.state.curPlatformId}
                              curArticleClassifyId={this.state.curArticleClassifyId}
@@ -74,6 +73,7 @@ class Parents extends Component {
         )
     }
 }
+// <Box1 changePlatform={this.changeItem} curItem={this.state.curItem}/>
 
 class Box extends Component {
     constructor(props) {

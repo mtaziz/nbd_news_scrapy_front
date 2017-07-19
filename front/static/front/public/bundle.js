@@ -7461,9 +7461,6 @@ var Parents = function (_Component) {
                 "div",
                 null,
                 _react2.default.createElement(Box, { changePlatform: this.changeItem, curItem: this.state.curItem }),
-                "/*",
-                _react2.default.createElement(Box1, { changePlatform: this.changeItem, curItem: this.state.curItem }),
-                "*/",
                 _react2.default.createElement(Box2, { changePlatform: this.changeItem, curItem: this.state.curItem }),
                 _react2.default.createElement(TestWrapper, { curItem: this.state.curItem, curPlatformId: this.state.curPlatformId,
                     curArticleClassifyId: this.state.curArticleClassifyId,
@@ -7476,6 +7473,7 @@ var Parents = function (_Component) {
 
     return Parents;
 }(_react.Component);
+// <Box1 changePlatform={this.changeItem} curItem={this.state.curItem}/>
 
 var Box = function (_Component2) {
     _inherits(Box, _Component2);
