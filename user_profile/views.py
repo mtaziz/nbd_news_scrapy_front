@@ -44,7 +44,7 @@ def setting(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            messages.success(request, ('更新成功，请重新登陆'))
+            messages.success(request, ('密码更新成功，请重新登陆'))
             return redirect('user_profile_setting')
         else:
             messages.error(request, ('修正以下错误'))
