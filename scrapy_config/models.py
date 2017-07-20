@@ -1,7 +1,6 @@
 # coding: utf-8
 from django.db import models
 from django.db.models.signals import post_save, pre_save
-from django.core.signals import request_finished
 from django.dispatch import receiver
 from nbd_news_scrapy_front import settings
 import requests
@@ -179,13 +178,8 @@ def update_scrapy_crawl(**kwargs):
         return r['jobid']
 
 
-@receiver(request_finished)
-def my_callback(sender, **kwargs):
-    print("Request finished!")
-
-
 @receiver(pre_save, sender=NextPageCrawlConfig)
-def update_crawl(sender, instance, *args, **kwargs):
+def update_next_page_crawl(sender, instance, *args, **kwargs):
     print "fdsafads"
     schedule, created = IntervalSchedule.objects.get_or_create(
         every=instance.crawl_frequency,
@@ -243,7 +237,7 @@ def update_crawl(sender, instance, *args, **kwargs):
 
 
 @receiver(pre_save, sender=OnePageCrawlConfig)
-def update_crawl(sender, instance, *args, **kwargs):
+def update_one_page_crawl(sender, instance, *args, **kwargs):
     schedule, created = IntervalSchedule.objects.get_or_create(
         every=instance.crawl_frequency,
         period=IntervalSchedule.MINUTES,
@@ -298,7 +292,7 @@ def update_crawl(sender, instance, *args, **kwargs):
 
 
 @receiver(pre_save, sender=JsonCrawlConfig)
-def update_crawl(sender, instance, *args, **kwargs):
+def update_json_crawl(sender, instance, *args, **kwargs):
     schedule, created = IntervalSchedule.objects.get_or_create(
         every=instance.crawl_frequency,
         period=IntervalSchedule.MINUTES,
