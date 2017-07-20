@@ -1,6 +1,7 @@
 # coding: utf-8
 from django.db import models
 from django.db.models.signals import post_save, pre_save
+from django.core.signals import request_finished
 from django.dispatch import receiver
 from nbd_news_scrapy_front import settings
 import requests
@@ -15,9 +16,10 @@ class XpathRuleSet(models.Model):
     # 对应着item对象
     # xpath_for_article_true_link = models.URLField(max_length=100)
     xpath_for_set_name = models.CharField(u'规则集名称', max_length=100, unique=True)
-    xpath_for_no_article_true_link = models.CharField(u'单页抓取时通过该条件避免重复插入数据, 在没有article_ture_link时使用', max_length=50, null=True,
-                                          blank=True)
-    xpath_for_article_true_link = models.CharField(u'文章真实链接', max_length=100,blank=True,null=True)
+    xpath_for_no_article_true_link = models.CharField(u'单页抓取时通过该条件避免重复插入数据, 在没有article_ture_link时使用', max_length=50,
+                                                      null=True,
+                                                      blank=True)
+    xpath_for_article_true_link = models.CharField(u'文章真实链接', max_length=100, blank=True, null=True)
     xpath_for_article_title = models.CharField(u'文章标题xpath', max_length=100)
     xpath_for_article_desc = models.CharField(u'文章描述xpath', max_length=100, blank=True)
     xpath_for_article_content = models.CharField(u'文章内容xpath', max_length=100, blank=True)
@@ -58,9 +60,9 @@ class AllSiteCrawlConfig(models.Model):
 
 class CrawlDirSort(models.Model):
     push_type_choice = ((1, u'开启'), (0, u'关闭'))
-    crawl_dir_sort_name = models.CharField(verbose_name=u'分类名称(通常为单个的start url的栏目名)',unique=True, max_length=30, db_index=True)
+    crawl_dir_sort_name = models.CharField(verbose_name=u'分类名称(通常为单个的start url的栏目名)', unique=True, max_length=30,
+                                           db_index=True)
     crawl_push_status = models.SmallIntegerField(u'是否开启微信推送', choices=push_type_choice, default=0)
-
 
     class Meta:
         verbose_name = u'网站分类栏目'
@@ -72,7 +74,8 @@ class CrawlDirSort(models.Model):
 
 class CrawlMedia(models.Model):
     crawl_domain = models.CharField(u"网站域名(根据域名生成allowed_domains)", max_length=200, default='', unique=True)
-    crawl_media_name = models.CharField(verbose_name=u'网站名称(哪个网站,可在前端选网站，查看该网站的最新新闻)',unique=True , max_length=30, db_index=True)
+    crawl_media_name = models.CharField(verbose_name=u'网站名称(哪个网站,可在前端选网站，查看该网站的最新新闻)', unique=True, max_length=30,
+                                        db_index=True)
 
     class Meta:
         verbose_name = u'网站'
@@ -83,7 +86,7 @@ class CrawlMedia(models.Model):
 
 
 class CrawlMediaSort(models.Model):
-    crawl_media_sort_name = models.CharField(u'网站分类名称(通常为类别，如股票，财经)',unique=True ,max_length=30, db_index=True)
+    crawl_media_sort_name = models.CharField(u'网站分类名称(通常为类别，如股票，财经)', unique=True, max_length=30, db_index=True)
 
     class Meta:
         verbose_name = u'网站分类'
@@ -125,8 +128,10 @@ class JsonCrawlConfig(models.Model):
     crawl_dir_sort = models.ForeignKey(CrawlDirSort, verbose_name=u'栏目分类(通常为单个的start url的栏目名)', db_index=True)
     crawl_start_url = models.URLField(u'单个的start url(通常做快速更新的列表页)', unique=True, db_index=True)
     crawl_xpath_rule_set = models.ForeignKey(XpathRuleSet, verbose_name=u'item规则集')
-    crawl_next_url = models.CharField(u'提取当前json页面遍历数组(支持多级查找使用英文,隔开多个键)，不填写则在本页面上使用item规则集', max_length=100, blank=True, null=True)
-    crawl_next_url_json_key = models.CharField(u'通过json键来提取数组中的中的url链接，不填写则在本页面上使用item规则集', max_length=20, blank=True, null=True)
+    crawl_next_url = models.CharField(u'提取当前json页面遍历数组(支持多级查找使用英文,隔开多个键)，不填写则在本页面上使用item规则集', max_length=100,
+                                      blank=True, null=True)
+    crawl_next_url_json_key = models.CharField(u'通过json键来提取数组中的中的url链接，不填写则在本页面上使用item规则集', max_length=20, blank=True,
+                                               null=True)
     crawl_frequency = models.IntegerField(u'更新频率(单位：分钟)', choices=SCORE_CHOICES)
     crawl_status = models.SmallIntegerField(u'是否开启抓取', choices=status_type_choice, default=1)
     crawl_note = models.CharField(u'start url备注', max_length=50, blank=True)
@@ -174,13 +179,19 @@ def update_scrapy_crawl(**kwargs):
         return r['jobid']
 
 
+@receiver(request_finished)
+def my_callback(sender, **kwargs):
+    print("Request finished!")
+
+
 @receiver(pre_save, sender=NextPageCrawlConfig)
 def update_crawl(sender, instance, *args, **kwargs):
+    print "fdsafads"
     schedule, created = IntervalSchedule.objects.get_or_create(
         every=instance.crawl_frequency,
         period=IntervalSchedule.MINUTES,
     )
-    logging.log(logging.DEBUG,schedule, created)
+    logging.log(logging.DEBUG, schedule, created)
     if instance.id:
         print "log if instance"
         logging.log(logging.DEBUG, instance.id)
