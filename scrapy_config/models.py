@@ -180,6 +180,7 @@ def update_crawl(sender, instance, *args, **kwargs):
         every=instance.crawl_frequency,
         period=IntervalSchedule.MINUTES,
     )
+    logging.log(logging.DEBUG,schedule, created)
     if instance.id:
         print "log if instance"
         logging.log(logging.DEBUG, instance.id)
