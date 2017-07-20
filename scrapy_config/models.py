@@ -203,7 +203,7 @@ def update_next_page_crawl(sender, instance, *args, **kwargs):
             logging.log(logging.DEBUG, instance.crawl_start_url)
             resp = requests.get(settings.SCRAPYD_SETTING_HOST + 'listprojects.json')
             project = resp.json()['projects'][0]
-            data = {'project': project, 'spider': 'next_page_crawl', 'current_crawl': instance.crawl_start_url}
+            data = {'project': project, 'spider': 'next_page_crawl', 'crawl_start_url': instance.crawl_start_url}
             task_status = True if instance.crawl_status == 1 else False
             expires_time = datetime.now() + timedelta(
                 seconds=75) if instance.crawl_frequency == 0 else datetime.now() + timedelta(days=1000)
