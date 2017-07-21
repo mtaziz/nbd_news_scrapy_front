@@ -28,14 +28,13 @@ def get_object_or_none(klass, *args, **kwargs):
 @login_required(login_url="/user/login/")
 def favorite(request):
     current_user_profile = UserProfile.objects.get(user=request.user)
-    user_favorite_info = {}
-    user_favorite_info['user_favorite_crawl_media_sort'] = current_user_profile.user_favorite_crawl_media_sort
-    user_favorite_info['user_favorite_crawl_media'] = current_user_profile.user_favorite_crawl_media
-    user_favorite_info['user_favorite_crawl_dir_sort'] = current_user_profile.user_favorite_crawl_dir_sort
+    user_favorite_crawl_media_sort = current_user_profile.user_favorite_crawl_media_sort
+    user_favorite_crawl_media = current_user_profile.user_favorite_crawl_media
+    user_favorite_crawl_dir_sort = current_user_profile.user_favorite_crawl_dir_sort
 
     media_sort_list = []
-    if user_favorite_info['user_favorite_crawl_media_sort']:
-        for i in user_favorite_info['user_favorite_crawl_media_sort'].split(","): # i = ["6_get_medias","21_get_medias","16_get_medias"]
+    if user_favorite_crawl_media_sort:
+        for i in user_favorite_crawl_media_sort.split(","): # i = ["6_get_medias","21_get_medias","16_get_medias"]
             media_sort_info = CrawlMediaSort.objects.get(id=i.split('_')[0])
             media_sort_list.append({
                 'name': media_sort_info.crawl_media_sort_name,
@@ -43,8 +42,8 @@ def favorite(request):
             })
 
     media_list = []
-    if user_favorite_info['user_favorite_crawl_media']:
-        for i in user_favorite_info['user_favorite_crawl_media'].split(","):
+    if user_favorite_crawl_media:
+        for i in user_favorite_crawl_media.split(","):
             media_info = CrawlMedia.objects.get(id=i.split('_')[0])
             media_list.append({
                 'name': media_info.crawl_media_name,
@@ -52,13 +51,14 @@ def favorite(request):
             })
 
     media_dir_sort_list = []
-    if user_favorite_info['user_favorite_crawl_dir_sort']:
-        for i in user_favorite_info['user_favorite_crawl_dir_sort'].split(","):
+    if user_favorite_crawl_dir_sort:
+        for i in user_favorite_crawl_dir_sort.split(","):
             media_dir_info = CrawlDirSort.objects.get(id=i.split('_')[0])
             media_dir_sort_list.append({
                 'name': media_dir_info.crawl_dir_sort_name,
                 'id': str(i.split('_')[0]) + "_get_dir_sorts"
             })
+    user_favorite_info = {}
     user_favorite_info['user_favorite_crawl_media_sort'] = media_sort_list
     user_favorite_info['user_favorite_crawl_media'] = media_list
     user_favorite_info['user_favorite_crawl_dir_sort'] = media_dir_sort_list
