@@ -47,7 +47,7 @@ def favorite(request):
     for i in user_favorite_info['user_favorite_crawl_media'].split(","):
         media_info = CrawlMedia.objects.get(id=i.split('_')[0])
         media_list.append({
-            'name': media_info['crawl_media_name'],
+            'name': media_info,
             'id': str(i.split('_')[0]) + "_get_medias"
         })
 
