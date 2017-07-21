@@ -7865,7 +7865,7 @@ var TestWrapper = function (_Component8) {
         key: "sendKeywords",
         value: function sendKeywords() {
             _jquery2.default.post("user/update_favorite", {
-                "newCurArticleClassifyl": this.state.Data.curArticleClassifyId,
+                "newCurArticleClassifyl": this.state.Data.curArticleClassifyId.join(","),
                 "Platforml": this.state.Data.curPlatformId.join(","),
                 "Allmedia": this.state.Data.curAllmediaId.join(",")
             }).then(function (msg) {
