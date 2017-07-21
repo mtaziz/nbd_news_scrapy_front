@@ -53,9 +53,9 @@ def favorite(request):
 
     media_dir_sort_list = []
     for i in user_favorite_info['user_favorite_crawl_dir_sort'].split(","):
-        media_info = CrawlDirSort.objects.get(id=i.split('_')[0])
+        media_dir_info = CrawlDirSort.objects.get(id=i.split('_')[0])
         media_dir_sort_list.append({
-            'name': media_info['crawl_dir_sort_name'],
+            'name': media_dir_info,
             'id': str(i.split('_')[0]) + "_get_dir_sorts"
         })
     user_favorite_info['user_favorite_crawl_media_sort'] = media_sort_list
