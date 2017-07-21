@@ -6,7 +6,6 @@ import sys
 import simplejson
 
 
-
 def gettoken(corpid, corpsecret):
     gettoken_url = 'https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=' + corpid + '&corpsecret=' + corpsecret
     print  gettoken_url

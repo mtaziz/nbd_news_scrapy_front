@@ -6,6 +6,8 @@ from django.contrib import auth
 import json
 from forms import UserForm, UserProfileForm
 from django.contrib import messages
+from django.core import serializers
+
 
 
 def get_object_or_none(klass, *args, **kwargs):
@@ -24,13 +26,12 @@ def get_object_or_none(klass, *args, **kwargs):
 # Create your views here.
 @login_required(login_url="/user/login/")
 def favorite(request):
-    current_user_profile = get_object_or_none(UserProfile,user=request.user)
+    current_user_profile = UserProfile.objects.get(user=request.user)
     user_favorite_info = {}
-    if  current_user_profile:
-        user_favorite_info['user_favorite_crawl_media_sort'] = current_user_profile.user_favorite_crawl_media_sort
-        user_favorite_info['user_favorite_crawl_media'] = current_user_profile.user_favorite_crawl_media
-        user_favorite_info['user_favorite_crawl_dir_sort'] = current_user_profile.user_favorite_crawl_dir_sort
-    return HttpResponse(json.dumps(current_user_profile), content_type="application/json")
+    user_favorite_info['user_favorite_crawl_media_sort'] = current_user_profile.user_favorite_crawl_media_sort
+    user_favorite_info['user_favorite_crawl_media'] = current_user_profile.user_favorite_crawl_media
+    user_favorite_info['user_favorite_crawl_dir_sort'] = current_user_profile.user_favorite_crawl_dir_sort
+    return HttpResponse(serializers.serialize('json', current_user_profile), content_type="application/json")
 
 
 @login_required(login_url="/user/login/")
