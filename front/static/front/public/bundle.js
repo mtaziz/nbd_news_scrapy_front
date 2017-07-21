@@ -7518,7 +7518,7 @@ var ArticleClassify = function (_Component3) {
 
         var _this3 = _possibleConstructorReturn(this, (ArticleClassify.__proto__ || Object.getPrototypeOf(ArticleClassify)).call(this, props));
 
-        _this3.state = { articleClassify: [] };
+        _this3.state = { articleClassify: [], open: true };
         return _this3;
     }
 
@@ -7547,27 +7547,40 @@ var ArticleClassify = function (_Component3) {
     }, {
         key: "render",
         value: function render() {
+            var _this5 = this;
+
             return _react2.default.createElement(
                 "div",
                 null,
                 _react2.default.createElement(
                     _reactBootstrap.Panel,
-                    { header: "网站分类" },
+                    { header: _react2.default.createElement(
+                            "h3",
+                            null,
+                            "\u6240\u6709\u7F51\u7AD9",
+                            _react2.default.createElement(
+                                "a",
+                                { href: "javascript:void(0)", className: "pull-right", onClick: function onClick() {
+                                        return _this5.setState({ open: !_this5.state.open });
+                                    } },
+                                this.state.open ? "关闭" : "展开"
+                            )
+                        ), collapsible: true, expanded: this.state.open },
                     function () {
-                        var _this5 = this;
+                        var _this6 = this;
 
                         return this.state.articleClassify.map(function (name, index) {
-                            return _this5.props.heightLinghtT.slice().indexOf(name.crawl_media_sort_name) == -1 ? _react2.default.createElement(
+                            return _this6.props.heightLinghtT.slice().indexOf(name.crawl_media_sort_name) == -1 ? _react2.default.createElement(
                                 _reactBootstrap.Button,
                                 { bsStyle: "primary", key: name.id,
-                                    onClick: _this5.handClick.bind(_this5, [name.id, name.crawl_media_sort_name], 'ArticleClassify') },
+                                    onClick: _this6.handClick.bind(_this6, [name.id, name.crawl_media_sort_name], 'ArticleClassify') },
                                 " ",
                                 name.crawl_media_sort_name,
                                 " "
                             ) : _react2.default.createElement(
                                 _reactBootstrap.Button,
                                 { bsStyle: "warning", key: name.id,
-                                    onClick: _this5.handClick.bind(_this5, [name.id, name.crawl_media_sort_name], 'ArticleClassify') },
+                                    onClick: _this6.handClick.bind(_this6, [name.id, name.crawl_media_sort_name], 'ArticleClassify') },
                                 " ",
                                 name.crawl_media_sort_name,
                                 " "
@@ -7588,10 +7601,10 @@ var Box1 = function (_Component4) {
     function Box1(props) {
         _classCallCheck(this, Box1);
 
-        var _this6 = _possibleConstructorReturn(this, (Box1.__proto__ || Object.getPrototypeOf(Box1)).call(this, props));
+        var _this7 = _possibleConstructorReturn(this, (Box1.__proto__ || Object.getPrototypeOf(Box1)).call(this, props));
 
-        _this6.changePlatformA = _this6.changePlatformA.bind(_this6);
-        return _this6;
+        _this7.changePlatformA = _this7.changePlatformA.bind(_this7);
+        return _this7;
     }
 
     _createClass(Box1, [{
@@ -7625,10 +7638,10 @@ var Platform = function (_Component5) {
     function Platform(props) {
         _classCallCheck(this, Platform);
 
-        var _this7 = _possibleConstructorReturn(this, (Platform.__proto__ || Object.getPrototypeOf(Platform)).call(this, props));
+        var _this8 = _possibleConstructorReturn(this, (Platform.__proto__ || Object.getPrototypeOf(Platform)).call(this, props));
 
-        _this7.state = { Platform: [] };
-        return _this7;
+        _this8.state = { Platform: [] };
+        return _this8;
     }
 
     _createClass(Platform, [{
@@ -7642,11 +7655,11 @@ var Platform = function (_Component5) {
     }, {
         key: "componentDidMount",
         value: function componentDidMount() {
-            var _this8 = this;
+            var _this9 = this;
 
             _jquery2.default.get("/get_dir_sorts").then(function (msg) {
                 var posts1 = msg;
-                _this8.setState({ Platform: posts1.message });
+                _this9.setState({ Platform: posts1.message });
             });
         }
     }, {
@@ -7665,20 +7678,20 @@ var Platform = function (_Component5) {
                     _reactBootstrap.Panel,
                     { header: "\u680F\u76EE\u5206\u7C7B" },
                     function () {
-                        var _this9 = this;
+                        var _this10 = this;
 
                         return this.state.Platform.map(function (name, index) {
-                            return _this9.props.heightLinghtT.slice().indexOf(name.crawl_dir_sort_name) == -1 ? _react2.default.createElement(
+                            return _this10.props.heightLinghtT.slice().indexOf(name.crawl_dir_sort_name) == -1 ? _react2.default.createElement(
                                 _reactBootstrap.Button,
                                 { bsStyle: "primary", key: name.id,
-                                    onClick: _this9.handClick.bind(_this9, [name.id, name.crawl_dir_sort_name], 'Platform') },
+                                    onClick: _this10.handClick.bind(_this10, [name.id, name.crawl_dir_sort_name], 'Platform') },
                                 " ",
                                 name.crawl_dir_sort_name,
                                 " "
                             ) : _react2.default.createElement(
                                 _reactBootstrap.Button,
                                 { bsStyle: "warning", key: name.id,
-                                    onClick: _this9.handClick.bind(_this9, [name.id, name.crawl_dir_sort_name], 'Platform') },
+                                    onClick: _this10.handClick.bind(_this10, [name.id, name.crawl_dir_sort_name], 'Platform') },
                                 " ",
                                 name.crawl_dir_sort_name,
                                 " "
@@ -7699,10 +7712,10 @@ var Box2 = function (_Component6) {
     function Box2(props) {
         _classCallCheck(this, Box2);
 
-        var _this10 = _possibleConstructorReturn(this, (Box2.__proto__ || Object.getPrototypeOf(Box2)).call(this, props));
+        var _this11 = _possibleConstructorReturn(this, (Box2.__proto__ || Object.getPrototypeOf(Box2)).call(this, props));
 
-        _this10.changePlatformA = _this10.changePlatformA.bind(_this10);
-        return _this10;
+        _this11.changePlatformA = _this11.changePlatformA.bind(_this11);
+        return _this11;
     }
 
     _createClass(Box2, [{
@@ -7736,10 +7749,10 @@ var Allmedia = function (_Component7) {
     function Allmedia(props) {
         _classCallCheck(this, Allmedia);
 
-        var _this11 = _possibleConstructorReturn(this, (Allmedia.__proto__ || Object.getPrototypeOf(Allmedia)).call(this, props));
+        var _this12 = _possibleConstructorReturn(this, (Allmedia.__proto__ || Object.getPrototypeOf(Allmedia)).call(this, props));
 
-        _this11.state = { Platform: [] };
-        return _this11;
+        _this12.state = { Platform: [], open: true };
+        return _this12;
     }
 
     _createClass(Allmedia, [{
@@ -7753,11 +7766,11 @@ var Allmedia = function (_Component7) {
     }, {
         key: "componentDidMount",
         value: function componentDidMount() {
-            var _this12 = this;
+            var _this13 = this;
 
             _jquery2.default.get("/get_medias").then(function (msg) {
                 var posts1 = msg;
-                _this12.setState({ Platform: posts1.message });
+                _this13.setState({ Platform: posts1.message });
             });
         }
     }, {
@@ -7768,28 +7781,41 @@ var Allmedia = function (_Component7) {
     }, {
         key: "render",
         value: function render() {
+            var _this14 = this;
+
             console.log("b=" + this.props.heightLinghtT);
             return _react2.default.createElement(
                 "div",
                 null,
                 _react2.default.createElement(
                     _reactBootstrap.Panel,
-                    { header: "\u6240\u6709\u7F51\u7AD9" },
+                    { header: _react2.default.createElement(
+                            "h3",
+                            null,
+                            "\u6240\u6709\u7F51\u7AD9",
+                            _react2.default.createElement(
+                                "a",
+                                { href: "javascript:void(0)", className: "pull-right", onClick: function onClick() {
+                                        return _this14.setState({ open: !_this14.state.open });
+                                    } },
+                                this.state.open ? "关闭" : "展开"
+                            )
+                        ), collapsible: true, expanded: this.state.open },
                     function () {
-                        var _this13 = this;
+                        var _this15 = this;
 
                         return this.state.Platform.map(function (name, index) {
-                            return _this13.props.heightLinghtT.slice().indexOf(name.crawl_media_name) == -1 ? _react2.default.createElement(
+                            return _this15.props.heightLinghtT.slice().indexOf(name.crawl_media_name) == -1 ? _react2.default.createElement(
                                 _reactBootstrap.Button,
                                 { bsStyle: "primary", key: name.id,
-                                    onClick: _this13.handClick.bind(_this13, [name.id, name.crawl_media_name], 'Allmedia') },
+                                    onClick: _this15.handClick.bind(_this15, [name.id, name.crawl_media_name], 'Allmedia') },
                                 " ",
                                 name.crawl_media_name,
                                 " "
                             ) : _react2.default.createElement(
                                 _reactBootstrap.Button,
                                 { bsStyle: "warning", key: name.id,
-                                    onClick: _this13.handClick.bind(_this13, [name.id, name.crawl_media_name], 'Allmedia') },
+                                    onClick: _this15.handClick.bind(_this15, [name.id, name.crawl_media_name], 'Allmedia') },
                                 " ",
                                 name.crawl_media_name,
                                 " "
@@ -7810,18 +7836,19 @@ var TestWrapper = function (_Component8) {
     function TestWrapper(props) {
         _classCallCheck(this, TestWrapper);
 
-        var _this14 = _possibleConstructorReturn(this, (TestWrapper.__proto__ || Object.getPrototypeOf(TestWrapper)).call(this, props));
+        var _this16 = _possibleConstructorReturn(this, (TestWrapper.__proto__ || Object.getPrototypeOf(TestWrapper)).call(this, props));
 
-        _this14.state = { articleList: [], clear: false, Data: {} };
+        _this16.state = { articleList: [], clear: false, Data: {} };
         // this.testChange = this.testChange.bind(this);
         // this.getArticleList = this.getArticleList.bind(this);
-        return _this14;
+        _this16.sendKeywords = _this16.sendKeywords.bind(_this16);
+        return _this16;
     }
 
     _createClass(TestWrapper, [{
         key: "getArticleList",
         value: function getArticleList(nextProps) {
-            var _this15 = this;
+            var _this17 = this;
 
             _jquery2.default.getJSON("/get_article", {
                 "newCurArticleClassifyl": nextProps.curArticleClassifyId.join(","),
@@ -7831,7 +7858,18 @@ var TestWrapper = function (_Component8) {
             }).then(function (msg) {
                 var post = msg;
                 // var newPost = this.state.articleList.slice().concat(post);
-                _this15.setState({ articleList: post, Data: nextProps });
+                _this17.setState({ articleList: post, Data: nextProps });
+            });
+        }
+    }, {
+        key: "sendKeywords",
+        value: function sendKeywords() {
+            _jquery2.default.post("user/update_favorite", {
+                "newCurArticleClassifyl": this.state.Data.curArticleClassifyId,
+                "Platforml": this.state.Data.curPlatformId.join(","),
+                "Allmedia": this.state.Data.curAllmediaId.join(",")
+            }).then(function (msg) {
+                alert(msg);
             });
         }
     }, {
@@ -7862,7 +7900,7 @@ var TestWrapper = function (_Component8) {
                 "div",
                 null,
                 _react2.default.createElement(List, { curItem: this.props.curItem, curPlatform: this.props.curPlatform,
-                    curArticleClassify: this.props.curArticleClassify }),
+                    curArticleClassify: this.props.curArticleClassify, sendKeywords: this.sendKeywords }),
                 this.state.articleList.map(function (name, index) {
                     return _react2.default.createElement(Modle, { article: name, key: index });
                 })
@@ -7901,7 +7939,12 @@ var List = function (_Component9) {
                         name,
                         " "
                     );
-                })
+                }),
+                _react2.default.createElement(
+                    _reactBootstrap.Button,
+                    { bsStyle: "info", onClick: this.props.sendKeywords },
+                    "\u6536\u85CF"
+                )
             );
         }
     }]);
@@ -7915,18 +7958,18 @@ var Modle = function (_Component10) {
     function Modle(props) {
         _classCallCheck(this, Modle);
 
-        var _this17 = _possibleConstructorReturn(this, (Modle.__proto__ || Object.getPrototypeOf(Modle)).call(this, props));
+        var _this19 = _possibleConstructorReturn(this, (Modle.__proto__ || Object.getPrototypeOf(Modle)).call(this, props));
 
-        _this17.state = {
+        _this19.state = {
             open: false
         };
-        return _this17;
+        return _this19;
     }
 
     _createClass(Modle, [{
         key: "render",
         value: function render() {
-            var _this18 = this;
+            var _this20 = this;
 
             return _react2.default.createElement(
                 _reactBootstrap.Well,
@@ -7955,7 +7998,7 @@ var Modle = function (_Component10) {
                 _react2.default.createElement(
                     _reactBootstrap.Button,
                     { bsStyle: "info", onClick: function onClick() {
-                            return _this18.setState({ open: !_this18.state.open });
+                            return _this20.setState({ open: !_this20.state.open });
                         } },
                     " \u663E\u793A\u6587\u7AE0\u4E3B\u4F53 "
                 ),
@@ -7993,25 +8036,25 @@ var Search = function (_Component11) {
     function Search(props) {
         _classCallCheck(this, Search);
 
-        var _this19 = _possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).call(this, props));
+        var _this21 = _possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).call(this, props));
 
-        _this19.state = {
+        _this21.state = {
             searchList: [],
             open: false,
             value: ""
         };
-        _this19.searcheKeyword = _this19.searcheKeyword.bind(_this19);
-        return _this19;
+        _this21.searcheKeyword = _this21.searcheKeyword.bind(_this21);
+        return _this21;
     }
 
     _createClass(Search, [{
         key: "searcheKeyword",
         value: function searcheKeyword(e) {
-            var _this20 = this;
+            var _this22 = this;
 
             var word = e.target.value;
             this.setState({ value: word }, function () {
-                console.log(_this20.state.value);
+                console.log(_this22.state.value);
             });
             console.log(this.props.tags);
         }

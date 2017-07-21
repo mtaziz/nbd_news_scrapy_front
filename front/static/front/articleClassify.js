@@ -99,7 +99,7 @@ class Box extends Component {
 class ArticleClassify extends Component {
     constructor(props) {
         super(props);
-        this.state = {articleClassify: []};
+        this.state = {articleClassify: [],open:true};
     }
 
     handClick(item, elem = 'ArticleClassify') {
@@ -120,7 +120,7 @@ class ArticleClassify extends Component {
     render() {
         return (
             <div>
-                <Panel header= { "网站分类" }>
+                <Panel header= { <h3>所有网站<a href="javascript:void(0)" className="pull-right" onClick = { () => this.setState({ open: !this.state.open })} >{this.state.open? "关闭" :"展开" }</a></h3> } collapsible expanded={this.state.open}>
                     {
                         (function () {
                             return this.state.articleClassify.map(
@@ -232,30 +232,27 @@ class Box2 extends Component {
 class Allmedia extends Component {
     constructor(props) {
         super(props);
-        this.state = {Platform: []};
+        this.state = {Platform: [],open:true};
     }
 
     handClick(item, elem = 'Allmedia') {
 
         this.props.changePlatformL(item, elem)
     }
-
     componentDidMount() {
         $.get("/get_medias").then(msg => {
             const posts1 = msg;
             this.setState({Platform: posts1.message})
         })
     }
-
     componentWillUnmount() {
         this.serverRequest.abort();
     }
-
     render() {
         console.log("b=" + this.props.heightLinghtT)
         return (
             <div>
-                <Panel header="所有网站">
+                <Panel header={<h3>所有网站<a href="javascript:void(0)" className="pull-right" onClick = { () => this.setState({ open: !this.state.open })} >{this.state.open? "关闭" :"展开" }</a></h3>}  collapsible expanded={this.state.open} >
                     {
                         (function () {
                             return this.state.Platform.map(
@@ -281,6 +278,7 @@ class TestWrapper extends Component {
         this.state = {articleList: [], clear: false, Data: {}};
         // this.testChange = this.testChange.bind(this);
         // this.getArticleList = this.getArticleList.bind(this);
+        this.sendKeywords =this.sendKeywords.bind(this);
     }
 
     getArticleList(nextProps) {
@@ -295,7 +293,15 @@ class TestWrapper extends Component {
             this.setState({articleList: post, Data: nextProps})
         })
     }
-
+    sendKeywords () {
+        $.post("user/update_favorite",{
+            "newCurArticleClassifyl": this.state.Data.curArticleClassifyId,
+            "Platforml": this.state.Data.curPlatformId.join(","),
+            "Allmedia": this.state.Data.curAllmediaId.join(",")
+        }).then( msg => {
+            alert(msg)
+        })
+    }
     componentWillReceiveProps(nextProps) {
         this.getArticleList(nextProps);
         this.setState({
@@ -319,7 +325,7 @@ class TestWrapper extends Component {
         return (
             <div>
                 <List curItem={this.props.curItem} curPlatform={this.props.curPlatform}
-                      curArticleClassify={this.props.curArticleClassify}/>
+                      curArticleClassify={this.props.curArticleClassify} sendKeywords = {this.sendKeywords}/>
                 {
                     this.state.articleList.map(
                         (name, index) => <Modle article={name} key={index}/>
@@ -343,6 +349,7 @@ class List extends Component {
                         (name, index) => <Button bsStyle="primary" key={index}> {name} </Button>
                     )
                 }
+                <Button bsStyle="info" onClick = { this.props.sendKeywords }>收藏</Button>
             </ButtonToolbar>
         )
     }
