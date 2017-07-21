@@ -7518,7 +7518,7 @@ var ArticleClassify = function (_Component3) {
 
         var _this3 = _possibleConstructorReturn(this, (ArticleClassify.__proto__ || Object.getPrototypeOf(ArticleClassify)).call(this, props));
 
-        _this3.state = { articleClassify: [], open: true };
+        _this3.state = { articleClassify: [], open: false };
         return _this3;
     }
 
@@ -7751,7 +7751,7 @@ var Allmedia = function (_Component7) {
 
         var _this12 = _possibleConstructorReturn(this, (Allmedia.__proto__ || Object.getPrototypeOf(Allmedia)).call(this, props));
 
-        _this12.state = { Platform: [], open: true };
+        _this12.state = { Platform: [], open: false };
         return _this12;
     }
 
