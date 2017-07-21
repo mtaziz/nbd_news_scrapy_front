@@ -7851,10 +7851,10 @@ var TestWrapper = function (_Component8) {
             var _this17 = this;
 
             _jquery2.default.getJSON("/get_article", {
-                "newCurArticleClassifyl": nextProps.curArticleClassifyId.join(","),
-                "Platforml": nextProps.curPlatformId.join(","),
+                "user_favorite_crawl_media_sort": nextProps.curArticleClassifyId.join(","),
+                "user_favorite_crawl_dir_sort": nextProps.curPlatformId.join(","),
                 "SendTime": this.props.time,
-                "Allmedia": nextProps.curAllmediaId.join(",")
+                "user_favorite_crawl_media": nextProps.curAllmediaId.join(",")
             }).then(function (msg) {
                 var post = msg;
                 // var newPost = this.state.articleList.slice().concat(post);

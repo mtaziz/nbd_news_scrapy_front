@@ -25,7 +25,7 @@ def update_favorite(request):
     profile_form = UserProfileForm(request.POST, instance=UserProfile.objects.get(user=request.user))
     if profile_form.is_valid():
         profile_form.save()
-    return HttpResponse("updated")
+    return HttpResponse("收藏成功")
 
 @login_required(login_url="/user/login/")
 def logout(request):
