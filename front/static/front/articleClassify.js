@@ -294,10 +294,10 @@ class TestWrapper extends Component {
         })
     }
     sendKeywords () {
-        $.post("user/update_favorite",{
-            "newCurArticleClassifyl": this.state.Data.curArticleClassifyId.join(","),
-            "Platforml": this.state.Data.curPlatformId.join(","),
-            "Allmedia": this.state.Data.curAllmediaId.join(",")
+        $.post("/user/update_favorite",{
+            "user_favorite_crawl_media_sort": this.state.Data.curArticleClassifyId.join(","),
+            "user_favorite_crawl_dir_sort": this.state.Data.curPlatformId.join(","),
+            "user_favorite_crawl_media": this.state.Data.curAllmediaId.join(",")
         }).then( msg => {
             alert(msg)
         })
