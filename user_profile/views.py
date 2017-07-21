@@ -26,12 +26,11 @@ def get_object_or_none(klass, *args, **kwargs):
 def favorite(request):
     current_user_profile = get_object_or_none(UserProfile,user=request.user)
     user_favorite_info = {}
-    print current_user_profile
     if  current_user_profile:
         user_favorite_info['user_favorite_crawl_media_sort'] = current_user_profile.user_favorite_crawl_media_sort
         user_favorite_info['user_favorite_crawl_media'] = current_user_profile.user_favorite_crawl_media
         user_favorite_info['user_favorite_crawl_dir_sort'] = current_user_profile.user_favorite_crawl_dir_sort
-    return HttpResponse(json.dumps(user_favorite_info), content_type="application/json")
+    return HttpResponse(json.dumps(current_user_profile), content_type="application/json")
 
 
 @login_required(login_url="/user/login/")
