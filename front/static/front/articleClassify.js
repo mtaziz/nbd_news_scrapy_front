@@ -99,7 +99,7 @@ class Box extends Component {
 class ArticleClassify extends Component {
     constructor(props) {
         super(props);
-        this.state = {articleClassify: [],open:false};
+        this.state = {articleClassify: [],open:true};
     }
 
     handClick(item, elem = 'ArticleClassify') {
