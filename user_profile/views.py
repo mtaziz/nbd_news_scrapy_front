@@ -22,8 +22,8 @@ def favorite(request):
 
 @login_required(login_url="/user/login/")
 def update_favorite(request):
-    profile_form = UserProfileForm(request.POST, instance=UserProfile.objects.get(user=request.user))
     if UserProfileForm.is_valid():
+        profile_form = UserProfileForm(request.POST, instance=UserProfile.objects.get(user=request.user))
         profile_form.save()
     return HttpResponse("updated")
 
