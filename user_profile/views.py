@@ -33,6 +33,7 @@ def favorite(request):
     user_favorite_info['user_favorite_crawl_media'] = current_user_profile.user_favorite_crawl_media
     user_favorite_info['user_favorite_crawl_dir_sort'] = current_user_profile.user_favorite_crawl_dir_sort
     media_sort_list = []
+    print user_favorite_info
     for i in user_favorite_info['user_favorite_crawl_media_sort'].split(","): # i = ["6_get_medias","21_get_medias","16_get_medias"]
         media_sort_info = CrawlMediaSort.objects.filter(id=i.split('_')[0]).values('crawl_media_sort_name')
         media_sort_list.append({
