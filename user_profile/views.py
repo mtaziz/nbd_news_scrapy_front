@@ -1,5 +1,5 @@
 # coding: utf-8
-from django.shortcuts import render, HttpResponse, HttpResponseRedirect, redirect
+from django.shortcuts import render, HttpResponse, HttpResponseRedirect, redirect, get_object_or_404
 from models import UserProfile
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
@@ -11,10 +11,10 @@ from django.contrib import messages
 # Create your views here.
 @login_required(login_url="/user/login/")
 def favorite(request):
-    current_user_profile = UserProfile.objects.filter(user=request.user)
+    current_user_profile = get_object_or_404(UserProfile, user=request.user)
     user_favorite_info = {}
     print current_user_profile
-    if  list(current_user_profile):
+    if  not list(current_user_profile):
         user_favorite_info['user_favorite_crawl_media_sort'] = current_user_profile.user_favorite_crawl_media_sort
         user_favorite_info['user_favorite_crawl_media'] = current_user_profile.user_favorite_crawl_media
         user_favorite_info['user_favorite_crawl_dir_sort'] = current_user_profile.user_favorite_crawl_media
