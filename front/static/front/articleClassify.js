@@ -295,7 +295,7 @@ class TestWrapper extends Component {
     }
     sendKeywords () {
         $.post("user/update_favorite",{
-            "newCurArticleClassifyl": this.state.Data.curArticleClassifyId,
+            "newCurArticleClassifyl": this.state.Data.curArticleClassifyId.join(","),
             "Platforml": this.state.Data.curPlatformId.join(","),
             "Allmedia": this.state.Data.curAllmediaId.join(",")
         }).then( msg => {
