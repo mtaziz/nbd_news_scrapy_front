@@ -31,7 +31,7 @@ def favorite(request):
     user_favorite_info['user_favorite_crawl_media_sort'] = current_user_profile.user_favorite_crawl_media_sort
     user_favorite_info['user_favorite_crawl_media'] = current_user_profile.user_favorite_crawl_media
     user_favorite_info['user_favorite_crawl_dir_sort'] = current_user_profile.user_favorite_crawl_dir_sort
-    return HttpResponse(serializers.serialize('json', current_user_profile), content_type="application/json")
+    return HttpResponse(json.dumps(user_favorite_info), content_type="application/json")
 
 
 @login_required(login_url="/user/login/")
