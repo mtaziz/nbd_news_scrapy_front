@@ -13,7 +13,8 @@ from django.contrib import messages
 def favorite(request):
     current_user_profile = UserProfile.objects.filter(user=request.user)
     user_favorite_info = {}
-    if not list(current_user_profile):
+    print current_user_profile
+    if  list(current_user_profile):
         user_favorite_info['user_favorite_crawl_media_sort'] = current_user_profile.user_favorite_crawl_media_sort
         user_favorite_info['user_favorite_crawl_media'] = current_user_profile.user_favorite_crawl_media
         user_favorite_info['user_favorite_crawl_dir_sort'] = current_user_profile.user_favorite_crawl_media
