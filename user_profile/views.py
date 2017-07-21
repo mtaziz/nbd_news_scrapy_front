@@ -39,7 +39,7 @@ def favorite(request):
         media_sort_info = CrawlMediaSort.objects.get(id=i.split('_')[0])
         print media_sort_info
         media_sort_list.append({
-            'name': media_sort_info['crawl_media_sort_name'],
+            'name': media_sort_info,
             'id': str(i.split('_')[0]) + "_get_media_sorts"
         })
 
