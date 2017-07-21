@@ -1,5 +1,5 @@
 # coding: utf-8
-from django.shortcuts import render, HttpResponse, HttpResponseRedirect, redirect, get_object_or_404
+from django.shortcuts import render, HttpResponse, HttpResponseRedirect, redirect, get_object_or_404, _get_queryset
 from models import UserProfile
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
@@ -8,13 +8,26 @@ from forms import UserForm, UserProfileForm
 from django.contrib import messages
 
 
+def get_object_or_none(klass, *args, **kwargs):
+    queryset = _get_queryset(klass)
+    try:
+        return queryset.get(*args, **kwargs)
+    except AttributeError:
+        klass__name = klass.__name__ if isinstance(klass, type) else klass.__class__.__name__
+        raise ValueError(
+            "First argument to get_object_or_404() must be a Model, Manager, "
+            "or QuerySet, not '%s'." % klass__name
+        )
+    except queryset.model.DoesNotExist:
+        return {}
+
 # Create your views here.
 @login_required(login_url="/user/login/")
 def favorite(request):
-    current_user_profile = get_object_or_404(UserProfile, user=request.user)
+    current_user_profile = get_object_or_none(UserProfile,user=request.user)
     user_favorite_info = {}
     print current_user_profile
-    if  not list(current_user_profile):
+    if  current_user_profile:
         user_favorite_info['user_favorite_crawl_media_sort'] = current_user_profile.user_favorite_crawl_media_sort
         user_favorite_info['user_favorite_crawl_media'] = current_user_profile.user_favorite_crawl_media
         user_favorite_info['user_favorite_crawl_dir_sort'] = current_user_profile.user_favorite_crawl_media
