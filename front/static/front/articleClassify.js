@@ -27,23 +27,13 @@ class Parents extends Component {
             var curArticleClassifyId = [];
             var curPlatformId = [];
             var curAllmediaId = [];
-            // var curArticleClassifyId = msg.user_favorite_crawl_media_sort.split(",").concat(this.state.curArticleClassifyId);
-            // var curPlatformId = msg.user_favorite_crawl_dir_sort.split(",").concat(this.state.curPlatformId);
-            // var curAllmediaId = msg.user_favorite_crawl_media.split(",").concat(this.state.curAllmediaId);
-            // var curItem = curArticleClassifyId.concat(curArticleClassifyId).concat(curAllmediaId)
-            // this.setState({
-            //     curArticleClassifyId:curArticleClassifyId,
-            //     curPlatformId:curPlatformId,
-            //     curAllmediaId:curAllmediaId,
-            //     curItem:curItem
-            // })
             function newArray(json , arrayName) {
                 if (json.length  == 0) {
                     return false;
                 }
                 for (var value of json) {
                     initName.push(value.name);
-                    arrayName = arrayName.push(value.id)
+                    arrayName.push(value.id);
                 }
             }
             newArray(msg.user_favorite_crawl_media,curArticleClassifyId);
@@ -391,7 +381,7 @@ class List extends Component {
                         (name, index) => <Button bsStyle="primary" key={index}> {name} </Button>
                     )
                 }
-                <Button bsStyle="info" onClick = { this.props.sendKeywords }>收藏</Button>
+                <Button bsStyle="info" onClick = { this.props.sendKeywords }>收藏该组标签</Button>
             </ButtonToolbar>
         )
     }
@@ -414,7 +404,7 @@ class Modle extends Component {
                     <div dangerouslySetInnerHTML={{__html: this.props.article.article_content}}></div>
                     <p> {this.props.article.article_origin}</p>
                 </Panel>
-                <Button bsStyle="info" onClick={ () => this.setState({open: !this.state.open})}> 显示文章主体 </Button>
+                <Button bsStyle="info" onClick={ () => this.setState({open: !this.state.open})}> { this.state.open ? "隐藏文章主体" : "显示文章主体"} </Button>
                 <Button href={this.props.article.article_true_link} target="_blank"
                         style={{marginLeft: 15}}>查看原网页</Button>
                 <i><b> 更新时间：{this.props.article.article_published_at} 来源： {this.props.article.media_name} </b></i>

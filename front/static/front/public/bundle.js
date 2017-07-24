@@ -7427,16 +7427,6 @@ var Parents = function (_Component) {
                 var curArticleClassifyId = [];
                 var curPlatformId = [];
                 var curAllmediaId = [];
-                // var curArticleClassifyId = msg.user_favorite_crawl_media_sort.split(",").concat(this.state.curArticleClassifyId);
-                // var curPlatformId = msg.user_favorite_crawl_dir_sort.split(",").concat(this.state.curPlatformId);
-                // var curAllmediaId = msg.user_favorite_crawl_media.split(",").concat(this.state.curAllmediaId);
-                // var curItem = curArticleClassifyId.concat(curArticleClassifyId).concat(curAllmediaId)
-                // this.setState({
-                //     curArticleClassifyId:curArticleClassifyId,
-                //     curPlatformId:curPlatformId,
-                //     curAllmediaId:curAllmediaId,
-                //     curItem:curItem
-                // })
                 function newArray(json, arrayName) {
                     if (json.length == 0) {
                         return false;
@@ -7450,7 +7440,7 @@ var Parents = function (_Component) {
                             var value = _step.value;
 
                             initName.push(value.name);
-                            arrayName = arrayName.push(value.id);
+                            arrayName.push(value.id);
                         }
                     } catch (err) {
                         _didIteratorError = true;
@@ -8014,7 +8004,7 @@ var List = function (_Component9) {
                 _react2.default.createElement(
                     _reactBootstrap.Button,
                     { bsStyle: "info", onClick: this.props.sendKeywords },
-                    "\u6536\u85CF"
+                    "\u6536\u85CF\u8BE5\u7EC4\u6807\u7B7E"
                 )
             );
         }
@@ -8071,7 +8061,9 @@ var Modle = function (_Component10) {
                     { bsStyle: "info", onClick: function onClick() {
                             return _this21.setState({ open: !_this21.state.open });
                         } },
-                    " \u663E\u793A\u6587\u7AE0\u4E3B\u4F53 "
+                    " ",
+                    this.state.open ? "隐藏文章主体" : "显示文章主体",
+                    " "
                 ),
                 _react2.default.createElement(
                     _reactBootstrap.Button,
