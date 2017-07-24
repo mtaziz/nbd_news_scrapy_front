@@ -7466,6 +7466,7 @@ var Parents = function (_Component) {
                     curAllmediaId: curAllmediaId,
                     curItem: initName
                 });
+                console.log(curArticleClassifyId);
             });
         }
     }, {
@@ -7512,12 +7513,12 @@ var Parents = function (_Component) {
                 Time: beforeSendTime
             });
 
-            console.log("curAllmediaId=" + this.state.curAllmediaId);
+            // console.log("curAllmediaId=" + this.state.curAllmediaId)
         }
     }, {
         key: "render",
         value: function render() {
-            console.log("TIME = " + this.state.Time);
+            // console.log("TIME = " + this.state.Time)
             return _react2.default.createElement(
                 "div",
                 null,

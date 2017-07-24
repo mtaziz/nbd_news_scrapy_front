@@ -45,6 +45,7 @@ class Parents extends Component {
                 curAllmediaId:curAllmediaId,
                 curItem:initName
             })
+            console.log(curArticleClassifyId);
         })
     }
     componentDidMount() {
@@ -87,11 +88,11 @@ class Parents extends Component {
             Time: beforeSendTime
         })
 
-        console.log("curAllmediaId=" + this.state.curAllmediaId)
+        // console.log("curAllmediaId=" + this.state.curAllmediaId)
     }
 
     render() {
-        console.log("TIME = " + this.state.Time)
+        // console.log("TIME = " + this.state.Time)
         return (
             <div>
                 <Box changePlatform={this.changeItem} curItem={this.state.curItem}/>
