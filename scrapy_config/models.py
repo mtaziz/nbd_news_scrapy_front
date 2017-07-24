@@ -169,6 +169,30 @@ class NextPageCrawlConfig(models.Model):
         return self.crawl_media.crawl_domain
 
 
+class ReCrawlConfig(models.Model):
+    status_type_choice = ((1, u'开启'), (2, u'关闭'))
+    SCORE_CHOICES = [(0, u'一次更新'), ]
+    SCORE_CHOICES = SCORE_CHOICES + zip(range(1, 10, 1), range(1, 10, 1))
+    crawl_media = models.ForeignKey(CrawlMedia, verbose_name=u'网站域名(如:www.nbd.com.cn) 做关联用', db_index=True)
+    crawl_media_sort = models.ForeignKey(CrawlMediaSort, verbose_name=u"网站分类(通常为类别，如股票，财经)", db_index=True)
+    crawl_dir_sort = models.ForeignKey(CrawlDirSort, verbose_name=u'栏目分类(通常为单个的start url的栏目名)', db_index=True)
+    crawl_start_url = models.URLField(u'单个的start url,获取next page链接', unique=True, db_index=True)
+    crawl_xpath_rule_set = models.ForeignKey(XpathRuleSet, verbose_name=u'item规则集')
+    crawl_next_url = models.CharField(u'提取当前json页面遍历数组(支持多级查找使用英文,隔开多个键)，不填写则在本页面上使用item规则集', max_length=100,
+                                      blank=True, null=True)
+    crawl_frequency = models.IntegerField(u'更新频率(单位：分钟)', choices=SCORE_CHOICES)
+    crawl_status = models.SmallIntegerField(u'是否开启抓取', choices=status_type_choice, default=1)
+    crawl_note = models.CharField(u'start url备注', max_length=50, blank=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = u'正则提取数据源'
+        verbose_name_plural = u'正则提取数据源管理'
+
+    def __unicode__(self):
+        return self.crawl_media.crawl_domain
+
+
 @shared_task
 def update_scrapy_crawl(**kwargs):
     data = {'project': kwargs['project'], 'spider': kwargs['spider'], 'crawl_start_url': kwargs['crawl_start_url']}
