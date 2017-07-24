@@ -4,6 +4,7 @@ import {Navbar} from "react-bootstrap";
 import {Button} from 'react-bootstrap';
 import {ButtonToolbar} from 'react-bootstrap';
 import {Row, Col, Modal, Grid, Panel, Well, FormGroup, InputGroup, FormControl, ListGroup, ListGroupItem} from 'react-bootstrap';
+import Select2 from 'react-select2-wrapper';
 
 class Parents extends Component {
     constructor(props) {
@@ -410,6 +411,15 @@ class Modle extends Component {
                 <Button href={this.props.article.article_true_link} target="_blank"
                         style={{marginLeft: 15}}>查看原网页</Button>
                 <i><b> 更新时间：{this.props.article.article_published_at} 来源： {this.props.article.media_name} </b></i>
+                <Select2
+                    multiple
+                    data={['bug', 'feature', 'documents', 'discussion']}
+                    options={
+                        {
+                        placeholder: 'search by tags',
+                        }
+                    }
+                />
             </Well>
         )
     }
