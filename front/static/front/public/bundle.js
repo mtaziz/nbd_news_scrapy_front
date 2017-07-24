@@ -7424,6 +7424,9 @@ var Parents = function (_Component) {
 
             _jquery2.default.getJSON(" /user/favorite").then(function (msg) {
                 var initName = [];
+                var curArticleClassifyId = [];
+                var curPlatformId = [];
+                var curAllmediaId = [];
                 // var curArticleClassifyId = msg.user_favorite_crawl_media_sort.split(",").concat(this.state.curArticleClassifyId);
                 // var curPlatformId = msg.user_favorite_crawl_dir_sort.split(",").concat(this.state.curPlatformId);
                 // var curAllmediaId = msg.user_favorite_crawl_media.split(",").concat(this.state.curAllmediaId);
@@ -7447,6 +7450,7 @@ var Parents = function (_Component) {
                             var value = _step.value;
 
                             initName.push(value.name);
+                            arrayName = arrayName.push(value.id);
                         }
                     } catch (err) {
                         _didIteratorError = true;
@@ -7463,11 +7467,13 @@ var Parents = function (_Component) {
                         }
                     }
                 }
-                newArray(msg.user_favorite_crawl_media, "curArticleClassifyId");
-                newArray(msg.user_favorite_crawl_dir_sort, "curPlatformId");
-                newArray(msg.user_favorite_crawl_media_sort, "curAllmediaId");
+                newArray(msg.user_favorite_crawl_media, curArticleClassifyId);
+                newArray(msg.user_favorite_crawl_dir_sort, curPlatformId);
+                newArray(msg.user_favorite_crawl_media_sort, curAllmediaId);
                 _this2.setState({
-
+                    curArticleClassifyId: curArticleClassifyId,
+                    curPlatformId: curPlatformId,
+                    curAllmediaId: curAllmediaId,
                     curItem: initName
                 });
             });

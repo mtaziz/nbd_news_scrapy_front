@@ -24,6 +24,9 @@ class Parents extends Component {
     setInit() {
         $.getJSON(" /user/favorite").then( msg => {
             var initName =[];
+            var curArticleClassifyId = [];
+            var curPlatformId = [];
+            var curAllmediaId = [];
             // var curArticleClassifyId = msg.user_favorite_crawl_media_sort.split(",").concat(this.state.curArticleClassifyId);
             // var curPlatformId = msg.user_favorite_crawl_dir_sort.split(",").concat(this.state.curPlatformId);
             // var curAllmediaId = msg.user_favorite_crawl_media.split(",").concat(this.state.curAllmediaId);
@@ -40,13 +43,16 @@ class Parents extends Component {
                 }
                 for (var value of json) {
                     initName.push(value.name);
+                    arrayName = arrayName.push(value.id)
                 }
             }
-            newArray(msg.user_favorite_crawl_media,"curArticleClassifyId");
-            newArray(msg.user_favorite_crawl_dir_sort,"curPlatformId");
-            newArray(msg.user_favorite_crawl_media_sort,"curAllmediaId");
+            newArray(msg.user_favorite_crawl_media,curArticleClassifyId);
+            newArray(msg.user_favorite_crawl_dir_sort,curPlatformId);
+            newArray(msg.user_favorite_crawl_media_sort,curAllmediaId);
             this.setState({
-
+                curArticleClassifyId:curArticleClassifyId,
+                curPlatformId:curPlatformId,
+                curAllmediaId:curAllmediaId,
                 curItem:initName
             })
         })
