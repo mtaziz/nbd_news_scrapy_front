@@ -7471,7 +7471,7 @@ var Parents = function (_Component) {
     }, {
         key: "componentDidMount",
         value: function componentDidMount() {
-            this.setInit();
+            // this.setInit();
         }
     }, {
         key: "componentWillUnmount",
