@@ -36,9 +36,9 @@ class Parents extends Component {
                     arrayName.push(value.id);
                 }
             }
-            newArray(msg.user_favorite_crawl_media,curArticleClassifyId);
+            newArray(msg.user_favorite_crawl_media_sort,curArticleClassifyId);
             newArray(msg.user_favorite_crawl_dir_sort,curPlatformId);
-            newArray(msg.user_favorite_crawl_media_sort,curAllmediaId);
+            newArray(msg.user_favorite_crawl_media,curAllmediaId);
             this.setState({
                 curArticleClassifyId:curArticleClassifyId,
                 curPlatformId:curPlatformId,

@@ -7457,9 +7457,9 @@ var Parents = function (_Component) {
                         }
                     }
                 }
-                newArray(msg.user_favorite_crawl_media, curArticleClassifyId);
+                newArray(msg.user_favorite_crawl_media_sort, curArticleClassifyId);
                 newArray(msg.user_favorite_crawl_dir_sort, curPlatformId);
-                newArray(msg.user_favorite_crawl_media_sort, curAllmediaId);
+                newArray(msg.user_favorite_crawl_media, curAllmediaId);
                 _this2.setState({
                     curArticleClassifyId: curArticleClassifyId,
                     curPlatformId: curPlatformId,
