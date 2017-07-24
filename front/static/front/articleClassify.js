@@ -321,7 +321,7 @@ class TestWrapper extends Component {
             "SendTime": this.props.time,
             "user_favorite_crawl_media": nextProps.curAllmediaId.join(",")
         }).then(msg => {
-            console.log("nextProps=" + nextProps)
+            console.log(nextProps)
             var post = msg;
             // var newPost = this.state.articleList.slice().concat(post);
             this.setState({articleList: post, Data: nextProps})

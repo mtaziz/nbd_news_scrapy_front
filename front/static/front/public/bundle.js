@@ -7918,7 +7918,7 @@ var TestWrapper = function (_Component8) {
                 "SendTime": this.props.time,
                 "user_favorite_crawl_media": nextProps.curAllmediaId.join(",")
             }).then(function (msg) {
-                console.log("nextProps=" + nextProps);
+                console.log(nextProps);
                 var post = msg;
                 // var newPost = this.state.articleList.slice().concat(post);
                 _this18.setState({ articleList: post, Data: nextProps });
