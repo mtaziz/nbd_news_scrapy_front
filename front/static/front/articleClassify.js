@@ -4,6 +4,7 @@ import {Navbar} from "react-bootstrap";
 import {Button} from 'react-bootstrap';
 import {ButtonToolbar} from 'react-bootstrap';
 import {Row, Col, Modal, Grid, Panel, Well, FormGroup, InputGroup, FormControl, ListGroup, ListGroupItem} from 'react-bootstrap';
+import Select2 from 'react-select2-wrapper';
 
 class Parents extends Component {
     constructor(props) {
@@ -316,10 +317,10 @@ class TestWrapper extends Component {
 
     getArticleList(nextProps) {
         $.getJSON("/get_article", {
-            "user_favorite_crawl_media": nextProps.curArticleClassifyId.join(","),
+            "user_favorite_crawl_media_sort": nextProps.curArticleClassifyId.join(","),
             "user_favorite_crawl_dir_sort": nextProps.curPlatformId.join(","),
             "SendTime": this.props.time,
-            "user_favorite_crawl_media_sort": nextProps.curAllmediaId.join(",")
+            "user_favorite_crawl_media": nextProps.curAllmediaId.join(",")
         }).then(msg => {
             console.log(nextProps)
             var post = msg;
@@ -329,7 +330,7 @@ class TestWrapper extends Component {
     }
     sendKeywords () {
         $.post("/user/update_favorite",{
-            "user_favorite_crawl_media_sort": this.state.Data.curArticleClassifyId.join(","),
+            "user_favorite_crawl_media_sort" : this.state.Data.curArticleClassifyId.join(","),
             "user_favorite_crawl_dir_sort": this.state.Data.curPlatformId.join(","),
             "user_favorite_crawl_media": this.state.Data.curAllmediaId.join(",")
         }).then( msg => {
@@ -410,6 +411,21 @@ class Modle extends Component {
                 <Button href={this.props.article.article_true_link} target="_blank"
                         style={{marginLeft: 15}}>查看原网页</Button>
                 <i><b> 更新时间：{this.props.article.article_published_at} 来源： {this.props.article.media_name} </b></i>
+                <div  className="col-xs-12 col-md-12">
+                    <Select2
+  defaultValue={[1, 4]}
+  data={[
+    { text: 'bug', id: 1 },
+    { text: 'feature', id: 2 },
+    { text: 'documents', id: 3 },
+    { text: 'discussion', id: 4 },
+  ]}
+  options={{
+    placeholder: 'search by tags',
+  }}
+/>
+                </div>
+
             </Well>
         )
     }
