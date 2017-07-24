@@ -2,6 +2,7 @@
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect, get_object_or_404
 from scrapy_config.models import CrawlMedia, CrawlMediaSort, CrawlDirSort
 import json
+from django.core.urlresolvers import reverse
 import logging
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
@@ -107,6 +108,7 @@ def get_article(request):
     for j in chain(article_info_list_for_media_sort, article_info_list_for_dir_sort, article_info_list_for_media):
         single_info = {}
         single_info['pk'] = j.id
+        single_info['link'] = reverse('get_article_detail', kwargs={"detail_id": j.id})
         single_info['media_name'] = j.article_for_crawl_media.crawl_media_name
         single_info['article_published_at'] = str(j.article_published_at)
         single_info['article_true_link'] = j.article_true_link
