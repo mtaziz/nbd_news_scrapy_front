@@ -381,7 +381,7 @@ class List extends Component {
                         (name, index) => <Button bsStyle="primary" key={index}> {name} </Button>
                     )
                 }
-                <Button bsStyle="info" onClick = { this.props.sendKeywords }>收藏改组标签</Button>
+                <Button bsStyle="info" onClick = { this.props.sendKeywords }>收藏该组标签</Button>
             </ButtonToolbar>
         )
     }

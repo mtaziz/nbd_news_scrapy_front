@@ -8004,7 +8004,7 @@ var List = function (_Component9) {
                 _react2.default.createElement(
                     _reactBootstrap.Button,
                     { bsStyle: "info", onClick: this.props.sendKeywords },
-                    "\u6536\u85CF\u6539\u7EC4\u6807\u7B7E"
+                    "\u6536\u85CF\u8BE5\u7EC4\u6807\u7B7E"
                 )
             );
         }
