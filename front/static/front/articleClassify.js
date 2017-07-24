@@ -414,11 +414,12 @@ class Modle extends Component {
                 <div  className="col-xs-12 col-md-12">
                     <Select2
                         multiple
+                        defaultValue={2}
                         data={['bug', 'feature', 'documents', 'discussion']}
                         options={
-                        {
-                        placeholder: 'search by tags',
-                        }
+                            {
+                                placeholder: 'search by tags',
+                            }
                         }
                     />
                 </div>
