@@ -7917,10 +7917,10 @@ var TestWrapper = function (_Component8) {
             var _this18 = this;
 
             _jquery2.default.getJSON("/get_article", {
-                "user_favorite_crawl_media": nextProps.curArticleClassifyId.join(","),
+                "user_favorite_crawl_media_sort": nextProps.curArticleClassifyId.join(","),
                 "user_favorite_crawl_dir_sort": nextProps.curPlatformId.join(","),
                 "SendTime": this.props.time,
-                "user_favorite_crawl_media_sort": nextProps.curAllmediaId.join(",")
+                "user_favorite_crawl_media": nextProps.curAllmediaId.join(",")
             }).then(function (msg) {
                 console.log(nextProps);
                 var post = msg;
