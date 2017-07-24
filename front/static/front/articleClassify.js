@@ -35,22 +35,18 @@ class Parents extends Component {
             //     curItem:curItem
             // })
             function newArray(json , arrayName) {
-                arrayName = [];
                 if (json.length  == 0) {
                     return false;
                 }
                 for (var value of json) {
                     initName.push(value.name);
-                    arrayName = arrayName.push(value.id)
                 }
             }
             newArray(msg.user_favorite_crawl_media,"curArticleClassifyId");
             newArray(msg.user_favorite_crawl_dir_sort,"curPlatformId");
             newArray(msg.user_favorite_crawl_media_sort,"curAllmediaId");
             this.setState({
-                curArticleClassifyId:curArticleClassifyId,
-                curPlatformId:curPlatformId,
-                curAllmediaId:curAllmediaId,
+
                 curItem:initName
             })
         })

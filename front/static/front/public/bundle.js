@@ -7435,7 +7435,6 @@ var Parents = function (_Component) {
                 //     curItem:curItem
                 // })
                 function newArray(json, arrayName) {
-                    arrayName = [];
                     if (json.length == 0) {
                         return false;
                     }
@@ -7448,7 +7447,6 @@ var Parents = function (_Component) {
                             var value = _step.value;
 
                             initName.push(value.name);
-                            arrayName = arrayName.push(value.id);
                         }
                     } catch (err) {
                         _didIteratorError = true;
@@ -7469,9 +7467,7 @@ var Parents = function (_Component) {
                 newArray(msg.user_favorite_crawl_dir_sort, "curPlatformId");
                 newArray(msg.user_favorite_crawl_media_sort, "curAllmediaId");
                 _this2.setState({
-                    curArticleClassifyId: curArticleClassifyId,
-                    curPlatformId: curPlatformId,
-                    curAllmediaId: curAllmediaId,
+
                     curItem: initName
                 });
             });
