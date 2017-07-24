@@ -7483,13 +7483,13 @@ var Parents = function (_Component) {
         key: "changeItem",
         value: function changeItem(item, elem) {
 
-            var newCurItem = this.state.curItem.slice();
-            var newCurPlatform = this.state.curPlatform.slice();
-            var newCurArticleClassify = this.state.curArticleClassify.slice();
-            var newCurAllmedia = this.state.curAllmedia.slice();
-            var newCurPlatformId = this.state.curPlatformId.slice();
-            var newCurArticleClassifyId = this.state.curArticleClassifyId.slice();
-            var newCurAllmediaId = this.state.curAllmediaId.slice();
+            var newCurItem = this.state.curItem;
+            var newCurPlatform = this.state.curPlatform;
+            var newCurArticleClassify = this.state.curArticleClassify;
+            var newCurAllmedia = this.state.curAllmedia;
+            var newCurPlatformId = this.state.curPlatformId;
+            var newCurArticleClassifyId = this.state.curArticleClassifyId;
+            var newCurAllmediaId = this.state.curAllmediaId;
             if (elem == 'Platform') {
                 newCurPlatform.indexOf(item[1]) == -1 ? newCurPlatform.push(item[1]) : newCurPlatform.splice(newCurPlatform.indexOf(item[1]), 1);
                 newCurPlatformId.indexOf(item[0]) == -1 ? newCurPlatformId.push(item[0]) : newCurPlatformId.splice(newCurPlatformId.indexOf(item[0]), 1);
@@ -7918,7 +7918,7 @@ var TestWrapper = function (_Component8) {
                 "SendTime": this.props.time,
                 "user_favorite_crawl_media": nextProps.curAllmediaId.join(",")
             }).then(function (msg) {
-                console.log(nextProps);
+                console.log("nextProps=" + nextProps);
                 var post = msg;
                 // var newPost = this.state.articleList.slice().concat(post);
                 _this18.setState({ articleList: post, Data: nextProps });
