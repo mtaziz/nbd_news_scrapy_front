@@ -7518,7 +7518,7 @@ var ArticleClassify = function (_Component3) {
 
         var _this3 = _possibleConstructorReturn(this, (ArticleClassify.__proto__ || Object.getPrototypeOf(ArticleClassify)).call(this, props));
 
-        _this3.state = { articleClassify: [], open: false };
+        _this3.state = { articleClassify: [], open: true };
         return _this3;
     }
 
