@@ -113,6 +113,7 @@ def get_article(request):
         single_info['article_title'] = j.article_title
         single_info['article_desc'] = j.article_desc
         single_info['article_content'] = j.article_content
+        single_info['article_tags'] = j.article_tags
         all_articles_info_list.append(single_info)
     return HttpResponse(json.dumps(all_articles_info_list), content_type="application/json")
 

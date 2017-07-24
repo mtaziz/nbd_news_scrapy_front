@@ -369,3 +369,58 @@ def update_json_crawl(sender, instance, *args, **kwargs):
                       'kwargs': json.dumps(data),
                       'expires': expires_time}
         )
+
+
+@receiver(pre_save, sender=ReCrawlConfig)
+def update_re_crawl(sender, instance, *args, **kwargs):
+    schedule, created = IntervalSchedule.objects.get_or_create(
+        every=instance.crawl_frequency,
+        period=IntervalSchedule.MINUTES,
+    )
+    if instance.id:
+        print "log if instance"
+        logging.log(logging.DEBUG, instance.id)
+        old_customer_crawl_config = sender.objects.filter(pk=instance.id).first()
+        print old_customer_crawl_config
+        if instance.crawl_media != old_customer_crawl_config.crawl_media \
+                or instance.crawl_start_url != old_customer_crawl_config.crawl_start_url \
+                or instance.crawl_xpath_rule_set != old_customer_crawl_config.crawl_xpath_rule_set \
+                or instance.crawl_next_url != old_customer_crawl_config.crawl_next_url \
+                or instance.crawl_frequency != old_customer_crawl_config.crawl_frequency \
+                or instance.crawl_status != old_customer_crawl_config.crawl_status:
+            # call scrapy crawl
+            print instance.crawl_start_url
+            logging.log(logging.DEBUG, instance.crawl_start_url)
+            resp = requests.get(settings.SCRAPYD_SETTING_HOST + 'listprojects.json')
+            project = resp.json()['projects'][0]
+            data = {'project': project, 'spider': 're_crawl', 'crawl_start_url': instance.crawl_start_url}
+            task_status = True if instance.crawl_status == 1 else False
+            expires_time = datetime.now() + timedelta(
+                seconds=75) if instance.crawl_frequency == 0 else datetime.now() + timedelta(days=1000)
+            PeriodicTask.objects.update_or_create(
+                name=instance.crawl_start_url,
+                defaults={'interval': schedule,
+                          'task': 'scrapy_config.models.update_scrapy_crawl',
+                          'name': instance.crawl_start_url,
+                          'kwargs': json.dumps(data),
+                          'enabled': task_status,
+                          'expires': expires_time}
+            )
+    else:
+        print 'no instance id'
+        logging.log(logging.DEBUG, 'no instance id')
+        resp = requests.get(settings.SCRAPYD_SETTING_HOST + 'listprojects.json')
+        project = resp.json()['projects'][0]
+        data = {'project': project, 'spider': 're_crawl', 'crawl_start_url': instance.crawl_start_url}
+        task_status = True if instance.crawl_status == 1 else False
+        expires_time = datetime.now() + timedelta(
+            seconds=75) if instance.crawl_frequency == 0 else datetime.now() + timedelta(days=1000)
+        PeriodicTask.objects.update_or_create(
+            name=instance.crawl_start_url,
+            defaults={'interval': schedule,
+                      'task': 'scrapy_config.models.update_scrapy_crawl',
+                      'name': instance.crawl_start_url,
+                      'enabled': task_status,
+                      'kwargs': json.dumps(data),
+                      'expires': expires_time}
+        )
