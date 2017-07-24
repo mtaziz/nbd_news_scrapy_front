@@ -1,7 +1,7 @@
 # coding: utf-8
 from django.contrib import admin
 from models import AllSiteCrawlConfig, XpathRuleSet, NextPageCrawlConfig, CrawlDirSort, CrawlMedia, CrawlMediaSort, \
-    OnePageCrawlConfig, JsonCrawlConfig
+    OnePageCrawlConfig, JsonCrawlConfig, ReCrawlConfig
 # from models import CrawlMedia
 from django.contrib import messages
 from django.utils.safestring import mark_safe
@@ -125,6 +125,24 @@ class NextPageCrawlConfigAdmin(admin.ModelAdmin):
     crawl_status_fri.short_description = u"是否开启抓取"
 
 
+class ReCrawlConfigAdmin(admin.ModelAdmin):
+    list_display = (
+        'crawl_start_url', 'crawl_media_sort', 'crawl_next_url', 'crawl_frequency', 'crawl_status_fri')
+    list_per_page = 50
+    search_fields = ('crawl_start_url',)
+    actions = [batch_open, batch_close]
+
+    def crawl_status_fri(self, obj):
+        if obj.crawl_status == 1:
+            return """<p class="btn btn-success">已开启</p>"""
+        else:
+            return """<p class="btn btn-danger">已关闭</p>"""
+
+    crawl_status_fri.allow_tags = True
+    crawl_status_fri.admin_order_field = 'crawl_status'
+    crawl_status_fri.short_description = u"是否开启抓取"
+
+
 class XpathRuleSetAdmin(admin.ModelAdmin):
     list_display = ('xpath_for_set_name', 'xpath_for_article_title', 'xpath_for_article_true_link')
     list_per_page = 20
@@ -139,3 +157,4 @@ admin.site.register(CrawlMediaSort, CrawlMediaSortAdmin)
 admin.site.register(CrawlDirSort, CrawlDirSortAdmin)
 admin.site.register(OnePageCrawlConfig, OnePageCrawlConfigAdmin)
 admin.site.register(JsonCrawlConfig, JsonCrawlConfigAdmin)
+admin.site.register(ReCrawlConfig, ReCrawlConfigAdmin)
