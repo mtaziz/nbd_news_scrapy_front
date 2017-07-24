@@ -2235,7 +2235,7 @@ function createChainableTypeChecker(validate) {
 
 exports.__esModule = true;
 
-var _createUncontrollable = __webpack_require__(442);
+var _createUncontrollable = __webpack_require__(443);
 
 var _createUncontrollable2 = _interopRequireDefault(_createUncontrollable);
 
@@ -7386,9 +7386,11 @@ var _jquery2 = _interopRequireDefault(_jquery);
 
 var _reactBootstrap = __webpack_require__(344);
 
-var _reactSelect2Wrapper = __webpack_require__(426);
+var _reactSelect2Wrapper = __webpack_require__(427);
 
 var _reactSelect2Wrapper2 = _interopRequireDefault(_reactSelect2Wrapper);
+
+__webpack_require__(426);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -19034,6 +19036,12 @@ function showSiblings(container, mountNode) {
 
 /***/ }),
 /* 426 */
+/***/ (function(module, exports) {
+
+throw new Error("Module parse failed: C:\\Users\\DELL\\PycharmProjects\\nbd_news_scrapy_front\\front\\static\\front\\node_modules\\react-select2-wrapper\\css\\select2.css Unexpected token (1:0)\nYou may need an appropriate loader to handle this file type.\n| .select2-container {\n|   box-sizing: border-box;\n|   display: inline-block;");
+
+/***/ }),
+/* 427 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19057,7 +19065,7 @@ var _reactDom = __webpack_require__(18);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _shallowEqualFuzzy = __webpack_require__(441);
+var _shallowEqualFuzzy = __webpack_require__(442);
 
 var _shallowEqualFuzzy2 = _interopRequireDefault(_shallowEqualFuzzy);
 
@@ -19065,7 +19073,7 @@ var _jquery = __webpack_require__(62);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-__webpack_require__(440);
+__webpack_require__(441);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -19321,7 +19329,6 @@ exports.default = Select2;
 module.exports = exports['default'];
 
 /***/ }),
-/* 427 */,
 /* 428 */,
 /* 429 */,
 /* 430 */,
@@ -19334,7 +19341,8 @@ module.exports = exports['default'];
 /* 437 */,
 /* 438 */,
 /* 439 */,
-/* 440 */
+/* 440 */,
+/* 441 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var require;var require;/*!
@@ -25068,7 +25076,7 @@ S2.define('jquery.select2',[
 
 
 /***/ }),
-/* 441 */
+/* 442 */
 /***/ (function(module, exports) {
 
 // inlined http://underscorejs.org/ realization isString, isNumber
@@ -25176,7 +25184,7 @@ module.exports = shallowEqualFuzzy;
 
 
 /***/ }),
-/* 442 */
+/* 443 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25196,7 +25204,7 @@ var _invariant = __webpack_require__(100);
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
-var _utils = __webpack_require__(443);
+var _utils = __webpack_require__(444);
 
 var utils = _interopRequireWildcard(_utils);
 
@@ -25377,7 +25385,7 @@ function createUncontrollable(mixin, set) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 443 */
+/* 444 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
