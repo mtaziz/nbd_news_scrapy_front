@@ -411,15 +411,18 @@ class Modle extends Component {
                 <Button href={this.props.article.article_true_link} target="_blank"
                         style={{marginLeft: 15}}>查看原网页</Button>
                 <i><b> 更新时间：{this.props.article.article_published_at} 来源： {this.props.article.media_name} </b></i>
-                <Select2
-                    multiple
-                    data={['bug', 'feature', 'documents', 'discussion']}
-                    options={
+                <div  className="col-xs-12 col-md-12">
+                    <Select2
+                        multiple
+                        data={['bug', 'feature', 'documents', 'discussion']}
+                        options={
                         {
                         placeholder: 'search by tags',
                         }
-                    }
-                />
+                        }
+                    />
+                </div>
+
             </Well>
         )
     }

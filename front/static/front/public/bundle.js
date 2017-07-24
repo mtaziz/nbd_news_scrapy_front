@@ -8090,13 +8090,17 @@ var Modle = function (_Component10) {
                         " "
                     )
                 ),
-                _react2.default.createElement(_reactSelect2Wrapper2.default, {
-                    multiple: true,
-                    data: ['bug', 'feature', 'documents', 'discussion'],
-                    options: {
-                        placeholder: 'search by tags'
-                    }
-                })
+                _react2.default.createElement(
+                    "div",
+                    { className: "col-xs-12 col-md-12" },
+                    _react2.default.createElement(_reactSelect2Wrapper2.default, {
+                        multiple: true,
+                        data: ['bug', 'feature', 'documents', 'discussion'],
+                        options: {
+                            placeholder: 'search by tags'
+                        }
+                    })
+                )
             );
         }
     }]);
