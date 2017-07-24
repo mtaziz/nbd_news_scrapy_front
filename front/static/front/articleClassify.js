@@ -413,7 +413,7 @@ class Modle extends Component {
                 <i><b> 更新时间：{this.props.article.article_published_at} 来源： {this.props.article.media_name} </b></i>
                 <div  className="col-xs-12 col-md-12">
                     <Select2
-                        multiple
+
                         defaultValue={2}
                         data={['bug', 'feature', 'documents', 'discussion']}
                         options={

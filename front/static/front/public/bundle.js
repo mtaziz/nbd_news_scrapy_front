@@ -8094,7 +8094,7 @@ var Modle = function (_Component10) {
                     "div",
                     { className: "col-xs-12 col-md-12" },
                     _react2.default.createElement(_reactSelect2Wrapper2.default, {
-                        multiple: true,
+
                         defaultValue: 2,
                         data: ['bug', 'feature', 'documents', 'discussion'],
                         options: {
