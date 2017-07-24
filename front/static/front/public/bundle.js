@@ -8004,7 +8004,7 @@ var List = function (_Component9) {
                 _react2.default.createElement(
                     _reactBootstrap.Button,
                     { bsStyle: "info", onClick: this.props.sendKeywords },
-                    "\u6536\u85CF"
+                    "\u6536\u85CF\u6539\u7EC4\u6807\u7B7E"
                 )
             );
         }
@@ -8062,7 +8062,7 @@ var Modle = function (_Component10) {
                             return _this21.setState({ open: !_this21.state.open });
                         } },
                     " ",
-                    this.setState({ open: !this.state.open }) ? "显示文章主体" : "隐藏文章主体",
+                    this.state.open ? "显示文章主体" : "隐藏文章主体",
                     " "
                 ),
                 _react2.default.createElement(

@@ -381,7 +381,7 @@ class List extends Component {
                         (name, index) => <Button bsStyle="primary" key={index}> {name} </Button>
                     )
                 }
-                <Button bsStyle="info" onClick = { this.props.sendKeywords }>收藏</Button>
+                <Button bsStyle="info" onClick = { this.props.sendKeywords }>收藏改组标签</Button>
             </ButtonToolbar>
         )
     }
@@ -404,7 +404,7 @@ class Modle extends Component {
                     <div dangerouslySetInnerHTML={{__html: this.props.article.article_content}}></div>
                     <p> {this.props.article.article_origin}</p>
                 </Panel>
-                <Button bsStyle="info" onClick={ () => this.setState({open: !this.state.open})}> { this.setState({open: !this.state.open})? "显示文章主体" : "隐藏文章主体"} </Button>
+                <Button bsStyle="info" onClick={ () => this.setState({open: !this.state.open})}> { this.state.open ? "显示文章主体" : "隐藏文章主体"} </Button>
                 <Button href={this.props.article.article_true_link} target="_blank"
                         style={{marginLeft: 15}}>查看原网页</Button>
                 <i><b> 更新时间：{this.props.article.article_published_at} 来源： {this.props.article.media_name} </b></i>
