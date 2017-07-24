@@ -272,7 +272,7 @@ class Box2 extends Component {
 class Allmedia extends Component {
     constructor(props) {
         super(props);
-        this.state = {Platform: [],open:true};
+        this.state = {Platform: [],open:false};
     }
 
     handClick(item, elem = 'Allmedia') {

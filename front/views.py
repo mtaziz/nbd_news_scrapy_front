@@ -70,7 +70,7 @@ def get_article(request):
     # newCurArticleClassify 文章标签
     # newCurPlatform 文章平台
     all_articles_info_list = []
-    newCurArticleClassifyl = request.GET.get("newCurArticleClassifyl", '').split(",")
+    newCurArticleClassifyl = request.GET.get("user_favorite_crawl_media_sort", '').split(",")
     article_info_list_for_media_sort = []
     if newCurArticleClassifyl != [u'']:
         media_sort_list = []
@@ -79,7 +79,7 @@ def get_article(request):
         article_info_list_for_media_sort = Articles.objects.filter(
             article_for_crawl_media_sort__in=media_sort_list).order_by('-article_updated_at')[:20]
 
-    Platforml = request.GET.get("Platforml", '').split(",")
+    Platforml = request.GET.get("user_favorite_crawl_dir_sort", '').split(",")
     article_info_list_for_dir_sort = []
     if Platforml != [u'']:
         dir_sort_list = []
@@ -89,7 +89,7 @@ def get_article(request):
             article_for_crawl_dir_sort__in=dir_sort_list).order_by(
             '-article_updated_at')[:10]
 
-    Allmedia = request.GET.get("Allmedia", '').split(",")
+    Allmedia = request.GET.get("user_favorite_crawl_media", '').split(",")
     article_info_list_for_media = []
     if Allmedia != [u'']:
         media_list = []
