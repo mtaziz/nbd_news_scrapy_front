@@ -7413,11 +7413,82 @@ var Parents = function (_Component) {
             Time: ""
         };
         _this.changeItem = _this.changeItem.bind(_this);
-
+        _this.setInit = _this.setInit.bind(_this);
         return _this;
     }
 
     _createClass(Parents, [{
+        key: "setInit",
+        value: function setInit() {
+            var _this2 = this;
+
+            _jquery2.default.getJSON(" /user/favorite").then(function (msg) {
+                var initName = [];
+                var curArticleClassifyId = [];
+                var curPlatformId = [];
+                var curAllmediaId = [];
+                // var curArticleClassifyId = msg.user_favorite_crawl_media_sort.split(",").concat(this.state.curArticleClassifyId);
+                // var curPlatformId = msg.user_favorite_crawl_dir_sort.split(",").concat(this.state.curPlatformId);
+                // var curAllmediaId = msg.user_favorite_crawl_media.split(",").concat(this.state.curAllmediaId);
+                // var curItem = curArticleClassifyId.concat(curArticleClassifyId).concat(curAllmediaId)
+                // this.setState({
+                //     curArticleClassifyId:curArticleClassifyId,
+                //     curPlatformId:curPlatformId,
+                //     curAllmediaId:curAllmediaId,
+                //     curItem:curItem
+                // })
+                function newArray(json, arrayName) {
+                    if (json.length == 0) {
+                        return false;
+                    }
+                    var _iteratorNormalCompletion = true;
+                    var _didIteratorError = false;
+                    var _iteratorError = undefined;
+
+                    try {
+                        for (var _iterator = json[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                            var value = _step.value;
+
+                            initName.push(value.name);
+                            arrayName = arrayName.push(value.id);
+                        }
+                    } catch (err) {
+                        _didIteratorError = true;
+                        _iteratorError = err;
+                    } finally {
+                        try {
+                            if (!_iteratorNormalCompletion && _iterator.return) {
+                                _iterator.return();
+                            }
+                        } finally {
+                            if (_didIteratorError) {
+                                throw _iteratorError;
+                            }
+                        }
+                    }
+                }
+                newArray(msg.user_favorite_crawl_media, curArticleClassifyId);
+                newArray(msg.user_favorite_crawl_dir_sort, curPlatformId);
+                newArray(msg.user_favorite_crawl_media_sort, curAllmediaId);
+                _this2.setState({
+                    curArticleClassifyId: curArticleClassifyId,
+                    curPlatformId: curPlatformId,
+                    curAllmediaId: curAllmediaId,
+                    curItem: initName
+                });
+            });
+        }
+    }, {
+        key: "componentDidMount",
+        value: function componentDidMount() {
+            this.setInit();
+        }
+    }, {
+        key: "componentWillUnmount",
+        value: function componentWillUnmount() {
+            this.serverRequest.abort();
+        }
+    }, {
         key: "changeItem",
         value: function changeItem(item, elem) {
 
@@ -7481,10 +7552,10 @@ var Box = function (_Component2) {
     function Box(props) {
         _classCallCheck(this, Box);
 
-        var _this2 = _possibleConstructorReturn(this, (Box.__proto__ || Object.getPrototypeOf(Box)).call(this, props));
+        var _this3 = _possibleConstructorReturn(this, (Box.__proto__ || Object.getPrototypeOf(Box)).call(this, props));
 
-        _this2.changePlatformA = _this2.changePlatformA.bind(_this2);
-        return _this2;
+        _this3.changePlatformA = _this3.changePlatformA.bind(_this3);
+        return _this3;
     }
 
     _createClass(Box, [{
@@ -7516,10 +7587,10 @@ var ArticleClassify = function (_Component3) {
     function ArticleClassify(props) {
         _classCallCheck(this, ArticleClassify);
 
-        var _this3 = _possibleConstructorReturn(this, (ArticleClassify.__proto__ || Object.getPrototypeOf(ArticleClassify)).call(this, props));
+        var _this4 = _possibleConstructorReturn(this, (ArticleClassify.__proto__ || Object.getPrototypeOf(ArticleClassify)).call(this, props));
 
-        _this3.state = { articleClassify: [], open: true };
-        return _this3;
+        _this4.state = { articleClassify: [], open: true };
+        return _this4;
     }
 
     _createClass(ArticleClassify, [{
@@ -7532,11 +7603,11 @@ var ArticleClassify = function (_Component3) {
     }, {
         key: "componentDidMount",
         value: function componentDidMount() {
-            var _this4 = this;
+            var _this5 = this;
 
             _jquery2.default.get("/get_media_sorts").then(function (msg) {
                 var posts = msg;
-                _this4.setState({ articleClassify: posts.message });
+                _this5.setState({ articleClassify: posts.message });
             });
         }
     }, {
@@ -7547,7 +7618,7 @@ var ArticleClassify = function (_Component3) {
     }, {
         key: "render",
         value: function render() {
-            var _this5 = this;
+            var _this6 = this;
 
             return _react2.default.createElement(
                 "div",
@@ -7561,26 +7632,26 @@ var ArticleClassify = function (_Component3) {
                             _react2.default.createElement(
                                 "a",
                                 { href: "javascript:void(0)", className: "pull-right", onClick: function onClick() {
-                                        return _this5.setState({ open: !_this5.state.open });
+                                        return _this6.setState({ open: !_this6.state.open });
                                     } },
                                 this.state.open ? "关闭" : "展开"
                             )
                         ), collapsible: true, expanded: this.state.open },
                     function () {
-                        var _this6 = this;
+                        var _this7 = this;
 
                         return this.state.articleClassify.map(function (name, index) {
-                            return _this6.props.heightLinghtT.slice().indexOf(name.crawl_media_sort_name) == -1 ? _react2.default.createElement(
+                            return _this7.props.heightLinghtT.slice().indexOf(name.crawl_media_sort_name) == -1 ? _react2.default.createElement(
                                 _reactBootstrap.Button,
                                 { bsStyle: "primary", key: name.id,
-                                    onClick: _this6.handClick.bind(_this6, [name.id, name.crawl_media_sort_name], 'ArticleClassify') },
+                                    onClick: _this7.handClick.bind(_this7, [name.id, name.crawl_media_sort_name], 'ArticleClassify') },
                                 " ",
                                 name.crawl_media_sort_name,
                                 " "
                             ) : _react2.default.createElement(
                                 _reactBootstrap.Button,
                                 { bsStyle: "warning", key: name.id,
-                                    onClick: _this6.handClick.bind(_this6, [name.id, name.crawl_media_sort_name], 'ArticleClassify') },
+                                    onClick: _this7.handClick.bind(_this7, [name.id, name.crawl_media_sort_name], 'ArticleClassify') },
                                 " ",
                                 name.crawl_media_sort_name,
                                 " "
@@ -7601,10 +7672,10 @@ var Box1 = function (_Component4) {
     function Box1(props) {
         _classCallCheck(this, Box1);
 
-        var _this7 = _possibleConstructorReturn(this, (Box1.__proto__ || Object.getPrototypeOf(Box1)).call(this, props));
+        var _this8 = _possibleConstructorReturn(this, (Box1.__proto__ || Object.getPrototypeOf(Box1)).call(this, props));
 
-        _this7.changePlatformA = _this7.changePlatformA.bind(_this7);
-        return _this7;
+        _this8.changePlatformA = _this8.changePlatformA.bind(_this8);
+        return _this8;
     }
 
     _createClass(Box1, [{
@@ -7638,10 +7709,10 @@ var Platform = function (_Component5) {
     function Platform(props) {
         _classCallCheck(this, Platform);
 
-        var _this8 = _possibleConstructorReturn(this, (Platform.__proto__ || Object.getPrototypeOf(Platform)).call(this, props));
+        var _this9 = _possibleConstructorReturn(this, (Platform.__proto__ || Object.getPrototypeOf(Platform)).call(this, props));
 
-        _this8.state = { Platform: [] };
-        return _this8;
+        _this9.state = { Platform: [] };
+        return _this9;
     }
 
     _createClass(Platform, [{
@@ -7655,11 +7726,11 @@ var Platform = function (_Component5) {
     }, {
         key: "componentDidMount",
         value: function componentDidMount() {
-            var _this9 = this;
+            var _this10 = this;
 
             _jquery2.default.get("/get_dir_sorts").then(function (msg) {
                 var posts1 = msg;
-                _this9.setState({ Platform: posts1.message });
+                _this10.setState({ Platform: posts1.message });
             });
         }
     }, {
@@ -7678,20 +7749,20 @@ var Platform = function (_Component5) {
                     _reactBootstrap.Panel,
                     { header: "\u680F\u76EE\u5206\u7C7B" },
                     function () {
-                        var _this10 = this;
+                        var _this11 = this;
 
                         return this.state.Platform.map(function (name, index) {
-                            return _this10.props.heightLinghtT.slice().indexOf(name.crawl_dir_sort_name) == -1 ? _react2.default.createElement(
+                            return _this11.props.heightLinghtT.slice().indexOf(name.crawl_dir_sort_name) == -1 ? _react2.default.createElement(
                                 _reactBootstrap.Button,
                                 { bsStyle: "primary", key: name.id,
-                                    onClick: _this10.handClick.bind(_this10, [name.id, name.crawl_dir_sort_name], 'Platform') },
+                                    onClick: _this11.handClick.bind(_this11, [name.id, name.crawl_dir_sort_name], 'Platform') },
                                 " ",
                                 name.crawl_dir_sort_name,
                                 " "
                             ) : _react2.default.createElement(
                                 _reactBootstrap.Button,
                                 { bsStyle: "warning", key: name.id,
-                                    onClick: _this10.handClick.bind(_this10, [name.id, name.crawl_dir_sort_name], 'Platform') },
+                                    onClick: _this11.handClick.bind(_this11, [name.id, name.crawl_dir_sort_name], 'Platform') },
                                 " ",
                                 name.crawl_dir_sort_name,
                                 " "
@@ -7712,10 +7783,10 @@ var Box2 = function (_Component6) {
     function Box2(props) {
         _classCallCheck(this, Box2);
 
-        var _this11 = _possibleConstructorReturn(this, (Box2.__proto__ || Object.getPrototypeOf(Box2)).call(this, props));
+        var _this12 = _possibleConstructorReturn(this, (Box2.__proto__ || Object.getPrototypeOf(Box2)).call(this, props));
 
-        _this11.changePlatformA = _this11.changePlatformA.bind(_this11);
-        return _this11;
+        _this12.changePlatformA = _this12.changePlatformA.bind(_this12);
+        return _this12;
     }
 
     _createClass(Box2, [{
@@ -7749,10 +7820,10 @@ var Allmedia = function (_Component7) {
     function Allmedia(props) {
         _classCallCheck(this, Allmedia);
 
-        var _this12 = _possibleConstructorReturn(this, (Allmedia.__proto__ || Object.getPrototypeOf(Allmedia)).call(this, props));
+        var _this13 = _possibleConstructorReturn(this, (Allmedia.__proto__ || Object.getPrototypeOf(Allmedia)).call(this, props));
 
-        _this12.state = { Platform: [], open: false };
-        return _this12;
+        _this13.state = { Platform: [], open: false };
+        return _this13;
     }
 
     _createClass(Allmedia, [{
@@ -7766,11 +7837,11 @@ var Allmedia = function (_Component7) {
     }, {
         key: "componentDidMount",
         value: function componentDidMount() {
-            var _this13 = this;
+            var _this14 = this;
 
             _jquery2.default.get("/get_medias").then(function (msg) {
                 var posts1 = msg;
-                _this13.setState({ Platform: posts1.message });
+                _this14.setState({ Platform: posts1.message });
             });
         }
     }, {
@@ -7781,7 +7852,7 @@ var Allmedia = function (_Component7) {
     }, {
         key: "render",
         value: function render() {
-            var _this14 = this;
+            var _this15 = this;
 
             console.log("b=" + this.props.heightLinghtT);
             return _react2.default.createElement(
@@ -7796,26 +7867,26 @@ var Allmedia = function (_Component7) {
                             _react2.default.createElement(
                                 "a",
                                 { href: "javascript:void(0)", className: "pull-right", onClick: function onClick() {
-                                        return _this14.setState({ open: !_this14.state.open });
+                                        return _this15.setState({ open: !_this15.state.open });
                                     } },
                                 this.state.open ? "关闭" : "展开"
                             )
                         ), collapsible: true, expanded: this.state.open },
                     function () {
-                        var _this15 = this;
+                        var _this16 = this;
 
                         return this.state.Platform.map(function (name, index) {
-                            return _this15.props.heightLinghtT.slice().indexOf(name.crawl_media_name) == -1 ? _react2.default.createElement(
+                            return _this16.props.heightLinghtT.slice().indexOf(name.crawl_media_name) == -1 ? _react2.default.createElement(
                                 _reactBootstrap.Button,
                                 { bsStyle: "primary", key: name.id,
-                                    onClick: _this15.handClick.bind(_this15, [name.id, name.crawl_media_name], 'Allmedia') },
+                                    onClick: _this16.handClick.bind(_this16, [name.id, name.crawl_media_name], 'Allmedia') },
                                 " ",
                                 name.crawl_media_name,
                                 " "
                             ) : _react2.default.createElement(
                                 _reactBootstrap.Button,
                                 { bsStyle: "warning", key: name.id,
-                                    onClick: _this15.handClick.bind(_this15, [name.id, name.crawl_media_name], 'Allmedia') },
+                                    onClick: _this16.handClick.bind(_this16, [name.id, name.crawl_media_name], 'Allmedia') },
                                 " ",
                                 name.crawl_media_name,
                                 " "
@@ -7836,19 +7907,19 @@ var TestWrapper = function (_Component8) {
     function TestWrapper(props) {
         _classCallCheck(this, TestWrapper);
 
-        var _this16 = _possibleConstructorReturn(this, (TestWrapper.__proto__ || Object.getPrototypeOf(TestWrapper)).call(this, props));
+        var _this17 = _possibleConstructorReturn(this, (TestWrapper.__proto__ || Object.getPrototypeOf(TestWrapper)).call(this, props));
 
-        _this16.state = { articleList: [], clear: false, Data: {} };
+        _this17.state = { articleList: [], clear: false, Data: {} };
         // this.testChange = this.testChange.bind(this);
         // this.getArticleList = this.getArticleList.bind(this);
-        _this16.sendKeywords = _this16.sendKeywords.bind(_this16);
-        return _this16;
+        _this17.sendKeywords = _this17.sendKeywords.bind(_this17);
+        return _this17;
     }
 
     _createClass(TestWrapper, [{
         key: "getArticleList",
         value: function getArticleList(nextProps) {
-            var _this17 = this;
+            var _this18 = this;
 
             _jquery2.default.getJSON("/get_article", {
                 "user_favorite_crawl_media_sort": nextProps.curArticleClassifyId.join(","),
@@ -7858,7 +7929,7 @@ var TestWrapper = function (_Component8) {
             }).then(function (msg) {
                 var post = msg;
                 // var newPost = this.state.articleList.slice().concat(post);
-                _this17.setState({ articleList: post, Data: nextProps });
+                _this18.setState({ articleList: post, Data: nextProps });
             });
         }
     }, {
@@ -7958,18 +8029,18 @@ var Modle = function (_Component10) {
     function Modle(props) {
         _classCallCheck(this, Modle);
 
-        var _this19 = _possibleConstructorReturn(this, (Modle.__proto__ || Object.getPrototypeOf(Modle)).call(this, props));
+        var _this20 = _possibleConstructorReturn(this, (Modle.__proto__ || Object.getPrototypeOf(Modle)).call(this, props));
 
-        _this19.state = {
+        _this20.state = {
             open: false
         };
-        return _this19;
+        return _this20;
     }
 
     _createClass(Modle, [{
         key: "render",
         value: function render() {
-            var _this20 = this;
+            var _this21 = this;
 
             return _react2.default.createElement(
                 _reactBootstrap.Well,
@@ -7998,7 +8069,7 @@ var Modle = function (_Component10) {
                 _react2.default.createElement(
                     _reactBootstrap.Button,
                     { bsStyle: "info", onClick: function onClick() {
-                            return _this20.setState({ open: !_this20.state.open });
+                            return _this21.setState({ open: !_this21.state.open });
                         } },
                     " \u663E\u793A\u6587\u7AE0\u4E3B\u4F53 "
                 ),
@@ -8036,25 +8107,25 @@ var Search = function (_Component11) {
     function Search(props) {
         _classCallCheck(this, Search);
 
-        var _this21 = _possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).call(this, props));
+        var _this22 = _possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).call(this, props));
 
-        _this21.state = {
+        _this22.state = {
             searchList: [],
             open: false,
             value: ""
         };
-        _this21.searcheKeyword = _this21.searcheKeyword.bind(_this21);
-        return _this21;
+        _this22.searcheKeyword = _this22.searcheKeyword.bind(_this22);
+        return _this22;
     }
 
     _createClass(Search, [{
         key: "searcheKeyword",
         value: function searcheKeyword(e) {
-            var _this22 = this;
+            var _this23 = this;
 
             var word = e.target.value;
             this.setState({ value: word }, function () {
-                console.log(_this22.state.value);
+                console.log(_this23.state.value);
             });
             console.log(this.props.tags);
         }

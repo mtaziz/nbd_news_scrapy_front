@@ -19,9 +19,51 @@ class Parents extends Component {
             Time: ""
         };
         this.changeItem = this.changeItem.bind(this);
-
+        this.setInit = this.setInit.bind(this);
+    }
+    setInit() {
+        $.getJSON(" /user/favorite").then( msg => {
+            var initName =[];
+            var curArticleClassifyId = [];
+            var curPlatformId = [];
+            var curAllmediaId = [];
+            // var curArticleClassifyId = msg.user_favorite_crawl_media_sort.split(",").concat(this.state.curArticleClassifyId);
+            // var curPlatformId = msg.user_favorite_crawl_dir_sort.split(",").concat(this.state.curPlatformId);
+            // var curAllmediaId = msg.user_favorite_crawl_media.split(",").concat(this.state.curAllmediaId);
+            // var curItem = curArticleClassifyId.concat(curArticleClassifyId).concat(curAllmediaId)
+            // this.setState({
+            //     curArticleClassifyId:curArticleClassifyId,
+            //     curPlatformId:curPlatformId,
+            //     curAllmediaId:curAllmediaId,
+            //     curItem:curItem
+            // })
+            function newArray(json , arrayName) {
+                if (json.length  == 0) {
+                    return false;
+                }
+                for (var value of json) {
+                    initName.push(value.name);
+                    arrayName = arrayName.push(value.id)
+                }
+            }
+            newArray(msg.user_favorite_crawl_media,curArticleClassifyId);
+            newArray(msg.user_favorite_crawl_dir_sort,curPlatformId);
+            newArray(msg.user_favorite_crawl_media_sort,curAllmediaId);
+            this.setState({
+                curArticleClassifyId:curArticleClassifyId,
+                curPlatformId:curPlatformId,
+                curAllmediaId:curAllmediaId,
+                curItem:initName
+            })
+        })
+    }
+    componentDidMount() {
+       this.setInit();
     }
 
+    componentWillUnmount() {
+        this.serverRequest.abort();
+    }
     changeItem(item, elem) {
 
         var newCurItem = this.state.curItem.slice();
