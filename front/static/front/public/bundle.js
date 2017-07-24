@@ -7427,16 +7427,6 @@ var Parents = function (_Component) {
                 var curArticleClassifyId = [];
                 var curPlatformId = [];
                 var curAllmediaId = [];
-                // var curArticleClassifyId = msg.user_favorite_crawl_media_sort.split(",").concat(this.state.curArticleClassifyId);
-                // var curPlatformId = msg.user_favorite_crawl_dir_sort.split(",").concat(this.state.curPlatformId);
-                // var curAllmediaId = msg.user_favorite_crawl_media.split(",").concat(this.state.curAllmediaId);
-                // var curItem = curArticleClassifyId.concat(curArticleClassifyId).concat(curAllmediaId)
-                // this.setState({
-                //     curArticleClassifyId:curArticleClassifyId,
-                //     curPlatformId:curPlatformId,
-                //     curAllmediaId:curAllmediaId,
-                //     curItem:curItem
-                // })
                 function newArray(json, arrayName) {
                     if (json.length == 0) {
                         return false;
@@ -8071,7 +8061,9 @@ var Modle = function (_Component10) {
                     { bsStyle: "info", onClick: function onClick() {
                             return _this21.setState({ open: !_this21.state.open });
                         } },
-                    " \u663E\u793A\u6587\u7AE0\u4E3B\u4F53 "
+                    " ",
+                    this.setState({ open: !this.state.open }) ? 显示文章主体 : 隐藏文章主体,
+                    " "
                 ),
                 _react2.default.createElement(
                     _reactBootstrap.Button,
