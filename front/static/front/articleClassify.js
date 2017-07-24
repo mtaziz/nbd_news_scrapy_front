@@ -42,8 +42,9 @@ class Parents extends Component {
                     return false;
                 }
                 for (var value of json) {
+                    var id = [value.id]
                     initName.push(value.name);
-                    arrayName = arrayName.push(value.id)
+                    arrayName = arrayName.concat(id);
                 }
             }
             newArray(msg.user_favorite_crawl_media,curArticleClassifyId);

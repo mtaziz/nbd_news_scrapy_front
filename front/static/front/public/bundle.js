@@ -7449,8 +7449,9 @@ var Parents = function (_Component) {
                         for (var _iterator = json[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                             var value = _step.value;
 
+                            var id = [value.id];
                             initName.push(value.name);
-                            arrayName = arrayName.push(value.id);
+                            arrayName = arrayName.concat(id);
                         }
                     } catch (err) {
                         _didIteratorError = true;
