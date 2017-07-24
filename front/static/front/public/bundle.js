@@ -7919,7 +7919,7 @@ var TestWrapper = function (_Component8) {
             }).then(function (msg) {
                 var post = msg;
                 // var newPost = this.state.articleList.slice().concat(post);
-                _this18.setState({ articleList: post, Data: nextProps });
+                _this18.setState({ articleList: post });
             });
         }
     }, {

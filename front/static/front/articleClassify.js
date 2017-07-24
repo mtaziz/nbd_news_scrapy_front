@@ -322,7 +322,7 @@ class TestWrapper extends Component {
         }).then(msg => {
             var post = msg;
             // var newPost = this.state.articleList.slice().concat(post);
-            this.setState({articleList: post, Data: nextProps})
+            this.setState({articleList: post})
         })
     }
     sendKeywords () {
