@@ -47,8 +47,8 @@ class Parents extends Component {
             })
         })
     }
-    componentDidMount() {
-       // this.setInit();
+    getInitialState() {
+       this.setInit();
     }
 
     componentWillUnmount() {

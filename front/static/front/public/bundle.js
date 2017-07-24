@@ -7469,9 +7469,9 @@ var Parents = function (_Component) {
             });
         }
     }, {
-        key: "componentDidMount",
-        value: function componentDidMount() {
-            // this.setInit();
+        key: "getInitialState",
+        value: function getInitialState() {
+            this.setInit();
         }
     }, {
         key: "componentWillUnmount",
