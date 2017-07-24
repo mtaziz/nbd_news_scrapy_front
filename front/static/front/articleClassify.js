@@ -413,15 +413,18 @@ class Modle extends Component {
                 <i><b> 更新时间：{this.props.article.article_published_at} 来源： {this.props.article.media_name} </b></i>
                 <div  className="col-xs-12 col-md-12">
                     <Select2
-
-                        defaultValue={2}
-                        data={['bug', 'feature', 'documents', 'discussion']}
-                        options={
-                            {
-                                placeholder: 'search by tags',
-                            }
-                        }
-                    />
+  multiple
+  defaultValue={[1, 4]}
+  data={[
+    { text: 'bug', id: 1 },
+    { text: 'feature', id: 2 },
+    { text: 'documents', id: 3 },
+    { text: 'discussion', id: 4 },
+  ]}
+  options={{
+    placeholder: 'search by tags',
+  }}
+/>
                 </div>
 
             </Well>

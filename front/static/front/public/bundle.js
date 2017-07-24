@@ -8094,9 +8094,9 @@ var Modle = function (_Component10) {
                     "div",
                     { className: "col-xs-12 col-md-12" },
                     _react2.default.createElement(_reactSelect2Wrapper2.default, {
-
-                        defaultValue: 2,
-                        data: ['bug', 'feature', 'documents', 'discussion'],
+                        multiple: true,
+                        defaultValue: [1, 4],
+                        data: [{ text: 'bug', id: 1 }, { text: 'feature', id: 2 }, { text: 'documents', id: 3 }, { text: 'discussion', id: 4 }],
                         options: {
                             placeholder: 'search by tags'
                         }
