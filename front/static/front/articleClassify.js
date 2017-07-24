@@ -316,10 +316,10 @@ class TestWrapper extends Component {
 
     getArticleList(nextProps) {
         $.getJSON("/get_article", {
-            "user_favorite_crawl_media_sort": nextProps.curArticleClassifyId.join(","),
+            "user_favorite_crawl_media": nextProps.curArticleClassifyId.join(","),
             "user_favorite_crawl_dir_sort": nextProps.curPlatformId.join(","),
             "SendTime": this.props.time,
-            "user_favorite_crawl_media": nextProps.curAllmediaId.join(",")
+            "user_favorite_crawl_media_sort": nextProps.curAllmediaId.join(",")
         }).then(msg => {
             console.log(nextProps)
             var post = msg;
