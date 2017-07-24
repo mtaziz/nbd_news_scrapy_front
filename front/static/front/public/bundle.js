@@ -8062,7 +8062,7 @@ var Modle = function (_Component10) {
                             return _this21.setState({ open: !_this21.state.open });
                         } },
                     " ",
-                    this.state.open ? "显示文章主体" : "隐藏文章主体",
+                    this.state.open ? "隐藏文章主体" : "显示文章主体",
                     " "
                 ),
                 _react2.default.createElement(
