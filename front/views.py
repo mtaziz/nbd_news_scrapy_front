@@ -78,7 +78,7 @@ def get_article(request):
         for i in newCurArticleClassifyl:
             media_sort_list.append(int(i.split("_")[0]))
         article_info_list_for_media_sort = Articles.objects.filter(
-            article_for_crawl_media_sort__in=media_sort_list).order_by('-article_updated_at')[:20]
+            article_for_crawl_media_sort__in=media_sort_list).order_by('-article_published_at')[:20]
 
     Platforml = request.GET.get("user_favorite_crawl_dir_sort", '').split(",")
     article_info_list_for_dir_sort = []
@@ -88,7 +88,7 @@ def get_article(request):
             dir_sort_list.append(int(i.split("_")[0]))
         article_info_list_for_dir_sort = Articles.objects.filter(
             article_for_crawl_dir_sort__in=dir_sort_list).order_by(
-            '-article_updated_at')[:10]
+            '-article_published_at')[:10]
 
     Allmedia = request.GET.get("user_favorite_crawl_media", '').split(",")
     article_info_list_for_media = []
@@ -96,14 +96,8 @@ def get_article(request):
         media_list = []
         for i in Allmedia:
             media_list.append(int(i.split("_")[0]))
-        # if current_time:
-        #     last_updated_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(float(current_time) / 1000))
-        #     article_info_list_for_media = Articles.objects.filter(article_for_crawl_media_sort__in=media_list,
-        #                                                           article_updated_at__gte=last_updated_time).order_by(
-        #         'article_updated_at')[:20]
-        # else:
         article_info_list_for_media = Articles.objects.filter(article_for_crawl_media__in=media_list).order_by(
-            '-article_updated_at')[:20]
+            '-article_published_at')[:20]
 
     for j in chain(article_info_list_for_media_sort, article_info_list_for_dir_sort, article_info_list_for_media):
         single_info = {}
@@ -117,7 +111,7 @@ def get_article(request):
         single_info['article_content'] = j.article_content
         single_info['article_tags'] = j.article_tags
         all_articles_info_list.append(single_info)
-        new_list = sorted(all_articles_info_list, key=lambda k: k['article_published_at'])
+    new_list = sorted(all_articles_info_list, key=lambda k: k['article_published_at'])
     return HttpResponse(json.dumps(new_list), content_type="application/json")
 
 
