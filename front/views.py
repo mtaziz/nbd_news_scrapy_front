@@ -117,7 +117,8 @@ def get_article(request):
         single_info['article_content'] = j.article_content
         single_info['article_tags'] = j.article_tags
         all_articles_info_list.append(single_info)
-    return HttpResponse(json.dumps(all_articles_info_list), content_type="application/json")
+        new_list = sorted(all_articles_info_list, key=lambda k: k['article_published_at'])
+    return HttpResponse(json.dumps(new_list), content_type="application/json")
 
 
 @login_required(login_url="/user/login/")
