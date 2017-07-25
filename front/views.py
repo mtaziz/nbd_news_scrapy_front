@@ -111,7 +111,7 @@ def get_article(request):
         single_info['article_content'] = j.article_content
         single_info['article_tags'] = j.article_tags
         all_articles_info_list.append(single_info)
-    new_list = sorted(all_articles_info_list, key=lambda k: k['article_published_at'])
+    new_list = sorted(all_articles_info_list, key=lambda k: k['article_published_at'], reverse=True)
     return HttpResponse(json.dumps(new_list), content_type="application/json")
 
 
