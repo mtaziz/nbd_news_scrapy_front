@@ -154,7 +154,7 @@ class ArticleClassify extends Component {
     render() {
         return (
             <div>
-                <Panel header= { <h3>所有网站<a href="javascript:void(0)" className="pull-right" onClick = { () => this.setState({ open: !this.state.open })} >{this.state.open? "关闭" :"展开" }</a></h3> } collapsible expanded={this.state.open}>
+                <Panel header= { <h3>网站分类<a href="javascript:void(0)" className="pull-right" onClick = { () => this.setState({ open: !this.state.open })} >{this.state.open? "关闭" :"展开" }</a></h3> } collapsible expanded={this.state.open}>
                     {
                         (function () {
                             return this.state.articleClassify.map(
@@ -410,20 +410,10 @@ class Modle extends Component {
                 <Button bsStyle="info" onClick={ () => this.setState({open: !this.state.open})}> { this.state.open ? "隐藏文章主体" : "显示文章主体"} </Button>
                 <Button href={this.props.article.article_true_link} target="_blank"
                         style={{marginLeft: 15}}>查看原网页</Button>
+                 <Button href={this.props.article.link} target="_blank"
+                        style={{marginLeft: 15}}>前往编辑</Button>
                 <i><b> 更新时间：{this.props.article.article_published_at} 来源： {this.props.article.media_name} </b></i>
                 <div  className="col-xs-12 col-md-12">
-                    <Select2
-  defaultValue={[1, 4]}
-  data={[
-    { text: 'bug', id: 1 },
-    { text: 'feature', id: 2 },
-    { text: 'documents', id: 3 },
-    { text: 'discussion', id: 4 },
-  ]}
-  options={{
-    placeholder: 'search by tags',
-  }}
-/>
                 </div>
 
             </Well>
