@@ -1,11 +1,15 @@
 {% extends "front/base_site.html" %}
+{% block header_js %}
+    <link href="https://cdn.bootcss.com/select2/4.0.3/css/select2.css" rel="stylesheet"/>
+    <script src="https://cdn.bootcss.com/select2/4.0.3/js/select2.js"></script>
+{% endblock %}
 
 {% block content %}
     <div class="right_col" role="main">
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>搜索页</h3>
+                    <h3>详情页</h3>
                 </div>
 
                 <div class="title_right">
@@ -23,38 +27,100 @@
             <div class="clearfix"></div>
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
-          <div class="x_title">
-            <h2>{{ detail_info.article_title }}<small>Sessions</small></h2>
-            <ul class="nav navbar-right panel_toolbox">
-              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">Settings 1</a>
-                  </li>
-                  <li><a href="#">Settings 2</a>
-                  </li>
-                </ul>
-              </li>
-              <li><a class="close-link"><i class="fa fa-close"></i></a>
-              </li>
-            </ul>
-            <div class="clearfix"></div>
-          </div>
-          <div class="x_content">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>{{ detail_info.article_title }}</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                       aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#">Settings 1</a>
+                                        </li>
+                                        <li><a href="#">Settings 2</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
 
-            <div class="bs-example" data-example-id="simple-jumbotron">
-              <div class="jumbotron">
-                <h3>{{ detail_info.article_desc }}</h3>
-                <p>{{ detail_info.article_content }}</p>
-              </div>
-            </div>
+                            <div class="bs-example" data-example-id="simple-jumbotron">
+                                <div class="jumbotron">
+                                    <h3>{{ detail_info.article_desc }}</h3>
+                                    <p>{{ detail_info.article_content }}</p>
+                                    <form>
+                                        <select class="js-example-data-ajax form-control">
+                                            <option value="3620194" selected="selected">select2/select2</option>
+                                        </select>
+                                        <script type="text/javascript">
+                                            $(document).ready(function () {
+                                                function formatRepo(repo) {
+                                                    if (repo.loading) return repo.text;
 
-          </div>
-        </div>
-      </div>
+                                                    var markup = "<div class='select2-result-repository clearfix'>" + repo.full_name + "</div>";
+
+                                                    if (repo.description) {
+                                                        markup += "<div class='select2-result-repository__description'>" + repo.description + "</div>";
+                                                    }
+                                                    return markup;
+                                                }
+
+                                                function formatRepoSelection(repo) {
+                                                    return repo.full_name || repo.text;
+                                                }
+
+
+                                                var $ajax = $(".js-example-data-ajax");
+                                                $ajax.select2({
+                                                    // tags: true,
+                                                    ajax: {
+                                                        url: "https://api.github.com/search/repositories",
+                                                        dataType: 'json',
+                                                        delay: 250,
+                                                        data: function (params) {
+                                                            return {
+                                                                q: params.term, // search term
+                                                                page: params.page
+                                                            };
+                                                        },
+                                                        processResults: function (data, params) {
+                                                            // parse the results into the format expected by Select2
+                                                            // since we are using custom formatting functions we do not need to
+                                                            // alter the remote JSON data, except to indicate that infinite
+                                                            // scrolling can be used
+                                                            params.page = params.page || 1;
+
+                                                            return {
+                                                                results: data.items,
+                                                                pagination: {
+                                                                    more: (params.page * 30) < data.total_count
+                                                                }
+                                                            };
+                                                        },
+                                                        cache: true
+                                                    },
+                                                    escapeMarkup: function (markup) {
+                                                        return markup;
+                                                    },
+                                                    minimumInputLength: 1,
+                                                    templateResult: formatRepo,
+                                                    templateSelection: formatRepoSelection
+                                                });
+                                            });
+                                        </script>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
