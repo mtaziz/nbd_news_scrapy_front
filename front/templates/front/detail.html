@@ -55,19 +55,18 @@
                                 <div class="jumbotron">
                                     <h3>{{ detail_info.article_desc }}</h3>
                                     <p>{{ detail_info.article_content }}</p>
-                                    <form>
+                                    <form class="input-group" ethod="post">
                                         <script type="text/javascript">
                                             $(document).ready(function () {
-                                                $(".js-example-basic-single").select2({
+                                                $(".js-example-tags").select2({
                                                     tags: true
                                                 });
                                             });
                                         </script>
-
-                                        <select class="js-example-basic-single">
-                                            <option value="AL">Alabama</option>
-                                            <option value="WY">Wyoming</option>
-                                        </select>
+                                        <div class="form-group">
+                                            <select class="js-example-tags">
+                                            </select>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
