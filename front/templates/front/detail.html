@@ -1,7 +1,8 @@
 {% extends "front/base_site.html" %}
+{% load staticfiles %}
 {% block header_js %}
-    <link href="https://cdn.bootcss.com/select2/4.0.3/css/select2.css" rel="stylesheet"/>
-    <script src="https://cdn.bootcss.com/select2/4.0.3/js/select2.js"></script>
+    <link href="{% static 'front/css/select2.css' %}" rel="stylesheet"/>
+    <script src="{% static 'front/js/select2.js' %}"></script>
 {% endblock %}
 
 {% block content %}
