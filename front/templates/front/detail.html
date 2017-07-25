@@ -1,8 +1,7 @@
 {% extends "front/base_site.html" %}
 {% load staticfiles %}
 {% block header_js %}
-    <link href="{% static 'front/css/select2.css' %}" rel="stylesheet"/>
-    <script src="{% static 'front/js/select2.js' %}"></script>
+
 {% endblock %}
 
 {% block content %}
@@ -50,22 +49,19 @@
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
-
                             <div class="bs-example" data-example-id="simple-jumbotron">
                                 <div class="jumbotron">
                                     <h3>{{ detail_info.article_desc }}</h3>
                                     <p>{{ detail_info.article_content }}</p>
-                                    <form class="input-group" ethod="post">
-                                        <script type="text/javascript">
-                                            $(document).ready(function () {
-                                                $(".js-example-tags").select2({
-                                                    tags: true
-                                                });
-                                            });
-                                        </script>
-                                        <div class="form-group">
-                                            <select class="js-example-tags">
-                                            </select>
+                                    <form class="form-horizontal form-label-left">
+                                        <div class="control-group">
+                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                <input id="tags_1" type="text" class="tags form-control"
+                                                       value="{{ detail_info.article_tags }}"/>
+                                            </div>
+                                            <div class="col-md-3 col-sm-3">
+                                                <a style="margin-top: 10px" id="update_article_tags" class="btn btn-success">更新文章标签</a>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
@@ -78,3 +74,28 @@
         </div>
     </div>
 {% endblock content %}
+
+{% block footer_js %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".js-example-tags").select2({
+                tags: true,
+
+            });
+        });
+
+        $("#update_article_tags").click(function () {
+            var article_tags = $("#tags_1").attr("value");
+            $.ajax({
+                type: "POST",
+                url: "/update_article_tags/{{ detail_info.id }}",
+                data: {article_tags: article_tags},
+                dataType: "json",
+                success: function (message) {
+                    console.log(message);
+                    alert(message.message);
+                }
+            });
+        })
+    </script>
+{% endblock %}

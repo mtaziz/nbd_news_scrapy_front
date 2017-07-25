@@ -176,3 +176,13 @@ class KeyWordSearchView(SearchView):
 
     def paginate_queryset(self, queryset, page_size):
         return super(KeyWordSearchView, self).paginate_queryset(queryset[:200], page_size)
+
+
+@login_required(login_url="/user/login/")
+def update_article_tags(request, detail_id):
+    print detail_id
+    article_info = Articles.objects.get(id=detail_id)
+    print request.POST.get("article_tags",'')
+    article_info.article_tags=request.POST.get("article_tags",'')
+    article_info.save()
+    return HttpResponse(json.dumps({'status': 200, 'message': "文章标签更新成功"}), content_type="application/json")

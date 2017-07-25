@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^get_medias', views.get_medias, name='get_medias'),
     url(r'^get_article', views.get_article, name='get_article'),
     url(r'^detail/(?P<detail_id>\d+?)\.html', views.get_article_detail, name='get_article_detail'),
+    url(r'^update_article_tags/(?P<detail_id>\d+)', views.update_article_tags, name='update_article_tags'),
     url(r'^favicon.ico$', views.get_favicon, name='get_favicon'),
     # url(r'^logout$', views.logout, name='logout'),
     # url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
