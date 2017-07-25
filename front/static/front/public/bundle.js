@@ -7623,7 +7623,7 @@ var ArticleClassify = function (_Component3) {
                     { header: _react2.default.createElement(
                             "h3",
                             null,
-                            "\u6240\u6709\u7F51\u7AD9",
+                            "\u7F51\u7AD9\u5206\u7C7B",
                             _react2.default.createElement(
                                 "a",
                                 { href: "javascript:void(0)", className: "pull-right", onClick: function onClick() {
@@ -8078,6 +8078,12 @@ var Modle = function (_Component10) {
                     "\u67E5\u770B\u539F\u7F51\u9875"
                 ),
                 _react2.default.createElement(
+                    _reactBootstrap.Button,
+                    { href: this.props.article.link, target: "_blank",
+                        style: { marginLeft: 15 } },
+                    "\u524D\u5F80\u7F16\u8F91"
+                ),
+                _react2.default.createElement(
                     "i",
                     null,
                     _react2.default.createElement(
@@ -8090,17 +8096,7 @@ var Modle = function (_Component10) {
                         " "
                     )
                 ),
-                _react2.default.createElement(
-                    "div",
-                    { className: "col-xs-12 col-md-12" },
-                    _react2.default.createElement(_reactSelect2Wrapper2.default, {
-                        defaultValue: [1, 4],
-                        data: [{ text: 'bug', id: 1 }, { text: 'feature', id: 2 }, { text: 'documents', id: 3 }, { text: 'discussion', id: 4 }],
-                        options: {
-                            placeholder: 'search by tags'
-                        }
-                    })
-                )
+                _react2.default.createElement("div", { className: "col-xs-12 col-md-12" })
             );
         }
     }]);
