@@ -10,7 +10,7 @@
                 minimumResultsForSearch: Infinity
             });
             $('.js-example-tags').val(['value1', 'value2']);
-            $('.js-example-tags').trigger('change.select2');
+            $('.mySelect').trigger('change.select2');
         });
     </script>
 
@@ -109,8 +109,8 @@
                 url: "/create_article_tags/{{ detail_info.id }}",
                 dataType: "json",
                 success: function (message) {
-                    $(".js-example-tags").val(message.message.split(","));
-                    $(".js-example-tags").trigger('change.select2');
+                    $("#js-example-tags").val(message.message.split(","));
+                    $("#js-example-tags").trigger('change.select2');
                     console.log(message.message)
                 }
             });

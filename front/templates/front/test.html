@@ -6,19 +6,20 @@
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.js"></script>
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
-    <link href="https://cdn.bootcss.com/select2/4.0.3/css/select2.css" rel="stylesheet"/>
-    <script src="https://cdn.bootcss.com/select2/4.0.3/js/select2.js"></script>
+    <link href="https://cdn.bootcss.com/select2/3.5.2/select2.css" rel="stylesheet"/>
+    <script src="https://cdn.bootcss.com/select2/3.5.2/select2.js"></script>
     <script>
-        $('#tagSelect').select2({tags: ["red", "green", "blue"]});
+        $(document).ready(function() {
+            $('#tagSelect').select2({tags: ["red", "green", "blue"]});
 
-        $('#setValue').click(function () {
-            $('#tagSelect').select2('val', ['brown', 'red', 'green']);
-        });
+            $('#setValue').click(function () {
+                $('#tagSelect').select2('val', ['brown', 'red', 'green']);
+            });
 
-        $('#showValue').click(function () {
-            $('#output').text($('#tagSelect').val());
-        });
-
+            $('#showValue').click(function () {
+                $('#output').text($('#tagSelect').val());
+            });
+        })
     </script>
 </head>
 <body>
