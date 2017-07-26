@@ -6,7 +6,8 @@
             $(".js-example-tags").select2({
                 tags: true,
                 placeholder: "添加标签",
-                 maximumSelectionLength: 7,
+                maximumSelectionLength: 7,
+                minimumResultsForSearch: Infinity
             })
         });
     </script>
@@ -69,11 +70,11 @@
 
                                 </div>
                                 <div class="col-md-3 col-sm-3">
-                                        <a style="margin-top: 10px" id="update_article_tags"
-                                           class="btn btn-success">更新文章标签</a>
-                                        <a style="margin-top: 10px" id="create_article_tags"
-                                           class="btn btn-success">要不试试自动填标签</a>
-                                    </div>
+                                    <a style="margin-top: 10px" id="update_article_tags"
+                                       class="btn btn-success">更新文章标签</a>
+                                    <a style="margin-top: 10px" id="create_article_tags"
+                                       class="btn btn-success">要不试试自动填标签</a>
+                                </div>
                             </div>
 
                         </div>
@@ -106,7 +107,8 @@
                 url: "/create_article_tags/{{ detail_info.id }}",
                 dataType: "json",
                 success: function (message) {
-                    $.fn.tagsInput.importTags('#tags_1', message.message);
+                    $(".js-example-tags").val([message.message.split(",")]);
+                    $(".js-example-tags").trigger('change.select2');
                     console.log(message.message)
                 }
             });

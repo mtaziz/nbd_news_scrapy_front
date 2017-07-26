@@ -8,20 +8,33 @@
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/select2/4.0.3/css/select2.css" rel="stylesheet"/>
     <script src="https://cdn.bootcss.com/select2/4.0.3/js/select2.js"></script>
+    <script>
+        $('#tagSelect').select2({tags: ["red", "green", "blue"]});
+
+        $('#setValue').click(function () {
+            $('#tagSelect').select2('val', ['brown', 'red', 'green']);
+        });
+
+        $('#showValue').click(function () {
+            $('#output').text($('#tagSelect').val());
+        });
+
+    </script>
 </head>
 <body>
 <div class="container">
 
     <div class="coo-md-9" role="main">
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $(".js-example-tags").select2({
-                    tags: true
-                })
-            });
-        </script>
-        <select class="js-example-tags form-control" multiple="multiple">
-        </select>
+        <input id="tagSelect" value="brown,red,green" style="width:300px;"/><br/>
+        <br/>
+        <button type="button" id="setValue">set value</button>
+        <br/>
+        <br/>
+        <button type="button" id="showValue">show value</button>
+        <br/>
+        <br/>
+        <div id="output">
+        </div>
 
 
     </div>
