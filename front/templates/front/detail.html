@@ -83,7 +83,7 @@
 {% block footer_js %}
     <script type="text/javascript">
         $("#update_article_tags").click(function () {
-            var article_tags = $(".select2-selection__rendered li").text().replace(/^×/, "").split(/×/).join(",");
+            var article_tags = $('#tagSelect').val();
             $.ajax({
                 type: "POST",
                 url: "/update_article_tags/{{ detail_info.id }}",
