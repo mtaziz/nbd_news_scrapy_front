@@ -194,4 +194,4 @@ def create_article_tags(request, detail_id):
     print detail_id
     article_info = Articles.objects.get(id=detail_id)
     article_tags = CommonFuction.get_article_tags(article_info.article_content)
-    return HttpResponse(json.dumps({'status': 200, 'message': article_tags}), content_type="application/json")
+    return HttpResponse(json.dumps({'status': 200, 'message': ','.join(article_tags)}), content_type="application/json")
