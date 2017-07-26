@@ -3,7 +3,7 @@
 {% block header_js %}
     <script>
         $(document).ready(function () {
-            $('#tagSelect').select2({tags: $('#tag').attr('value').split(',')});
+            $('#tagSelect').select2({tags: $('#tagSelect').attr('value').split(',')});
         });
     </script>
 {% endblock %}
@@ -59,9 +59,8 @@
                                 <p>{{ detail_info.article_content }}</p>
                                 <div class="col-md-9 col-sm-9">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Email address</label>
                                         <input id="tagSelect" value="{{ detail_info.article_tags }}"
-                                               class="form-control">
+                                               class="form-control" placeholder="添加标签">
                                     </div>
                                 </div>
                                 <div class="col-md-3 col-sm-3">
@@ -108,6 +107,6 @@
                 }
             });
         });
-        $('#tagSelect').select2({tags: $('#tag').attr('value').split(',')});
+        $('#tagSelect').select2({tags: $('#tagSelect').attr('value').split(',')});
     </script>
 {% endblock %}
