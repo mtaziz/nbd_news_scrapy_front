@@ -103,7 +103,6 @@
             $.ajax({
                 type: "get",
                 url: "/create_article_tags/{{ detail_info.id }}",
-                data: {article_tags: article_tags},
                 dataType: "json",
                 success: function (message) {
                     $("#tags_1").attr("value", message.message);
