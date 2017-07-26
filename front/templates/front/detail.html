@@ -61,11 +61,22 @@
                                                        value="{{ detail_info.article_tags }}"/>
                                             </div>
                                             <div class="col-md-3 col-sm-3">
-                                                <a style="margin-top: 10px" id="update_article_tags" class="btn btn-success">更新文章标签</a>
-                                                <a style="margin-top: 10px" id="create_article_tags" class="btn btn-success">要不试试自动填标签</a>
+                                                <a style="margin-top: 10px" id="update_article_tags"
+                                                   class="btn btn-success">更新文章标签</a>
+                                                <a style="margin-top: 10px" id="create_article_tags"
+                                                   class="btn btn-success">要不试试自动填标签</a>
                                             </div>
                                         </div>
                                     </form>
+                                    <select class="js-example-tags form-control select2-hidden-accessible" multiple=""
+                                            tabindex="-1" aria-hidden="true">
+                                        <option selected="selected">orange</option>
+                                        <option>white</option>
+                                        <option selected="selected">purple</option>
+                                        <option value="red">red</option>
+                                        <option value="blue">blue</option>
+                                        <option value="green">green</option>
+                                    </select>
                                 </div>
                             </div>
 
@@ -79,7 +90,9 @@
 
 {% block footer_js %}
     <script type="text/javascript">
-
+        $(document).ready(function () {
+            $(".js-example-tags").select2();
+        });
         $("#update_article_tags").click(function () {
             var article_tags = $("#tags_1_tagsinput span.tag span").text().replace(/\s+$/, '');
             var new_article_tags = article_tags.split(/\s{2}/).join(",");
