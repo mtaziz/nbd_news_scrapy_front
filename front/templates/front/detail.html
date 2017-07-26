@@ -4,7 +4,9 @@
     <script>
         $(document).ready(function () {
             $(".js-example-tags").select2({
-                tags: true
+                tags: true,
+                placeholder: "添加标签",
+                 maximumSelectionLength: 7,
             })
         });
     </script>
@@ -86,12 +88,11 @@
     <script type="text/javascript">
 
         $("#update_article_tags").click(function () {
-            var article_tags = $("#tags_1_tagsinput span.tag span").text().replace(/\s+$/, '');
-            var new_article_tags = article_tags.split(/\s{2}/).join(",");
+            var article_tags = $(".select2-selection__rendered li").text().replace(/^×/, "").split(/×/).join(",");
             $.ajax({
                 type: "POST",
                 url: "/update_article_tags/{{ detail_info.id }}",
-                data: {article_tags: new_article_tags},
+                data: {article_tags: article_tags},
                 dataType: "json",
                 success: function (message) {
                     console.log(message);
