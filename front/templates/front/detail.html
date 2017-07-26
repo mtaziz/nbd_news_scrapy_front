@@ -87,11 +87,12 @@
         });
 
         $("#update_article_tags").click(function () {
-            var article_tags = $("#tags_1").attr("value");
+            var article_tags = $("#tags_1_tagsinput span.tag span").text();
+            var new_article_tags = article_tags.split(/\s{2}/).join(",").replace(/\s+$/, '');
             $.ajax({
                 type: "POST",
                 url: "/update_article_tags/{{ detail_info.id }}",
-                data: {article_tags: article_tags},
+                data: {article_tags: new_article_tags},
                 dataType: "json",
                 success: function (message) {
                     console.log(message);
