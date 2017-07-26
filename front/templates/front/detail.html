@@ -3,15 +3,13 @@
 {% block header_js %}
     <script>
         $(document).ready(function () {
-            $('#tagSelect').select2({tags: $('#tagSelect').attr('value').split(',')});
+            $('#tagSelect').select2({tags: $('#tag').attr('value').split(',')});
         });
     </script>
-
 {% endblock %}
 
 {% block content %}
     <div class="right_col" role="main">
-    <div class="">
         <div class="page-title">
             <div class="title_left">
                 <h3>详情页</h3>
@@ -60,8 +58,11 @@
 
                                 <p>{{ detail_info.article_content }}</p>
                                 <div class="col-md-9 col-sm-9">
-                                    <input id="tagSelect" value="{{ detail_info.article_tags }}" class="form-control">
-                                    <br/>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Email address</label>
+                                        <input id="tagSelect" value="{{ detail_info.article_tags }}"
+                                               class="form-control">
+                                    </div>
                                 </div>
                                 <div class="col-md-3 col-sm-3">
                                     <a style="margin-top: 10px" id="update_article_tags"
@@ -70,7 +71,6 @@
                                        class="btn btn-success">要不试试自动填标签</a>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -79,9 +79,10 @@
     </div>
 {% endblock content %}
 
+
+
 {% block footer_js %}
     <script type="text/javascript">
-
         $("#update_article_tags").click(function () {
             var article_tags = $(".select2-selection__rendered li").text().replace(/^×/, "").split(/×/).join(",");
             $.ajax({
@@ -95,17 +96,17 @@
                 }
             });
         });
+
         $("#create_article_tags").click(function () {
             $.ajax({
                 type: "get",
                 url: "/create_article_tags/{{ detail_info.id }}",
                 dataType: "json",
                 success: function (message) {
-
                     $('#tagSelect').select2('val', message.message.split(","));
                     console.log(message.message)
                 }
             });
-        })
+        });
     </script>
 {% endblock %}
