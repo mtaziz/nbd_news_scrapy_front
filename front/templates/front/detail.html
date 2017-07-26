@@ -68,7 +68,7 @@
                                             </div>
                                         </div>
                                     </form>
-                                    <select class="js-example-basic-multiple" multiple="multiple">
+                                    <select class="js-example-tags" multiple="multiple">
                                         <option value="AL">Alabama</option>
                                         ...
                                         <option value="WY">Wyoming</option>
@@ -87,7 +87,9 @@
 {% block footer_js %}
     <script type="text/javascript">
         $(document).ready(function () {
-            $(".js-example-basic-multiple").select2();
+            $(".js-example-tags").select2({
+                tags: true
+            })
         });
         $("#update_article_tags").click(function () {
             var article_tags = $("#tags_1_tagsinput span.tag span").text().replace(/\s+$/, '');
