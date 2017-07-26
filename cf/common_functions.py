@@ -1,8 +1,9 @@
 # coding:utf8
 import jieba
+import jieba.posseg as pseg
 import networkx as nx
-from sklearn.feature_extraction.text import TfidfVectorizer, TfidfTransformer
-from sklearn.feature_extraction.text import TfidfTransformer
+import numpy as np
+from sklearn.feature_extraction.text import TfidfVectorizer, TfidfTransformer, CountVectorizer
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -68,4 +69,33 @@ class CommonFuction:
         size = min(size, len(docs))
         indices = map(lambda x: x[0], tops)[:size]
         return map(lambda idx: docs[idx], indices)
+
+    @staticmethod
+    def get_article_tags(content):
+        stop_word = [unicode(line.rstrip()) for line in open('chinese_stopword.txt')]
+        print len(stop_word)
+        content = content.strip().replace('\n', '').replace(' ', '').replace('\t', '').replace('\r', '')
+        seg_list = pseg.cut(content)
+        seg_list_after = []
+        # 去停用词
+        for seg in seg_list:
+            if seg.word not in stop_word:
+                seg_list_after.append(seg.word)
+        result = ' '.join(seg_list_after)
+        wordslist = [result]
+        vectorizer = CountVectorizer()
+        transformer = TfidfTransformer()
+        tfidf = transformer.fit_transform(vectorizer.fit_transform(wordslist))
+
+        words = vectorizer.get_feature_names()  # 所有文本的关键字
+        weight = tfidf.toarray()
+
+        n = 5  # 前五位
+        tag_list = []
+        for w in weight:
+            # 排序
+            loc = np.argsort(-w)
+            for i in range(n):
+                tag_list.append(words[loc[i]])
+        return tag_list
 
