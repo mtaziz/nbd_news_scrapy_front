@@ -79,12 +79,12 @@
 
 {% block footer_js %}
     <script type="text/javascript">
-        $(document).ready(function () {
-            $(".js-example-tags").select2({
-                tags: true,
-
-            });
-        });
+{#        $(document).ready(function () {#}
+{#            $(".js-example-tags").select2({#}
+{#                tags: true,#}
+{##}
+{#            });#}
+{#        });#}
 
         $("#update_article_tags").click(function () {
             var article_tags = $("#tags_1_tagsinput span.tag span").text().replace(/\s+$/, '');
