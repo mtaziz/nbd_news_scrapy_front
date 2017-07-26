@@ -3,7 +3,7 @@
 {% block header_js %}
     <script>
         $(document).ready(function () {
-            $('#tagSelect').select2({tags: ["red", "green", "blue"]});
+            $('#tagSelect').select2({tags: $('#tagSelect').attr('value').split(',')});
         });
     </script>
 
