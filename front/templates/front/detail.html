@@ -3,14 +3,12 @@
 {% block header_js %}
     <script>
         $(document).ready(function () {
-            $(".js-example-tags").select2({
-                tags: true,
-                placeholder: "添加标签",
-                maximumSelectionLength: 7,
-                minimumResultsForSearch: Infinity
+            $('#tagSelect').select2({tags: ["red", "green", "blue"]});
+
+
+            $('#showValue').click(function () {
+                $('#output').text($('#tagSelect').val());
             });
-            $('.js-example-tags').val(['value1', 'value2']);
-            $('.mySelect').trigger('change.select2');
         });
     </script>
 
@@ -67,9 +65,8 @@
 
                                 <p>{{ detail_info.article_content }}</p>
                                 <div class="col-md-9 col-sm-9">
-                                    <select class="js-example-tags form-control" multiple="multiple">
-                                    </select>
-
+                                    <input id="tagSelect" value="{{ detail_info.article_tags }}" class="form-control">
+                                    <br/>
                                 </div>
                                 <div class="col-md-3 col-sm-3">
                                     <a style="margin-top: 10px" id="update_article_tags"
@@ -109,8 +106,8 @@
                 url: "/create_article_tags/{{ detail_info.id }}",
                 dataType: "json",
                 success: function (message) {
-                    $("#js-example-tags").val(message.message.split(","));
-                    $("#js-example-tags").trigger('change.select2');
+
+                    $('#tagSelect').select2('val', message.message.split(","));
                     console.log(message.message)
                 }
             });
