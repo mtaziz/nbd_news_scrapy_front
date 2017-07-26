@@ -106,6 +106,12 @@
                 dataType: "json",
                 success: function (message) {
                     $("#tags_1").attr("value", message.message);
+                    var tag_list = $("#tags_1").attr("value").split(",");
+                    for (var i in tag_list){
+                        item = '<span class="tag"><span>' + i + '&nbsp;&nbsp;</span><a href="#" title="Removing tag">x</a></span>'
+                        $(item).insertBefore("#tags_1_tagsinput")
+                    }
+
                     console.log(message.message)
                 }
             });
