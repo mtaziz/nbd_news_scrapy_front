@@ -8,7 +8,9 @@
                 placeholder: "添加标签",
                 maximumSelectionLength: 7,
                 minimumResultsForSearch: Infinity
-            })
+            });
+            $('.js-example-tags').val(['value1', 'value2']);
+            $('.js-example-tags').trigger('change.select2');
         });
     </script>
 
