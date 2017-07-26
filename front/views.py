@@ -12,6 +12,7 @@ from django.db.models import Q
 import time
 from front.models import Articles, ArticleForm
 from haystack.generic_views import SearchView
+from cf.common_functions import CommonFuction
 
 
 def check_user_is_login(func):
@@ -186,3 +187,11 @@ def update_article_tags(request, detail_id):
     article_info.article_tags=request.POST.get("article_tags",'')
     article_info.save()
     return HttpResponse(json.dumps({'status': 200, 'message': "文章标签更新成功"}), content_type="application/json")
+
+
+@login_required(login_url="/user/login/")
+def create_article_tags(request, detail_id):
+    print detail_id
+    article_info = Articles.objects.get(id=detail_id)
+    article_desc = CommonFuction.get_abstract(article_info.article_content)
+    return HttpResponse(json.dumps({'status': 200, 'message': article_desc}), content_type="application/json")
