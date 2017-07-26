@@ -19,7 +19,7 @@ class CommonFuction:
         """
         if not isinstance(sentence, unicode):
             sentence = sentence.decode('utf-8')
-        delimiters = frozenset(u'。！？')
+        delimiters = frozenset(u'。！？?!.')
         buf = []
         for ch in sentence:
             buf.append(ch)
@@ -52,7 +52,7 @@ class CommonFuction:
         return filter(lambda x: not stopwords.__contains__(x), jieba.cut(sentence))
 
     @staticmethod
-    def get_abstract(content, size=3):
+    def get_abstract(content, size=2):
         """ 
         利用textrank提取摘要 
         :param content: 

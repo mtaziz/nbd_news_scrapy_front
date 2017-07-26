@@ -1,5 +1,5 @@
 # coding: utf8
-is_development = False
+is_development = True
 
 if is_development:
     from settings_dev import *
