@@ -100,7 +100,7 @@
                 url: "/create_article_tags/{{ detail_info.id }}",
                 dataType: "json",
                 success: function (message) {
-                    $.fn.tagsInput.importTags('#tags_1', 'fdasf,dfasd');
+                    $.fn.tagsInput.importTags('#tags_1', message.message);
                     console.log(message.message)
                 }
             });
