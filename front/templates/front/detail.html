@@ -58,14 +58,11 @@
                                         <div class="control-group">
                                             <div class="col-md-9 col-sm-9 col-xs-12">
                                                 <input id="tags_1" type="text" class="tags form-control"
-                                                       data-tagsinput-init="true"
                                                        value="{{ detail_info.article_tags }}"/>
                                             </div>
                                             <div class="col-md-3 col-sm-3">
-                                                <a style="margin-top: 10px" id="update_article_tags"
-                                                   class="btn btn-success">更新文章标签</a>
-                                                <a style="margin-top: 10px" id="create_article_tags"
-                                                   class="btn btn-success">要不试试自动填标签</a>
+                                                <a style="margin-top: 10px" id="update_article_tags" class="btn btn-success">更新文章标签</a>
+                                                <a style="margin-top: 10px" id="create_article_tags" class="btn btn-success">要不试试自动填标签</a>
                                             </div>
                                         </div>
                                     </form>
@@ -82,6 +79,13 @@
 
 {% block footer_js %}
     <script type="text/javascript">
+        $(document).ready(function () {
+            $(".js-example-tags").select2({
+                tags: true,
+
+            });
+        });
+
         $("#update_article_tags").click(function () {
             var article_tags = $("#tags_1_tagsinput span.tag span").text().replace(/\s+$/, '');
             var new_article_tags = article_tags.split(/\s{2}/).join(",");
@@ -104,7 +108,7 @@
                 success: function (message) {
                     $("#tags_1").attr("value", message.message);
                     var tag_list = $("#tags_1").attr("value").split(",");
-                    for (var i in tag_list) {
+                    for (var i in tag_list){
                         var item = '<span class="tag"><span>' + tag_list[i] + '&nbsp;&nbsp;</span><a href="#" title="Removing tag">x</a></span>';
                         $(item).insertBefore("#tags_1_addTag")
                     }
@@ -112,12 +116,5 @@
                 }
             });
         })
-
-        var tag_list = $("#tags_1").attr("value").split(",");
-        for (var i in tag_list) {
-            var item = '<span class="tag"><span>' + tag_list[i] + '&nbsp;&nbsp;</span><a href="#" title="Removing tag">x</a></span>';
-            $(item).insertBefore("#tags_1_addTag")
-        }
-
     </script>
 {% endblock %}
